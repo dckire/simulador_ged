@@ -256,81 +256,953 @@
     <script>
         // Base de datos integrada con las 4 materias oficiales, tiempos reales y preguntas prototipo reales
         const gedDatabase = {
-            matematicas: {
-                name: "Razonamiento Matemático",
-                officialTime: 6900, // 115 Minutos oficiales
-                questions: [
-                    {
-                        q: "Un tanque de almacenamiento contiene 240 galones de agua. Si se vacía a una tasa constante de 6 galones por minuto, ¿cuál de las siguientes ecuaciones representa la cantidad de agua (W) que queda en el tanque después de 'm' minutos?",
-                        options: ["W = 240 + 6m", "W = 6m - 240", "W = 240 - 6m", "W = 240 / 6m"],
-                        correct: 2,
-                        hint: "El volumen inicial se reduce progresivamente conforme pasan los minutos.",
-                        exp: "Inicias con 240 galones. Al vaciarse, disminuye a razón de 6 galones por cada minuto transcurrido (6m). Por lo tanto, la ecuación lineal correcta es W = 240 - 6m."
-                    },
-                    {
-                        q: "Resuelve la siguiente inecuación para x:\n3x - 4 > 11",
-                        options: ["x > 5", "x > 2.33", "x < 5", "x > 7"],
-                        correct: 0,
-                        hint: "Despeja sumando 4 en ambos lados primero, luego divide entre 3.",
-                        exp: "Sumamos 4 a ambos lados: 3x > 15. Al dividir ambos términos por 3, obtenemos x > 5."
-                    }
-                ]
-            },
-            lenguaje: {
-                name: "Artes del Lenguaje (RLA)",
-                officialTime: 9000, // 150 Minutos oficiales
-                questions: [
-                    {
-                        q: "Lea el siguiente fragmento:\n'La adopción acelerada del comercio electrónico no solo ha transformado los hábitos de consumo masivo, sino que también ha obligado a las empresas de logística tradicional a reinventar sus cadenas de distribución.'\n\n¿Cuál es la idea principal del autor?",
-                        options: [
-                            "El e-commerce transformó el consumo masivo e impulsó la reestructuración logística.",
-                            "Las empresas tradicionales están destinadas a la quiebra absoluta.",
-                            "Las entregas en menos de 24 horas son insostenibles económicamente.",
-                            "Los consumidores prefieren evitar las tiendas físicas por comodidad."
-                        ],
-                        correct: 0,
-                        hint: "Busca la opción que resuma de forma global los dos efectos mencionados en el fragmento.",
-                        exp: "El texto abarca de forma directa dos elementos entrelazados: la transformación del consumo y la obligada reinvención de las cadenas logísticas de distribución."
-                    },
-                    {
-                        q: "Seleccione la opción que corrija los errores de concordancia de la siguiente frase:\n'El grupo de ingenieros, luego de revisar los planos, concluyeron que el suelo era inestables.'",
-                        options: [
-                            "El grupo de ingenieros, luego de revisar los planos, concluyeron que el suelo era inestables.",
-                            "El grupo de ingenieros, luego de revisar los planos, concluyó que el suelo era inestable.",
-                            "El grupo de ingenieros luego de revisar los planos concluyeron que el suelo era inestable.",
-                            "El grupo de ingenieros, luego de revisar los planos, concluyó que el suelo era inestables."
-                        ],
-                        correct: 1,
-                        hint: "El sujeto principal es 'El grupo' (singular) y el adjetivo debe calificar a 'suelo' (singular).",
-                        exp: "'El grupo' es un sujeto colectivo singular, requiere el verbo 'concluyó'. Asimismo, el adjetivo 'inestable' debe concordar en singular con 'suelo'."
-                    }
-                ]
-            },
-            ciencias: {
-                name: "Ciencias",
-                officialTime: 5400, // 90 Minutos oficiales
-                questions: [
-                    {
-                        q: "Un científico quiere probar la efectividad de un nuevo fertilizante en el crecimiento de plantas de maíz. Coloca 50 plantas bajo el sol con el nuevo fertilizante y otras 50 plantas exactamente bajo las mismas condiciones de sol y agua, pero usando fertilizante común.\n\nEn este experimento, ¿cuál es la variable independiente?",
-                        options: [
-                            "La cantidad de agua recibida.",
-                            "La altura final alcanzada por las plantas.",
-                            "El tipo de fertilizante utilizado.",
-                            "La cantidad de luz solar diaria."
-                        ],
-                        correct: 2,
-                        hint: "La variable independiente es el factor que el experimentador cambia intencionalmente para ver qué pasa.",
-                        exp: "El tipo de fertilizante es la variable independiente porque es el elemento modificado a propósito por el científico para evaluar sus impactos diferenciales."
-                    },
-                    {
-                        q: "En genética, si cruzamos dos plantas heterocigotas de flores rojas (Rr), donde el alelo R (rojo) es dominante sobre el alelo r (blanco), ¿cuál es la probabilidad matemática de obtener una planta de flores blancas (rr)?",
-                        options: ["0%", "25%", "50%", "75%"],
-                        correct: 1,
-                        hint: "Realiza el Cuadro de Punnett combinando Rr x Rr.",
-                        exp: "La cruza genera los genotipos: 25% RR (rojo), 50% Rr (rojo) y 25% rr (blanco). Al ser el color blanco recesivo puro, tiene un 25% (1 de 4) de probabilidad."
-                    }
-                ]
-            },
+            {
+    name: "Razonamiento Matemático",
+    officialTime: 6900, // 115 Minutos oficiales
+    questions: [
+        {
+            q: "Un tanque de almacenamiento contiene 240 galones de agua. Si se vacía a una tasa constante de 6 galones por minuto, ¿cuál de las siguientes ecuaciones representa la cantidad de agua (W) que queda en el tanque después de 'm' minutos?",
+            options: ["W = 240 + 6m", "W = 6m - 240", "W = 240 - 6m", "W = 240 / 6m"],
+            correct: 2,
+            hint: "El volumen inicial se reduce progresivamente conforme pasan los minutos.",
+            exp: "Inicias con 240 galones. Al vaciarse, disminuye a razón de 6 galones por cada minuto transcurrido (6m). Por lo tanto, la ecuación lineal correcta es W = 240 - 6m."
+        },
+        {
+            q: "Resuelve la siguiente inecuación para x:\n3x - 4 > 11",
+            options: ["x > 5", "x > 2.33", "x < 5", "x > 7"],
+            correct: 0,
+            hint: "Despeja sumando 4 en ambos lados primero, luego divide entre 3.",
+            exp: "Sumamos 4 a ambos lados: 3x > 15. Al dividir ambos términos por 3, obtenemos x > 5."
+        },
+        {
+            q: "Un cilindro de almacenamiento de combustible tiene un radio base de 3 metros y una altura total de 10 metros. ¿Cuál es el volumen aproximado de este contenedor usando $\\pi \\approx 3.14$?",
+            options: ["94.2 metros cúbicos", "282.6 metros cúbicos", "847.8 metros cúbicos", "188.4 metros cúbicos"],
+            correct: 1,
+            hint: "La fórmula para calcular el volumen de un cilindro es $V = \\pi r^2 h$.",
+            exp: "Calculamos el área de la base: $3^2 = 9$. Luego multiplicamos por pi y la altura: $9 \\times 3.14 \\times 10 = 282.6\\text{ m}^3$."
+        },
+        {
+            q: "Un anuncio publicitario digital generó 1,200 clics durante su primera semana. Si la tasa de conversión promedio es del 5%, ¿cuántas ventas o conversiones efectivas se obtuvieron?",
+            options: ["12 conversiones", "24 conversiones", "60 conversiones", "120 conversiones"],
+            correct: 2,
+            hint: "Para encontrar el porcentaje, multiplica 1,200 por 0.05.",
+            exp: "El 5% de 1,200 se calcula multiplicando $1200 \\times 0.05 = 60$ conversiones exitosas."
+        },
+        {
+            q: "Simplifique la siguiente expresión algebraica combinando términos semejantes:\n$4x^2 - 3x + 5 - 2x^2 + 7x - 9$",
+            options: [
+                "$2x^2 + 4x - 4$",
+                "$6x^2 + 10x + 14$",
+                "$2x^2 - 4x - 4$",
+                "$2x^4 + 4x^2 - 4$"
+            ],
+            correct: 0,
+            hint: "Agrupa por separado los términos con $x^2$, los que tienen $x$ y los números independientes.",
+            exp: "Operando términos comunes: $(4x^2 - 2x^2) = 2x^2$; $(-3x + 7x) = 4x$; $(5 - 9) = -4$. El resultado es $2x^2 + 4x - 4$."
+        },
+        {
+            q: "Un triángulo rectángulo tiene una base de 6 centímetros y una altura de 8 centímetros. ¿Cuál es la longitud de su hipotenusa?",
+            options: ["10 cm", "14 cm", "48 cm", "12 cm"],
+            correct: 0,
+            hint: "Utiliza el Teorema de Pitágoras: $a^2 + b^2 = c^2$.",
+            exp: "Sumamos los cuadrados de los catetos: $6^2 + 8^2 = 36 + 64 = 100$. La raíz cuadrada de 100 es 10 cm."
+        },
+        {
+            q: "El precio original de un curso digital es de $80. Si aplicas un cupón de descuento especial del 25%, ¿cuánto terminarás pagando finalmente por el producto?",
+            options: ["$20", "$60", "$55", "$75"],
+            correct: 1,
+            hint: "Calcula el 25% de 80 y réstaselo al precio original, o calcula directamente el 75% de 80.",
+            exp: "El descuento es del 25% ($80 \\times 0.25 = $20). Al restar el descuento al precio original ($80 - $20) obtenemos un costo final de $60."
+        },
+        {
+            q: "Encuentra la pendiente ($m$) de la línea recta que pasa exactamente por los puntos coordenados $A(2, 4)$ y $B(5, 13)$ en el plano cartesiano.",
+            options: ["m = 1.5", "m = 3", "m = 9", "m = 0.33"],
+            correct: 1,
+            hint: "La fórmula de la pendiente es $m = (y_2 - y_1) / (x_2 - x_1)$.",
+            exp: "Sustituyendo los valores: $m = (13 - 4) / (5 - 2) = 9 / 3 = 3$. La pendiente es igual a 3."
+        },
+        {
+            q: "Un analista de tráfico divide una lista de 400 prospectos en una razón de 3:1 entre tráfico orgánico y tráfico pagado. ¿Cuántos prospectos corresponden al grupo de tráfico orgánico?",
+            options: ["100 prospectos", "300 prospectos", "200 prospectos", "133 prospectos"],
+            correct: 1,
+            hint: "La razón total consta de 4 partes (3 + 1 = 4). Divide 400 entre 4 partes y multiplica el resultado por 3.",
+            exp: "Cada parte equivale a $400 / 4 = 100$. Al ser la relación 3 partes orgánicas, calculamos $100 \\times 3 = 300$ prospectos."
+        },
+        {
+            q: "Resuelve el siguiente sistema de ecuaciones lineales para encontrar el valor correlativo de y:\n$x + y = 12$\n$x - y = 4$",
+            options: ["y = 8", "y = 4", "y = 6", "y = 2"],
+            correct: 1,
+            hint: "Puedes sumar ambas ecuaciones de forma directa para eliminar la variable $y$ primero, o usar sustitución.",
+            exp: "Sumando las ecuaciones: $2x = 16 \\rightarrow x = 8$. Sustituyendo en la primera ecuación: $8 + y = 12 \\rightarrow y = 4$."
+        },
+        {
+            q: "Un conjunto de datos incluye las siguientes calificaciones obtenidas en una evaluación: 75, 80, 80, 85, 90, 95, 100. ¿Cuál es la mediana de estas puntuaciones?",
+            options: ["85", "80", "86.4", "90"],
+            correct: 0,
+            hint: "La mediana es el valor central que divide el conjunto ordenado exactamente a la mitad.",
+            exp: "Los datos ya se encuentran ordenados de menor a mayor. Al haber 7 elementos, el número que ocupa la posición central (la cuarta posición) es el 85."
+        },
+        {
+            q: "Calcule la probabilidad de obtener un número par al lanzar un dado estándar balanceado de seis caras numeradas del 1 al 6.",
+            options: ["1/6", "1/2", "1/3", "2/3"],
+            correct: 1,
+            hint: "Determina cuántos números pares hay en el dado (2, 4, 6) en relación al total de caras posibles.",
+            exp: "Hay 3 casos favorables (2, 4, 6) de un total de 6 opciones posibles. La fracción $3/6$ se simplifica exactamente a $1/2$ (50%)."
+        },
+        {
+            q: "Si la base de un rectángulo se duplica en longitud y su altura se reduce exactamente a la mitad, ¿cómo cambia su área original?",
+            options: [
+                "El área se duplica.",
+                "El área se reduce a la cuarta parte.",
+                "El área permanece exactamente igual.",
+                "El área aumenta cuatro veces."
+            ],
+            correct: 2,
+            hint: "Fórmula del área: $A = b \\cdot h$. Haz la sustitución matemática usando $2b$ y $h/2$.",
+            exp: "Nueva área = $(2b) \\times (h / 2) = 2/2 \\cdot (b \\cdot h) = b \\cdot h$. Las operaciones se compensan, manteniendo el área idéntica."
+        },
+        {
+            q: "Un contratista cobra una tarifa fija de $50 por la visita técnica a domicilio, más $30 adicionales por cada hora de mano de obra laborada. Si el cobro total facturado fue de $170, ¿cuántas horas trabajó?",
+            options: ["3 horas", "4 horas", "5 horas", "2.5 horas"],
+            correct: 1,
+            hint: "Plantea la ecuación lineal $30h + 50 = 170$ y despeja la variable de las horas ($h$).",
+            exp: "Restamos el costo fijo del total: $170 - 50 = 120$. Luego dividimos el saldo entre la tarifa por hora: $120 / 30 = 4$ horas."
+        },
+        {
+            q: "Una caja metálica cúbica tiene una arista que mide exactamente 5 centímetros por lado. ¿Cuál es el área superficial total de las seis caras exteriores combinadas de la caja?",
+            options: ["25 cm²", "125 cm²", "150 cm²", "60 cm²"],
+            correct: 2,
+            hint: "Calcula el área de una sola cara cuadrada ($lado \\times lado$) y luego multiplica ese resultado por el total de caras (6).",
+            exp: "El área de una cara es $5 \\times 5 = 25\\text{ cm}^2$. Al tener un cubo 6 caras uniformes, el área total corresponde a $25 \\times 6 = 150\\text{ cm}^2$."
+        },
+        {
+            q: "Encuentre las soluciones reales o raíces de la siguiente ecuación cuadrática factorizable:\n$x^2 - 5x + 6 = 0$",
+            options: ["x = -2, x = -3", "x = 2, x = 3", "x = 1, x = 6", "x = 5, x = 6"],
+            correct: 1,
+            hint: "Factoriza la expresión buscando dos números que multiplicados den +6 y sumados den -5.",
+            exp: "La ecuación se factoriza como $(x - 2)(x - 3) = 0$. Al igualar cada binomio a cero, obtenemos las soluciones $x = 2$ y $x = 3$."
+        },
+        {
+            q: "Una tienda de comercio electrónico compra un artículo a precio de proveedor por $20 y decide venderlo al público marcando un precio de venta de $25. ¿Cuál es el porcentaje de ganancia o margen sobre el costo de adquisición?",
+            options: ["5%", "20%", "25%", "15%"],
+            correct: 2,
+            hint: "La ganancia neta es de $5. Divide esa ganancia entre el costo original de $20 y conviértelo a porcentaje.",
+            exp: "Dividiendo el beneficio sobre la inversión base: $5 / 20 = 0.25$. Multiplicando por 100 obtenemos un margen exacto del 25%."
+        },
+        {
+            q: "¿Cuál es el valor numérico obtenido al evaluar la siguiente función exponencial cuando el tiempo es $t = 3$?\n$f(t) = 5 \\cdot 2^t$",
+            options: ["30", "40", "125", "15"],
+            correct: 1,
+            hint: "Aplica primero la potencia $2^3$ siguiendo el orden jerárquico operacional y luego multiplica por 5.",
+            exp: "Primero se calcula el exponente de la base: $2^3 = 2 \\times 2 \\times 2 = 8$. Finalmente, multiplicamos el factor: $5 \\times 8 = 40$."
+        },
+        {
+            q: "Un mapa de carreteras utiliza una escala de representación donde 2 centímetros en el papel equivalen a 15 kilómetros reales de terreno. Si la distancia medida en el mapa entre dos poblados es de 8 centímetros, ¿cuál es la distancia real en kilómetros?",
+            options: ["30 km", "60 km", "120 km", "45 km"],
+            correct: 1,
+            hint: "Plantea una regla de tres simple directa: si 2 cm son 15 km, entonces 8 cm representan 'x' km.",
+            exp: "Multiplicamos cruzado y dividimos: $(8 \\times 15) / 2 = 120 / 2 = 60$ kilómetros reales."
+        },
+        {
+            q: "Calcule el perímetro aproximado de una alfombra circular cuyo diámetro total mide exactamente 6 metros. (Utilice $\\pi \\approx 3.14$)",
+            options: ["18.84 metros", "9.42 metros", "28.26 metros", "37.68 metros"],
+            correct: 0,
+            hint: "La fórmula para el perímetro o circunferencia es $C = \\pi \\cdot d$, donde $d$ es el diámetro.",
+            exp: "Sustituyendo el diámetro directo en la fórmula de la circunferencia tenemos: $3.14 \\times 6 = 18.84$ metros de perímetro."
+        },
+        {
+            q: "Si la media aritmética de cuatro números es exactamente 20, y tres de esos números son 15, 20 y 25, ¿cuál es el valor del cuarto número faltante?",
+            options: ["10", "20", "30", "15"],
+            correct: 1,
+            hint: "Si la media de 4 números es 20, la suma acumulada de todos ellos debe dar un total de 80 ($4 \\times 20$).",
+            exp: "La suma requerida es $4 \\times 20 = 80$. Sumando los tres valores conocidos: $15 + 20 + 25 = 60$. El número faltante es $80 - 60 = 20$."
+        },
+        {
+            q: "Un inversionista coloca un capital de $1,000 en una cuenta de ahorros que rinde un interés simple del 6% anual. ¿Cuánto dinero total habrá acumulado en la cuenta después de transcurrir 3 años sin retiros?",
+            options: ["$1,060", "$1,180", "$1,216", "$1,006"],
+            correct: 1,
+            hint: "Calcula el interés de un año ($1,000 \\times 0.06$), multiplícalo por 3 años y súmaselo al capital inicial.",
+            exp: "El interés ganado por año es de $60. En 3 años el interés acumulado es de $180 ($60 \\times 3$). El monto total es $1,000 + $180 = $1,180."
+        },
+        {
+            q: "Identifique el valor de la incógnita $x$ que satisface la siguiente ecuación lineal con fracciones:\n$x / 4 + 3 = 7$",
+            options: ["x = 16", "x = 4", "x = 1", "x = 40"],
+            correct: 0,
+            hint: "Resta 3 en ambos miembros de la ecuación antes de multiplicar por 4 para despejar completamente la variable.",
+            exp: "Restando 3 en ambos lados: $x / 4 = 4$. Al pasar el 4 multiplicando al miembro derecho, obtenemos un valor de $x = 16$."
+        },
+        {
+            q: "¿Cuál es el área total de un terreno plano que tiene forma geométrica de trapecio, si sus bases miden 12 y 8 metros respectivamente, y su altura perpendicular es de 5 metros?",
+            options: ["100 metros cuadrados", "50 metros cuadrados", "48 metros cuadrados", "25 metros cuadrados"],
+            correct: 1,
+            hint: "La fórmula para el área de un trapecio es $A = \\frac{(B + b) \\cdot h}{2}$.",
+            exp: "Sumamos las bases: $12 + 8 = 20$. Multiplicamos por la altura: $20 \\times 5 = 100$. Dividiendo el resultado por 2 obtenemos 50 metros cuadrados."
+        },
+        {
+            q: "En una fábrica de empaques, una máquina automatizada produce 15 cajas de cartón cada 45 segundos. ¿A qué tasa constante produce cajas expresada por minuto?",
+            options: ["20 cajas por minuto", "30 cajas por minuto", "45 cajas por minuto", "15 cajas por minuto"],
+            correct: 0,
+            hint: "Un minuto contiene 60 segundos. Divide 60 entre 45 y multiplica por 15, o usa una proporción simple.",
+            exp: "La tasa de producción es de $15 / 45 = 1/3$ de caja por segundo. En un minuto completo ($60\\text{ segundos}$): $60 \\times (1/3) = 20$ cajas."
+        },
+        {
+            q: "Una encuesta aplicada a 200 personas reveló que a 120 de ellas les gusta consumir café por las mañanas. ¿Qué porcentaje del grupo encuestado representa a los consumidores de café?",
+            options: ["40%", "50%", "60%", "120%"],
+            correct: 2,
+            hint: "Divide el número de respuestas favorables entre la población muestra total y multiplica por 100.",
+            exp: "Haciendo la división porcentual: $120 / 200 = 0.60$. Al multiplicar por 100 obtenemos que equivale exactamente al 60%."
+        },
+        {
+            q: "El volumen de un contenedor prismático rectangular (caja) es de 120 metros cúbicos. Si se sabe que el largo mide 6 metros y el ancho mide 4 metros, ¿cuánto mide la altura del contenedor?",
+            options: ["5 metros", "10 metros", "2 metros", "24 metros"],
+            correct: 0,
+            hint: "La fórmula del volumen de un prisma rectangular es $V = largo \\times ancho \\times altura$.",
+            exp: "El área de la base es $6 \\times 4 = 24\\text{ m}^2$. Sabiendo que el volumen total es 120, dividimos el volumen entre el área base: $120 / 24 = 5$ metros."
+        },
+        {
+            q: "Si la razón matemática entre dos números enteros es 5:2 y el número menor es 14, ¿cuál es el valor numérico asignado al número mayor?",
+            options: ["35", "28", "70", "21"],
+            correct: 0,
+            hint: "Establece la proporción: $5 / 2 = x / 14$ y despeja el valor de la incógnita multiplicando cruzado.",
+            exp: "Despejando la proporción directa: $x = (5 \\times 14) / 2$. Al resolver la operación obtenemos $70 / 2 = 35$."
+        },
+        {
+            q: "Graficando la función lineal $y = -2x + 4$, ¿en qué punto cartesiano cruza la recta de forma exacta el eje vertical de las ordenadas (eje Y)?",
+            options: ["(0, -2)", "(0, 4)", "(2, 0)", "(-2, 4)"],
+            correct: 1,
+            hint: "El cruce con el eje Y ocurre cuando el valor de la variable $x$ se iguala a cero. Observa la ordenada al origen de la ecuación.",
+            exp: "Sustituyendo $x = 0$ en la función lineal: $y = -2(0) + 4 \\rightarrow y = 4$. Por lo tanto, las coordenadas cartesianas del intercepto son $(0, 4)$."
+        },
+        {
+            q: "Un estudiante necesita obtener un promedio mínimo de 80 en cuatro exámenes para acreditar una materia. Si sus primeras tres notas fueron 75, 82 y 78, ¿cuánto debe obtener como calificación mínima en el cuarto examen?",
+            options: ["80", "85", "90", "78"],
+            correct: 1,
+            hint: "Para promediar 80 en 4 notas, los puntos acumulados totales sumados deben ser de al menos 320 puntos.",
+            exp: "El puntaje total requerido es $80 \\times 4 = 320$. Al sumar los tres exámenes aprobados se tiene: $75 + 82 + 78 = 235$. El cuarto examen exige $320 - 235 = 85$."
+        }
+    ]
+},
+            {
+    name: "Artes del Lenguaje (RLA)",
+    officialTime: 9000, // 150 Minutos oficiales
+    questions: [
+        {
+            q: "Lea el siguiente fragmento:\n'La adopción acelerada del comercio electrónico no solo ha transformado los hábitos de consumo masivo, sino que también ha obligado a las empresas de logística tradicional a reinventar sus cadenas de distribución.'\n\n¿Cuál es la idea principal del autor?",
+            options: [
+                "El e-commerce transformó el consumo masivo e impulsó la reestructuración logística.",
+                "Las empresas tradicionales están destinadas a la quiebra absoluta.",
+                "Las entregas en menos de 24 horas son insostenibles económicamente.",
+                "Los consumidores prefieren evitar las tiendas físicas por comodidad."
+            ],
+            correct: 0,
+            hint: "Busca la opción que resuma de forma global los dos efectos mencionados en el fragmento.",
+            exp: "El texto abarca de forma directa dos elementos entrelazados: la transformación del consumo y la obligada reinvención de las cadenas logísticas de distribución."
+        },
+        {
+            q: "Seleccione la opción que corrija los errores de concordancia de la siguiente frase:\n'El grupo de ingenieros, luego de revisar los planos, concluyeron que el suelo era inestables.'",
+            options: [
+                "El grupo de ingenieros, luego de revisar los planos, concluyeron que el suelo era inestables.",
+                "El grupo de ingenieros, luego de revisar los planos, concluyó que el suelo era inestable.",
+                "El grupo de ingenieros luego de revisar los planos concluyeron que el suelo era inestable.",
+                "El grupo de ingenieros, luego de revisar los planos, concluyó que el suelo era inestables."
+            ],
+            correct: 1,
+            hint: "El sujeto principal es 'El grupo' (singular) y el adjetivo debe calificar a 'suelo' (singular).",
+            exp: "'El grupo' es un sujeto colectivo singular, requiere el verbo 'concluyó'. Asimismo, el adjetivo 'inestable' debe concordar en singular con 'suelo'."
+        },
+        {
+            q: "Lea la siguiente premisa argumentativa:\n'Los programas de reciclaje municipal son costosos y requieren una inversión inicial masiva en infraestructura. Por lo tanto, las ciudades deberían evitar implementarlos si quieren mantener la estabilidad fiscal.'\n\n¿Qué falacia lógica o debilidad argumentativa presenta este razonamiento?",
+            options: [
+                "Ataque personal (ad hominem) hacia los administradores municipales.",
+                "Falso dilema o sobresimplificación, ignorando los beneficios económicos a largo plazo.",
+                "Apelación a la autoridad sin datos que la respalden.",
+                "Generalización apresurada basada en un solo caso exitoso."
+            ],
+            correct: 1,
+            hint: "El argumento plantea que solo se puede tener estabilidad fiscal O reciclaje, sin ver el panorama completo.",
+            exp: "El argumento asume erróneamente que el costo inicial cancela cualquier beneficio futuro, planteando una falsa oposición entre ecología y salud fiscal."
+        },
+        {
+            q: "Seleccione la palabra que complete correctamente la oración respetando las reglas ortográficas de las grafías b/v, c/s/z, g/j:\n'El especialista sugirió que el paciente debía _____ de consumir azúcares refinados para evitar una _____ en su condición.'",
+            options: [
+                "absternerse / recivida",
+                "abstenerse / recidiva",
+                "abstenérse / recidiba",
+                "havstenerse / resivida"
+            ],
+            correct: 1,
+            hint: "Pensar en el verbo 'abstener' y el término médico para la reaparición de una enfermedad.",
+            exp: "'Abstenerse' se escribe con 'b' (prefijo abs-) y 's'. 'Recidiva' (recaída) proviene de raíces latinas y se escribe con 'c' y 'v'."
+        },
+        {
+            q: "Identifique la función de la coma en el siguiente fragmento:\n'Gabriela, la nueva jefa del departamento de marketing digital, presentará las métricas trimestrales mañana por la mañana.'",
+            options: [
+                "Separar elementos en una enumeración compleja.",
+                "Indicar la omisión de un verbo previamente mencionado.",
+                "Aislar una aposición explicativa que detalla quién es el sujeto.",
+                "Introducir una oración subordinada condicional."
+            ],
+            correct: 2,
+            hint: "La frase entre comas aporta información extra sobre Gabriela que podría eliminarse sin perder el sentido de la oración.",
+            exp: "Las comas se utilizan para encerrar una aposición explicativa ('la nueva jefa del departamento...'), aportando datos accesorios sobre el núcleo del sujeto."
+        },
+        {
+            q: "Lea el siguiente texto:\n'Aunque el uso de energías renovables como la solar y la eólica ha crecido un 40% en la última década, los combustibles fósiles aún subsidian más del 70% de la demanda energética industrial debido a su alta densidad energética y bajo costo de almacenamiento.'\n\n¿Qué relación lógica existe entre el crecimiento de las renovables y el uso de combustibles fósiles según el fragmento?",
+            options: [
+                "Causa y efecto: las renovables causan la necesidad de más petróleo.",
+                "Oposición o contraste: a pesar del crecimiento de las renovables, los combustibles fósiles siguen dominando.",
+                "Cronológica: las renovables precedieron históricamente al uso industrial del carbón.",
+                "Comparativa de igualdad: ambas fuentes generan exactamente los mismos ingresos."
+            ],
+            correct: 1,
+            hint: "Presta atención al conector inicial 'Aunque'. Indica un contraste.",
+            exp: "El conector concessivo 'Aunque' establece una relación de contraste entre el avance de las energías limpias y el dominio persistente de los combustibles tradicionales."
+        },
+        {
+            q: "Determine cuál de las siguientes opciones elimina la redundancia o el pleonasmo de manera efectiva:",
+            options: [
+                "El testigo afirmó que vio con sus propios ojos cómo el sospechoso huía hacia arriba.",
+                "Debemos trazar un plan a futuro para prever de antemano los posibles riesgos futuros.",
+                "El equipo analizó los resultados previos con el objetivo de anticipar las tendencias.",
+                "Tengo una hija mujer que actualmente posee un lapso de tiempo libre disponible."
+            ],
+            correct: 2,
+            hint: "Evita frases que repitan el mismo concepto innecesariamente (como 'viste con tus ojos' o 'plan a futuro').",
+            exp: "La opción 2 es limpia y directa. Las demás contienen pleonasmos evidentes como 'propios ojos', 'prever de antemano/riesgos futuros' o 'hija mujer/lapso de tiempo'."
+        },
+        {
+            q: "Elija la opción que use correctamente los signos de puntuación (puntos, puntos y coma, dos puntos):\n'La estrategia omnicanal requiere tres pilares fundamentales _____'",
+            options: [
+                "tecnología integrada; capacitación del personal y, finalmente, análisis de datos.",
+                "tecnología integrada, capacitación del personal y análisis de datos.",
+                ": tecnología integrada, capacitación del personal y análisis de datos.",
+                ". Tecnología integrada, capacitación del personal, análisis de datos."
+            ],
+            correct: 2,
+            hint: "Se utiliza un signo específico para introducir una enumeración anunciada previamente.",
+            exp: "Los dos puntos (:) son el recurso correcto para abrir una lista o enumeración que ha sido anticipada por elementos como 'tres pilares fundamentales'."
+        },
+        {
+            q: "En una carta comercial, ¿cuál de las siguientes opciones mantiene el registro formal y profesional adecuado?",
+            options: [
+                "Oye, te escribo para decirte que los precios del catálogo ya cambiaron, checa los adjuntos.",
+                "Por medio de la presente, me dirijo a usted con el propósito de notificarle la actualización en nuestras tarifas vigentes.",
+                "A ver si revisas el correo porque les subimos el precio a las cosas de la plataforma virtual.",
+                "Estimado cliente, las cosas están más caras por la inflación, disculpe las molestias ocasionadas."
+            ],
+            correct: 1,
+            hint: "Busca la opción que evite el lenguaje coloquial o excesivamente informal.",
+            exp: "La opción 1 utiliza fórmulas de cortesía institucional ('Por medio de la presente', 'notificarle') adecuadas para el ámbito profesional corporativo."
+        },
+        {
+            q: "Lea el siguiente enunciado:\n'Si el departamento de control de calidad _____ detectado la falla a tiempo, la empresa no _____ pérdidas millonarias durante el último trimestre.'\n\n¿Qué verbos completan la estructura condicional de forma correcta?",
+            options: [
+                "hubiera / habría sufrido",
+                "habría / hubiera sufrido",
+                "haya / sufrirá",
+                "hubiese / sufriera"
+            ],
+            correct: 0,
+            hint: "Se trata de una condicional imposible o del pasado (tercer tipo). Requiere el pluscuamperfecto de subjuntivo y el condicional compuesto.",
+            exp: "La estructura condicional sobre situaciones pasadas no ocurridas exige la combinación: 'Si + hubiera/hubiese + participio' seguido de 'habría + participio'."
+        },
+        {
+            q: "¿Qué recurso literario o figura retórica predomina en la frase: 'El mercado financiero es un océano embravecido que devora a los inversionistas inexpertos'?",
+            options: [
+                "Metáfora",
+                "Hipérbole",
+                "Anáfora",
+                "Personificación estricta"
+            ],
+            correct: 0,
+            hint: "Identifica la identificación directa de una cosa (mercado) con otra (océano) sin usar conectores como 'como' o 'parece'.",
+            exp: "Es una metáfora pura, ya que asimila directamente el concepto del mercado con el del océano para transferir sus cualidades de peligro e inestabilidad."
+        },
+        {
+            q: "Elija la palabra que presenta una ortografía correcta según las reglas de acentuación de las palabras esdrújulas y sobreesdrújulas:",
+            options: [
+                "Permiteselo",
+                "Permíteselo",
+                "Permitesélo",
+                "Permitáselo"
+            ],
+            correct: 1,
+            hint: "Las palabras cuya sílaba tónica es la anterior a la antepenúltima siempre llevan tilde.",
+            exp: "'Permíteselo' es una palabra sobreesdrújula y, de acuerdo con la regla ortográfica general de la RAE, todas las palabras de este tipo se acentúan gráficamente."
+        },
+        {
+            q: "Lea con atención:\n'Los algoritmos de recomendación analizan miles de puntos de datos. Sin embargo, su incapacidad para interpretar el contexto emocional real de un usuario limita la empatía de la interfaz.'\n\n¿Cuál es el propósito del conector 'Sin embargo'?",
+            options: [
+                "Añadir información adicional que refuerza la premisa inicial.",
+                "Introducir una objeción o restricción a la efectividad de los algoritmos descritos.",
+                "Establecer una causa directa del procesamiento masivo de datos.",
+                "Concluir definitivamente un proceso lógico matemático."
+            ],
+            correct: 1,
+            hint: "Este conector se usa para contraponer una idea limitante a una afirmación anterior.",
+            exp: "'Sin embargo' funciona como un conector adversativo, limitando la idea del poder de procesamiento de los algoritmos al contraponerla con su falta de empatía."
+        },
+        {
+            q: "Seleccione la opción donde el uso de los homófonos 'porque / por qué / porqué / por que' sea gramaticalmente correcto:",
+            options: [
+                "No entiendo el por qué de tu drástica decisión ejecutiva.",
+                "¿Porqué no asististe a la reunión de alineación de marcas del lunes?",
+                "El director técnico explicó el porqué de la reestructuración del sitio web.",
+                "Estamos preocupados por qué no se alcanzaron las metas de conversión."
+            ],
+            correct: 2,
+            hint: "'Porqué' funciona como un sustantivo sinónimo de 'causa' o 'motivo' cuando va precedido de un artículo.",
+            exp: "En la opción 2, 'el porqué' actúa correctamente como sustantivo masculino singular. Las otras opciones debieron ser 'el porqué' (1), '¿Por qué...?' (2) y 'porque' (3)."
+        },
+        {
+            q: "Identifique el error principal en el siguiente fragmento de texto instructivo:\n'Paso 1: Descargue el archivo ejecutable. Paso 2: Ejecute el instalador en su equipo de cómputo. Paso 3: Te vas a asegurar de que el firewall no bloquee los puertos de red.'",
+            options: [
+                "Falta de claridad técnica en los términos utilizados.",
+                "Ruptura en la persona gramatical o consistencia del tono (pasa de usted a tú).",
+                "Ausencia de nexos temporales indispensables.",
+                "Uso excesivo de verbos en modo infinitivo."
+            ],
+            correct: 1,
+            hint: "Observa los verbos: 'Descargue' (usted), 'Ejecute' (usted), 'Te vas a asegurar' (tú).",
+            exp: "El texto rompe la consistencia en el tratamiento del lector, variando injustificadamente de la tercera persona de cortesía ('usted') a la segunda persona formal/informal ('tú')."
+        },
+        {
+            q: "Lea el siguiente texto argumentativo:\n'Implementar el teletrabajo permanente ahorra costos operativos de oficina. Además, estudios demuestran que incrementa la retención de talento en un 25%. Por ende, las organizaciones tradicionales deben transicionar a esquemas híbridos o remotos.'\n\n¿Qué elemento del argumento representa la frase 'estudios demuestran que incrementa la retención de talento en un 25%'?",
+            options: [
+                "La conclusión o tesis central.",
+                "Una evidencia o respaldo empírico que apoya la tesis.",
+                "Una contraargumentación para debilitar el punto de vista opuesto.",
+                "Una falacia de apelación a las emociones colectivas."
+            ],
+            correct: 1,
+            hint: "Es un dato objetivo o estadístico citado para demostrar la validez de la propuesta.",
+            exp: "Las referencias a estudios y porcentajes específicos (25%) funcionan como datos de respaldo o evidencias empíricas dentro de la estructura de un argumento."
+        },
+        {
+            q: "Seleccione la oración que carezca de errores de leísmo, laísmo o loísmo:",
+            options: [
+                "A María le vi en la oficina comercial revisando las facturas de la semana.",
+                "A las propuestas de campaña las añadí un apéndice con los costos detallados.",
+                "Al nuevo diseñador lo contrataron después de evaluar su portafolio digital.",
+                "A los directores les llamé por teléfono para avisar del retraso del servidor."
+            ],
+            correct: 2,
+            hint: "Determina si el verbo requiere un objeto directo (lo/la) o indirecto (le) para el referente masculino singular.",
+            exp: "'Contratar' exige un objeto directo ('lo contrataron' es correcto para masculino singular). La opción 0 presenta leísmo, y la 1 presenta laísmo."
+        },
+        {
+            q: "¿Cuál es el significado deducible de la palabra 'ubicuidad' en el siguiente contexto?\n'La ubicuidad de los teléfonos inteligentes ha modificado la estructura de las interacciones humanas cotidianas, permitiendo la comunicación instantánea en cualquier rincón habitado.'",
+            options: [
+                "Costo excesivamente elevado de una tecnología moderna.",
+                "Capacidad de estar presente en todas partes al mismo tiempo.",
+                "Obsolescencia planificada de los dispositivos electrónicos.",
+                "Fragilidad o propensión a fallos en redes remotas."
+            ],
+            correct: 1,
+            hint: "El texto menciona 'en cualquier rincón', dando una pista sobre la disponibilidad global o masiva.",
+            exp: "El término 'ubicuidad' alude a la omnipresencia, es decir, el hecho o facultad de estar presente de manera simultánea o generalizada en múltiples lugares."
+        },
+        {
+            q: "Complete el enunciado con la combinación de conectores que le devuelva la coherencia lógica:\n'El diseño de la interfaz de usuario es sumamente estético; _____, la experiencia de navegación resulta confusa _____ la arquitectura de la información está mal organizada.'",
+            options: [
+                "por lo tanto / debido a que",
+                "no obstante / puesto que",
+                "es decir / a pesar de que",
+                "en consecuencia / sin embargo"
+            ],
+            correct: 1,
+            hint: "El primer espacio requiere un conector de contraste (estético vs. confuso). El segundo requiere un conector de causa.",
+            exp: "'No obstante' introduce el contraste entre la buena estética y la mala navegación. 'Puesto que' explica la causa raíz del problema organizativo."
+        },
+        {
+            q: "Determine el tono predominante del autor en el siguiente fragmento:\n'Resulta alarmante e inaceptable que, en plena era de la información, comunidades enteras permanezcan aisladas digitalmente debido a la desidia institucional y la falta de inversión en redes públicas de fibra óptica.'",
+            options: [
+                "Objetivo e informativo.",
+                "Crítico y de indignación.",
+                "Irónico y humorístico.",
+                "Condescendiente y conciliador."
+            ],
+            correct: 1,
+            hint: "Identifica adjetivos y expresiones cargadas de emoción valorativa como 'alarmante', 'inaceptable' o 'desidia'."
+        },
+        {
+            q: "Seleccione la frase que use correctamente las mayúsculas de acuerdo con la normativa vigente de la Real Academia Española (RAE):",
+            options: [
+                "El Ministro de Economía anunció medidas drásticas para controlar la Inflación.",
+                "El Renacimiento supuso una revolución cultural en toda Europa Occidental.",
+                "La Geografía de esta región es estudiada por el profesor Martínez los Martes.",
+                "Ayer visité el norte de Chile tras cruzar la Cordillera de los Andes con mi Tío."
+            ],
+            correct: 1,
+            hint: "Los nombres de movimientos históricos y áreas geopolíticas van con mayúscula, a diferencia de los cargos públicos o días de la semana.",
+            exp: "'Renacimiento' (época histórica) y 'Europa Occidental' (entidad geopolítica) llevan mayúscula. 'Ministro', 'inflación', 'martes' o 'norte' deben ir en minúscula."
+        },
+        {
+            q: "Lea la siguiente cadena de razonamiento:\n'Todas las plataformas SaaS basadas en la nube requieren una suscripción mensual activa. Trello es una plataforma SaaS basada en la nube. Por lo tanto, Trello requiere una suscripción activa.'\n\n¿Qué tipo de razonamiento lógico se ha empleado?",
+            options: [
+                "Razonamiento inductivo, de lo particular a lo general.",
+                "Razonamiento deductivo válido, de una regla general a un caso específico.",
+                "Falacia de la causa falsa (post hoc ergo propter hoc).",
+                "Argumento de analogía débil."
+            ],
+            correct: 1,
+            hint: "El argumento parte de una premisa general absoluta para concluir sobre un elemento individual que pertenece a esa categoría.",
+            exp: "Es un silogismo clásico que representa el método deductivo: si la premisa mayor y menor son verdaderas, la conclusión sobre el caso particular es necesariamente válida."
+        },
+        {
+            q: "Elija la opción que no incurra en errores de gerundio ilícito (gerundio de posterioridad):",
+            options: [
+                "El programador diseñó el código fuente, entregándolo tres semanas después.",
+                "El decreto gubernamental se firmó en mayo, siendo publicado meses más tarde.",
+                "El ingeniero de sistemas dictó una conferencia explicando el nuevo protocolo.",
+                "Se registró un incendio masivo afectando a las bodegas centrales del puerto."
+            ],
+            correct: 2,
+            hint: "El gerundio debe expresar una acción simultánea o anterior a la del verbo principal, nunca una acción posterior.",
+            exp: "En la opción 2, 'explicando' describe una acción simultánea al acto de dictar la conferencia, lo cual es el uso correcto del gerundio en español."
+        },
+        {
+            q: "En el análisis de un texto periodístico editorial, ¿cuál es la diferencia clave entre un hecho y una opinión?",
+            options: [
+                "Los hechos son subjetivos y las opiniones siempre contienen datos numéricos.",
+                "Los hechos pueden verificarse empíricamente de forma objetiva; las opiniones expresan juicios de valor del emisor.",
+                "Las opiniones son compartidas por toda la población; los hechos solo por científicos.",
+                "No existe diferencia alguna dentro de los géneros de opinión periodística."
+            ],
+            correct: 1,
+            hint: "Piensa en qué se puede comprobar mediante evidencia y qué depende de la perspectiva de una persona.",
+            exp: "Un hecho es comprobable y medible mediante datos empíricos objetivos. Una opinión es una interpretación personal o institucional basada en valores, creencias o análisis particulares."
+        },
+        {
+            q: "Seleccione la opción que corrija las deficiencias de puntuación y sintaxis de esta frase:\n'A pesar de que el producto digital era excelente el equipo de ventas no logró colocarlo en el mercado, por su falta de entrenamiento.'",
+            options: [
+                "A pesar de que el producto digital era excelente, el equipo de ventas no logró colocarlo en el mercado debido a su falta de entrenamiento.",
+                "A pesar de que el producto digital era excelente; el equipo de ventas no logró colocarlo en el mercado, por su falta de entrenamiento.",
+                "A pesar de que el producto digital era excelente el equipo de ventas no logró colocarlo en el mercado. Por su falta de entrenamiento.",
+                "El equipo de ventas no logró colocarlo en el mercado a pesar de que el producto digital era excelente. Por su falta de entrenamiento."
+            ],
+            correct: 0,
+            hint: "Se necesita una coma tras la oración subordinada concesiva introductoria y cambiar el conector final para precisar la causa.",
+            exp: "La opción 0 introduce adecuadamente la coma tras el bloque concesivo inicial 'A pesar de...' y sustituye la estructura ambigua por el conector causal claro 'debido a'."
+        },
+        {
+            q: "Lea el siguiente párrafo:\n'La tipografía de un sitio web no es meramente ornamental. De hecho, estudios de legibilidad indican que fuentes sans-serif incrementan la velocidad de lectura en pantallas digitales hasta en un 18%, disminuyendo considerablemente la tasa de rebote en blogs informativos.'\n\n¿Qué conclusión se extrae de forma directa del texto?",
+            options: [
+                "Las fuentes tipográficas con serifa deberían prohibirse por completo de internet.",
+                "La elección de la tipografía influye de manera cuantificable en el comportamiento y retención del usuario.",
+                "Los blogs informativos están perdiendo lectores sin importar el diseño web.",
+                "Un diseño web estético prescinde totalmente de textos extensos."
+            ],
+            correct: 1,
+            hint: "Une el incremento en la velocidad de lectura con la disminución de la tasa de rebote.",
+            exp: "El texto correlaciona directamente el tipo de fuente con métricas operativas de experiencia de usuario y analítica web, como la retención de lectura y la tasa de rebote."
+        },
+        {
+            q: "Identifique el enunciado que presenta anfibología (ambigüedad estructural en su significado):",
+            options: [
+                "El gerente de marketing vio al diseñador gráfico saliendo de su oficina corporativa.",
+                "El equipo de desarrollo concluyó la migración de servidores durante la madrugada.",
+                "Los enlaces de afiliados deben ser verificados periódicamente por los administradores.",
+                "La optimización de motores de búsqueda requiere paciencia, constancia y análisis constantes."
+            ],
+            correct: 0,
+            hint: "¿De quién era la oficina? ¿Del gerente o del diseñador gráfico? El texto no lo deja claro.",
+            exp: "La frase presenta ambigüedad sintáctica ('su oficina'), lo que impide determinar con certeza a cuál de las dos personas pertenece el espacio mencionado."
+        },
+        {
+            q: "Seleccione el prefijo que denote correctamente la idea de 'por debajo de' o 'en menor grado' para completar la palabra en la siguiente frase:\n'El rendimiento del servidor principal fue _____óptimo durante las horas de tráfico pico.'",
+            options: [
+                "hiper",
+                "sub",
+                "infra",
+                "anti"
+            ],
+            correct: 1,
+            hint: "Busca el prefijo estándar que se asocia a niveles inferiores (como en subterráneo o suburbio).",
+            exp: "El prefijo 'sub-' significa inferioridad, posición inferior o escasez. En este caso, 'subóptimo' determina que estuvo por debajo del nivel óptimo esperado."
+        },
+        {
+            q: "Lea con atención:\n'Los sistemas operativos modernos aíslan los procesos de usuario en espacios de memoria protegidos. Esto previene que una falla crítica en una aplicación ordinaria corrompa la estabilidad del sistema central.'\n\n¿A qué se refiere el pronombre demostrativo 'Esto'?",
+            options: [
+                "A las fallas críticas de las aplicaciones.",
+                "Al aislamiento de los procesos de usuario en espacios de memoria protegidos.",
+                "A la estabilidad general del sistema central.",
+                "Al desarrollo de aplicaciones ordinarias."
+            ],
+            correct: 1,
+            hint: "'Esto' resume toda la acción u oración completa expresada de forma inmediatamente anterior.",
+            exp: "El pronombre demostrativo neutro 'Esto' funciona como anáfora textual, englobando y haciendo referencia a toda la proposición anterior sobre el aislamiento de procesos."
+        },
+        {
+            q: "Determine cuál de las opciones representa la estructura idónea de un texto argumentativo formal de tres partes:",
+            options: [
+                "Anécdota introductoria, listado de datos técnicos desorganizados, cierre emotivo.",
+                "Tesis o postura inicial, cuerpo argumentativo de respaldo con evidencias, conclusión o síntesis.",
+                "Glosario de términos técnicos, descripción detallada del problema, propuesta económica.",
+                "Hipótesis científica, desarrollo experimental controlado, bibliografía en formato APA."
+            ],
+            correct: 1,
+            hint: "Es el esquema clásico de la redacción de ensayos académicos y columnas de opinión.",
+            exp: "La estructura argumentativa estándar por excelencia contempla la presentación clara de una tesis, el desarrollo ordenado de argumentos con evidencias y un cierre de síntesis coherente."
+        }
+    ]
+},
+            {
+    name: "Ciencias",
+    officialTime: 5400, // 90 Minutos oficiales
+    questions: [
+        {
+            q: "Un científico quiere probar la efectividad de un nuevo fertilizante en el crecimiento de plantas de maíz. Coloca 50 plantas bajo el sol con el nuevo fertilizante y otras 50 plantas exactamente bajo las mismas condiciones de sol y agua, pero usando fertilizante común.\n\nEn este experimento, ¿cuál es la variable independiente?",
+            options: [
+                "La cantidad de agua recibida.",
+                "La altura final alcanzada por las plantas.",
+                "El tipo de fertilizante utilizado.",
+                "La cantidad de luz solar diaria."
+            ],
+            correct: 2,
+            hint: "La variable independiente es el factor que el experimentador cambia intencionalmente para ver qué pasa.",
+            exp: "El tipo de fertilizante es la variable independiente porque es el elemento modificado a propósito por el científico para evaluar sus impactos diferenciales."
+        },
+        {
+            q: "En genética, si cruzamos dos plantas heterocigotas de flores rojas (Rr), donde el alelo R (rojo) es dominante sobre el alelo r (blanco), ¿cuál es la probabilidad matemática de obtener una planta de flores blancas (rr)?",
+            options: ["0%", "25%", "50%", "75%"],
+            correct: 1,
+            hint: "Realiza el Cuadro de Punnett combinando Rr x Rr.",
+            exp: "La cruza genera los genotipos: 25% RR (rojo), 50% Rr (rojo) y 25% rr (blanco). Al ser el color blanco recesivo puro, tiene un 25% (1 de 4) de probabilidad."
+        },
+        {
+            q: "Durante el proceso de respiración celular anaeróbica (fermentación) en las células musculares humanas debido a un esfuerzo físico intenso y falta de oxígeno, ¿qué subproducto se genera acumulándose en los tejidos?",
+            options: [
+                "Alcohol etílico",
+                "Ácido láctico",
+                "Glucosa sintética",
+                "Monóxido de carbono"
+            ],
+            correct: 1,
+            hint: "Es el compuesto responsable de la fatiga o ardor muscular temporal tras un ejercicio anaeróbico.",
+            exp: "Cuando el oxígeno es insuficiente, las células musculares recurren a la fermentación láctica, transformando el piruvato en ácido láctico para seguir produciendo ATP."
+        },
+        {
+            q: "Un bloque de metal de 10 kg se desplaza sobre una superficie horizontal. Si se le aplica una fuerza neta constante de 30 Newtons, ¿cuál será la aceleración del bloque de acuerdo con la Segunda Ley de Newton?",
+            options: [
+                "3 m/s²",
+                "0.33 m/s²",
+                "300 m/s²",
+                "20 m/s²"
+            ],
+            correct: 0,
+            hint: "La fórmula matemática es Fuerza es igual a Masa por Aceleración (F = m * a). Despeja la aceleración.",
+            exp: "Aceleración = Fuerza / Masa. Dividiendo 30 N entre 10 kg obtenemos un resultado exacto de 3 m/s²."
+        },
+        {
+            q: "Considere la teoría de las placas tectónicas. ¿Qué tipo de límite de placas ocurre cuando dos placas se deslizan horizontalmente una al lado de la otra, como sucede en la Falla de San Andrés?",
+            options: [
+                "Límite divergente",
+                "Límite convergente",
+                "Límite transformante",
+                "Punto caliente magmático"
+            ],
+            correct: 2,
+            hint: "En este límite no se crea ni se destruye corteza terrestre de forma masiva, solo hay fricción lateral intensa.",
+            exp: "Los límites transformantes o transcurrentes se caracterizan por el desplazamiento horizontal y paralelo de las placas en direcciones opuestas, generando alta actividad sísmica."
+        },
+        {
+            q: "El agua líquida se calienta en una estufa hasta alcanzar los 100°C a nivel del mar y comienza a hervir transformándose en vapor. ¿Qué ocurre con la temperatura del agua mientras dura el cambio de fase de líquido a gas?",
+            options: [
+                "Continúa aumentando de forma lineal constante.",
+                "Disminuye drásticamente debido a la evaporación.",
+                "Permanece constante a 100°C hasta que todo el líquido se evapore.",
+                "Fluctúa impredeciblemente dependiendo de la intensidad de la flama."
+            ],
+            correct: 2,
+            hint: "Toda la energía térmica añadida durante un cambio de fase se utiliza para romper los enlaces moleculares intermoleculares.",
+            exp: "Durante un cambio de fase (ebullición), la temperatura no cambia; la energía térmica suministrada se consume como calor latente de vaporización para separar las moléculas de agua."
+        },
+        {
+            q: "En un ecosistema forestal, los grillos se alimentan de las hojas de las plantas, las ranas comen grillos y las serpientes comen ranas. ¿Qué porcentaje aproximado de la energía útil de los grillos se transfiere al nivel trófico de las ranas?",
+            options: ["100%", "50%", "10%", "1%"],
+            correct: 2,
+            hint: "Recuerda la ley del diezmo ecológico o pirámide de energía en la transferencia entre niveles.",
+            exp: "Por regla general de la termodinámica en ecología, solo cerca del 10% de la energía de un nivel trófico se incorpora al siguiente nivel; el resto se disipa como calor metabólico."
+        },
+        {
+            q: "Un átomo neutro de carbono tiene un número atómico Z = 6 y un número de masa A = 14 (Carbono-14). ¿Cuál es la composición exacta de sus partículas subatómicas en el núcleo?",
+            options: [
+                "6 protones y 6 electrones",
+                "6 protones y 8 neutrones",
+                "8 protones y 6 neutrones",
+                "14 protones y 6 electrones"
+            ],
+            correct: 1,
+            hint: "El número atómico determina los protones. Los neutrones se calculan restando el número atómico al número de masa (A - Z).",
+            exp: "El Carbono siempre posee 6 protones (Z=6). Restando sus protones de la masa total (14 - 6), determinamos que posee 8 neutrones en su núcleo."
+        },
+        {
+            q: "La hipótesis de la evolución por selección natural de Charles Darwin postula que los individuos con rasgos heredables adaptativos tienen más probabilidades de sobrevivir y reproducirse. ¿Qué concepto describe mejor este proceso?",
+            options: [
+                "Mutación inducida artificialmente",
+                "Éxito reproductivo diferencial",
+                "Generación espontánea adaptada",
+                "Transmisión de caracteres adquiridos por esfuerzo"
+            ],
+            correct: 1,
+            hint: "La selección natural mide cuántos descendientes fértiles deja un organismo en comparación con otros de su población.",
+            exp: "El éxito reproductivo diferencial significa que los organismos mejor adaptados al medio dejan más descendencia, haciendo que sus rasgos se vuelvan comunes en las siguientes generaciones."
+        },
+        {
+            q: "¿Cuál de las siguientes opciones describe una transformación puramente química en lugar de un cambio físico?",
+            options: [
+                "La congelación del agua líquida en un cubo de hielo por pérdida de calor.",
+                "La disolución completa de sal de mesa en un vaso de agua tibia.",
+                "La oxidación de un clavo de hierro expuesto a la intemperie y la humedad.",
+                "La trituración de una roca de cuarzo hasta convertirla en polvo fino."
+            ],
+            correct: 2,
+            hint: "Busca el proceso donde los elementos originales reaccionen para formar sustancias completamente nuevas con propiedades distintas.",
+            exp: "La oxidación del hierro modifica la estructura molecular del metal combinándolo con el oxígeno, creando óxido de hierro, lo cual constituye una reacción química irreversible."
+        },
+        {
+            q: "El efecto invernadero es un proceso natural que mantiene la Tierra a una temperatura habitable. Sin embargo, la quema masiva de combustibles fósiles altera este equilibrio. ¿Qué gas es el principal responsable del aumento antropogénico de este efecto?",
+            options: [
+                "Dióxido de carbono (CO2)",
+                "Nitrógeno gaseoso (N2)",
+                "Oxígeno molecular (O2)",
+                "Argón (Ar)"
+            ],
+            correct: 0,
+            hint: "Es el compuesto liberado de forma masiva en los procesos de combustión automotriz e industrial.",
+            exp: "El dióxido de carbono ($CO_2$) derivado de la actividad humana retiene la radiación infrarroja emitida por la superficie terrestre, intensificando el calentamiento atmosférico."
+        },
+        {
+            q: "Una solución tiene una concentración de iones de hidrógeno muy alta, registrando un pH numérico de 2.0. ¿Cómo se clasifica correctamente esta sustancia química?",
+            options: [
+                "Base fuerte",
+                "Solución neutra",
+                "Ácido fuerte",
+                "Sal insoluble"
+            ],
+            correct: 2,
+            hint: "La escala de pH va de 0 a 14. Los valores inferiores a 7 corresponden al espectro ácido.",
+            exp: "Un pH menor a 7 indica acidez. Cuanto más cercano a 0 esté el valor, mayor será la acidez; por lo tanto, un pH de 2 representa un ácido fuerte."
+        },
+        {
+            q: "En las células eucariotas, ¿cuál es el organelo especializado encargado de realizar la respiración celular aeróbica para sintetizar la mayor cantidad de moléculas de ATP (energía)?",
+            options: [
+                "Aparato de Golgi",
+                "Ribosoma",
+                "Mitocondria",
+                "Cloroplasto"
+            ],
+            correct: 2,
+            hint: "Suele conocerse popularmente como la central energética o el motor de la célula.",
+            exp: "Las mitocondrias son los organelos donde se lleva a cabo el ciclo de Krebs y la cadena de transporte de electrones para la producción masiva de ATP."
+        },
+        {
+            q: "Imagine que una onda de luz viaja por el espacio exterior vacío y entra directamente en una ventana de vidrio grueso. Debido al cambio de densidad del medio, la velocidad de la luz disminuye y su trayectoria se desvía. ¿Qué fenómeno físico explica esto?",
+            options: [
+                "Reflexión especular",
+                "Difracción de ondas",
+                "Refracción",
+                "Efecto Doppler"
+            ],
+            correct: 2,
+            hint: "Es el mismo fenómeno físico que hace que un lápiz parezca quebrado al sumergirse parcialmente en un vaso con agua.",
+            exp: "La refracción ocurre cuando una onda cambia de velocidad y dirección al pasar oblicuamente de un medio de propagación a otro con diferente índice refractivo."
+        },
+        {
+            q: "En el ciclo del agua, ¿cómo se denomina el proceso biológico mediante el cual las plantas absorben agua por las raíces y la liberan en forma de vapor a la atmósfera a través de los estomas de sus hojas?",
+            options: [
+                "Condensación foliar",
+                "Sublimación inversa",
+                "Transpiración",
+                "Precipitación capilar"
+            ],
+            correct: 1,
+            hint: "A nivel global del ecosistema, suele medirse de forma conjunta con la evaporación del suelo en la 'evapotranspiración'.",
+            exp: "La transpiración vegetal es la pérdida de agua en forma de vapor que realizan las plantas para regular su temperatura y transportar nutrientes minerales."
+        },
+        {
+            q: "Una de las evidencias más fuertes del Big Bang es el descubrimiento de una radiación débil de microondas uniforme que inunda todo el universo observable. ¿Qué nombre recibe este fenómeno astronómico?",
+            options: [
+                "Radiación de fondo de microondas (CMB)",
+                "Viento solar heliosférico",
+                "Luz de supernovas distantes",
+                "Gravedad cuántica de bucles"
+            ],
+            correct: 0,
+            hint: "Es el remanente térmico o el 'eco de calor' del universo primitivo expandiéndose.",
+            exp: "La Radiación de Fondo de Microondas (CMB) es el plasma térmico remanente que se enfrió a medida que el universo se expandió tras el Big Bang."
+        },
+        {
+            q: "Si la resistencia eléctrica de un circuito cerrado se mantiene constante y el voltaje suministrado por la fuente se duplica, ¿qué le sucederá matemáticamente a la intensidad de la corriente eléctrica según la Ley de Ohm?",
+            options: [
+                "Se reduce a la mitad.",
+                "Permanece exactamente igual.",
+                "Se duplica.",
+                "Se cuadruplica."
+            ],
+            correct: 2,
+            hint: "La Ley de Ohm indica que la corriente es directamente proporcional al voltaje ($I = V / R$).",
+            exp: "Al ser la corriente eléctrica ($I$) directamente proporcional al voltaje aplicado ($V$), si el voltaje se duplica manteniendo la resistencia fija, la corriente también aumentará el doble."
+        },
+        {
+            q: "¿Cuál de los siguientes enunciados describe correctamente la función homeostática del sistema endocrino humano ante un incremento rápido de glucosa en el torrente sanguíneo?",
+            options: [
+                "El páncreas secreta glucagón para movilizar las grasas de reserva.",
+                "El páncreas libera insulina para facilitar la absorción de glucosa en las células musculares y hepáticas.",
+                "El hígado destruye el exceso de azúcar mediante filtración glomerular acelerada.",
+                "Las glándulas suprarrenales bombean adrenalina bloqueando la asimilación calórica."
+            ],
+            correct: 1,
+            hint: "Es la hormona cuya deficiencia o resistencia celular provoca la condición médica conocida como diabetes.",
+            exp: "La insulina disminuye los niveles elevados de azúcar en la sangre promoviendo el almacenamiento de la glucosa en forma de glucógeno dentro del hígado y tejidos."
+        },
+        {
+            q: "¿Cuál es el mecanismo principal de transferencia de calor que ocurre cuando calientas una sopa en una olla y el líquido caliente menos denso sube, mientras el líquido frío más denso baja, creando un flujo circular?",
+            options: [
+                "Conducción térmica",
+                "Convección",
+                "Radiación electromagnética",
+                "Aislamiento térmico"
+            ],
+            correct: 1,
+            hint: "Involucra el movimiento físico o corrientes del propio fluido (líquidos o gases) debido a diferencias de densidad.",
+            exp: "La convección es el transporte de calor mediante el movimiento de masas de un fluido fluido. Es el motor detrás de la meteorología y las corrientes marinas."
+        },
+        {
+            q: "Un geólogo analiza una sección de estratos rocosos no perturbados. Encuentra fósiles de trilobites en la capa inferior y fósiles de dinosaurios en la capa superior. ¿Qué principio geológico le permite afirmar con certeza que los trilobites vivieron antes?",
+            options: [
+                "Principio de uniformismo dinámico",
+                "Principio de superposición de estratos",
+                "Teoría del catastrofismo geológico",
+                "Datación absoluta por carbono radiactivo"
+            ],
+            correct: 1,
+            hint: "Establece que en secuencias sedimentarias horizontales, las capas más antiguas quedan abajo y las más recientes arriba.",
+            exp: "El principio de superposición postula que en rocas sedimentarias sin deformaciones, cada capa es más joven que la que tiene debajo y más vieja que la que tiene encima."
+        },
+        {
+            q: "Durante la fotosíntesis, las plantas verdes capturan energía lumínica y reactivos inorgánicos para producir compuestos orgánicos energéticos. ¿Cuáles son los reactivos químicos básicos requeridos al inicio de este proceso?",
+            options: [
+                "Glucosa y oxígeno molecular",
+                "Dióxido de carbono y agua",
+                "Metano y nitrógeno líquido",
+                "Ácido sulfúrico y carbohidratos"
+            ],
+            correct: 1,
+            hint: "Las plantas toman este gas del aire exterior y absorben el líquido mediante sus raíces terrestres.",
+            exp: "La ecuación general de la fotosíntesis utiliza dióxido de carbono ($6CO_2$) y agua ($6H_2O$) junto con luz solar para sintetizar glucosa y liberar oxígeno."
+        },
+        {
+            q: "Un objeto se lanza verticalmente hacia arriba en el aire. A medida que sube perdiendo velocidad debido a la atracción de la gravedad terrestre, ¿cómo se comporta su energía mecánica total omitiendo la resistencia del aire?",
+            options: [
+                "La energía potencial disminuye y la energía cinética aumenta de forma exponencial.",
+                "La energía cinética disminuye transformándose en energía potencial, manteniendo la energía mecánica constante.",
+                "La energía mecánica total se destruye paulatinamente hasta que el objeto se detiene en su punto más alto.",
+                "Ambas energías aumentan al mismo tiempo violando las leyes termodinámicas."
+            ],
+            correct: 1,
+            hint: "Recuerda la Ley de la Conservación de la Energía: la energía no se crea ni se destruye, solo se transforma.",
+            exp: "Al no haber fricción con el aire, la energía mecánica se conserva. La energía cinética inicial disminuye al frenarse, transformándose íntegramente en energía potencial gravitatoria."
+        },
+        {
+            q: "El SIDA es causado por el Virus de la Inmunodeficiencia Humana (VIH). ¿Por qué los antibióticos comunes como la penicilina resultan completamente ineficaces para combatir el VIH?",
+            options: [
+                "Porque el VIH muta demasiado rápido mutando sus proteínas superficiales.",
+                "Porque los antibióticos atacan estructuras bacterianas específicas (como la pared celular) y carecen de efecto sobre los virus.",
+                "Porque el tamaño de los antibióticos es demasiado grande para penetrar en la cápside viral.",
+                "Porque los antibióticos solo funcionan dentro del sistema digestivo humano."
+            ],
+            correct: 1,
+            hint: "Los virus no son células; carecen de metabolismo propio o paredes celulares que puedan romperse con medicamentos antibacterianos.",
+            exp: "Los antibióticos están diseñados exclusivamente para interferir con los procesos biológicos de las bacterias. Las infecciones virales requieren medicamentos antivirales específicos."
+        },
+        {
+            q: "Si examinas la tabla periódica de los elementos, ¿qué propiedad define de manera idéntica a todos los elementos químicos que pertenecen al mismo grupo o columna vertical?",
+            options: [
+                "Tienen el mismo número total de protones en sus núcleos.",
+                "Poseen el mismo número de electrones en su capa de valencia (último nivel energético).",
+                "Tienen masas atómicas idénticas distribuidas de manera uniforme.",
+                "Se encuentran exactamente en el mismo estado físico de agregación de la materia."
+            ],
+            correct: 1,
+            hint: "Los electrones de la capa externa dictan cómo reacciona químicamente un elemento con otros.",
+            exp: "Los elementos de un mismo grupo comparten propiedades químicas similares debido a que poseen el mismo número de electrones de valencia en su capa exterior."
+        },
+        {
+            q: "En el océano, las corrientes marinas profundas circulan a nivel global impulsadas principalmente por variaciones drásticas de temperatura y salinidad, las cuales alteran la densidad del agua. ¿Cómo se conoce a este circuito global?",
+            options: [
+                "Efecto Coriolis atmosférico",
+                "Circulación termohalina",
+                "Mareas de sizigia gravitatoria",
+                "Surgencia costera ecuatorial"
+            ],
+            correct: 1,
+            hint: "Analiza las raíces del nombre: termo (temperatura) y halino (relativo a la concentración de sal).",
+            exp: "La circulación termohalina es la gran cinta transportadora oceánica regulada por gradientes de densidad controlados por la salinidad y la temperatura del agua líquida."
+        },
+        {
+            q: "¿Cuál es la función biológica primordial de la división celular por meiosis en los organismos pluricelulares con reproducción sexual?",
+            options: [
+                "Reparar tejidos dañados y permitir el crecimiento somático del individuo.",
+                "Producir gametos haploides (espermatozoides y óvulos) garantizando la variabilidad genética.",
+                "Duplicar el número cromosómico total de las células hijas resultantes.",
+                "Clonar células idénticas para la regeneración interna de órganos."
+            ],
+            correct: 1,
+            hint: "La meiosis reduce a la mitad el número de cromosomas, evitando que se dupliquen indefinidamente en cada generación tras la fecundación.",
+            exp: "La meiosis reduce el número cromosómico de diploide ($2n$) a haploide ($n$) mediante dos divisiones, introduciendo variabilidad genética por recombinación cromosómica."
+        },
+        {
+            q: "Un asteroide viaja por el espacio profundo a una velocidad constante de 15,000 km/h. Si ingresa a una región del espacio interestelar alejada de cualquier estrella o planeta donde la fuerza de gravedad neta sea exactamente cero, ¿qué le sucederá?",
+            options: [
+                "Se detendrá de inmediato debido a la ausencia de fuerzas impulsoras.",
+                "Disminuirá su velocidad gradualmente hasta quedar estático.",
+                "Continuará moviéndose indefinidamente en línea recta a los mismos 15,000 km/h.",
+                "Explotará instantáneamente debido a presiones internas desequilibradas."
+            ],
+            correct: 2,
+            hint: "Aplica la Primera Ley de Newton o Ley de la Inercia sobre cuerpos sin fuerzas externas netas.",
+            exp: "La Primera Ley de Newton estipula que un cuerpo en movimiento continuará en movimiento rectilíneo uniforme a velocidad constante a menos que una fuerza externa actúe sobre él."
+        },
+        {
+            q: "¿Cuál es el principal postulado de la Teoría Celular que unifica el estudio de la biología moderna?",
+            options: [
+                "Todos los seres vivos están compuestos por una o más células, siendo esta la unidad básica de la vida.",
+                "Las células se originan de materia inorgánica expuesta a descargas eléctricas.",
+                "Las células animales poseen paredes celulares rígidas hechas de celulosa pura.",
+                "Únicamente los animales superiores cuentan con estructuras celulares organizadas."
+            ],
+            correct: 0,
+            hint: "Establece el origen, composición estructural y unidad funcional común de todo organismo viviente.",
+            exp: "La teoría celular postula que la célula es la unidad estructural, funcional y de origen de todos los seres vivos, y que toda célula proviene de otra preexistente."
+        },
+        {
+            q: "Una estrella masiva agota por completo su combustible nuclear interno al final de su ciclo de vida. Al no poder contrarrestar su propia fuerza de gravedad, colapsa violentamente sobre sí misma y estalla de forma titánica. ¿Cómo se llama este evento?",
+            options: [
+                "Nébula planetaria",
+                "Supernova",
+                "Agujero de gusano",
+                "Enana blanca estable"
+            ],
+            correct: 1,
+            hint: "Son las explosiones estelares más energéticas del universo y pueden opacar brevemente galaxias enteras.",
+            exp: "Una supernova ocurre cuando estrellas de gran masa sufren un colapso gravitatorio catastrófico, expulsando sus capas externas en una inmensa explosión cósmica."
+        },
+        {
+            q: "Un grupo de meteorólogos registra que la presión atmosférica en una ciudad costera está disminuyendo de forma drástica y acelerada en pocas horas. ¿Qué tipo de pronóstico del tiempo es el más probable?",
+            options: [
+                "Cielos despejados, clima seco y condiciones estables prolongadas.",
+                "La aproximación inminente de un sistema de baja presión asociado a tormentas o mal clima.",
+                "Una ola de calor extremo y ausencia absoluta de corrientes de viento.",
+                "Un descenso inmediato del nivel del mar provocado por la atmósfera densa."
+            ],
+            correct: 1,
+            hint: "Las bajas presiones (ciclones) facilitan la elevación del aire húmedo, propiciando la formación de nubes densas y precipitaciones.",
+            exp: "Una caída rápida en el barómetro (presión atmosférica) indica la llegada de un frente de baja presión, lo cual atrae masas de aire inestables que provocan vientos y tormentas."
+        }
+    ]
+},
             sociales: {
                 name: "Estudios Sociales",
                 officialTime: 4200, // 70 Minutos oficiales
@@ -358,10 +1230,347 @@
                         correct: 2,
                         hint: "En el libre mercado manda la ley de los compradores y los vendedores sin intervención centralizada.",
                         exp: "En los sistemas de libre mercado o capitalistas, la fijación de precios, bienes y salarios se regula mediante la ley natural de la oferta y la demanda competitiva."
+                    },
+                    {
+                        q: "Lea el siguiente fragmento de la Declaración de Independencia (1776):\n'Sostenemos como evidentes estas verdades: que todos los hombres son creados iguales; que son dotados por su Creador de ciertos derechos inalienables; que entre estos están la vida, la libertad y la búsqueda de la felicidad.'\n\n¿Cuál es el principio filosófico principal reflejado en este texto?",
+                        options: [
+                            "El derecho divino de los reyes para gobernar.",
+                            "La teoría de los derechos naturales del individuo.",
+                            "La necesidad de un gobierno militar centralizado.",
+                            "La abolición inmediata de la propiedad privada."
+                        ],
+                        correct: 1,
+                        hint: "Se refiere a derechos con los que nacen las personas y que ningún gobierno les puede quitar.",
+                        exp: "El texto refleja fuertemente las ideas de John Locke sobre los derechos naturales: libertades fundamentales inherentes a todos los seres humanos que el gobierno tiene la obligación de proteger."
+                    },
+                    {
+                        q: "Durante la Guerra Fría, la doctrina de la 'Contención' de los Estados Unidos tenía como objetivo primordial:",
+                        options: [
+                            "Evitar la expansión del comunismo e influencia de la Unión Soviética en el mundo.",
+                            "Fomentar la libre inmigración entre Europa del Este y Europa del Occidental.",
+                            "Destruir todas las armas nucleares existentes en el planeta mediante un tratado.",
+                            "Apoyar militarmente la colonización de nuevos territorios en África."
+                        ],
+                        correct: 0,
+                        hint: "Contener significa detener o frenar el avance de algo. ¿Qué sistema ideológico competía con EE.UU.?",
+                        exp: "La política de Contención, establecida tras la Segunda Guerra Mundial, buscaba frenar el avance geopolítico e ideológico del comunismo soviético más allá de sus fronteras existentes."
+                    },
+                    {
+                        q: "Si el banco central de un país decide aumentar drásticamente la cantidad de dinero en circulación sin que haya un aumento real en la producción de bienes y servicios, ¿cuál es el efecto económico más probable a corto plazo?",
+                        options: [
+                            "Una disminución generalizada en los precios de la canasta básica (Deflación).",
+                            "Un aumento rápido y generalizado en los precios (Inflación).",
+                            "El fin automático del desempleo y la pobreza en el país.",
+                            "Un incremento en el valor de la moneda nacional frente al dólar estadounidense."
+                        ],
+                        correct: 1,
+                        hint: "Si hay demasiado dinero persiguiendo la misma cantidad de productos, el dinero pierde valor.",
+                        exp: "Cuando la oferta de dinero crece mucho más rápido que la producción económica real, el poder adquisitivo de la moneda cae, provocando un aumento en los precios conocido como inflación."
+                    },
+                    {
+                        q: "La Decimocuarta Enmienda a la Constitución de los EE.UU. es históricamente crucial porque garantizó cuál de los siguientes derechos:",
+                        options: [
+                            "El derecho de las mujeres a votar en elecciones federales.",
+                            "La ciudadanía y la protección igualitaria ante la ley para todas las personas nacidas o naturalizadas.",
+                            "La libertad de expresión y de prensa sin censura gubernamental.",
+                            "La prohibición absoluta de la fabricación y venta de bebidas alcohólicas."
+                        ],
+                        correct: 1,
+                        hint: "Fue ratificada después de la Guerra Civil (Guerra de Secesión) para proteger a los esclavos liberados.",
+                        exp: "Aprobada en 1868, esta enmienda definió la ciudadanía nacional y prohibió a los estados negar la 'protección igualitaria de las leyes', siendo la base de la mayoría de los juicios de derechos civiles de la historia."
+                    },
+                    {
+                        q: "¿Cuál fue una de las principales causas económicas que detonó la de la Independencia de EE.UU. contra Gran Bretaña?",
+                        options: [
+                            "La imposición de impuestos por el Parlamento británico sin otorgarles representación colonial.",
+                            "La escasez extrema de tierras de cultivo en el nuevo territorio americano.",
+                            "La prohibición absoluta de practicar religiones distintas a la anglicana.",
+                            "El cierre total de todos los puertos comerciales en el océano Atlántico."
+                        ],
+                        correct: 0,
+                        hint: "Recuerda el famoso lema: 'No taxation without representation'.",
+                        exp: "Los colonos americanos se opusieron fuertemente a las leyes fiscales fiscales aprobadas por un Parlamento en Londres donde ellos no tenían voz ni voto."
+                    },
+                    {
+                        q: "El sistema electoral de los Estados Unidos utiliza el 'Colegio Electoral' para elegir al Presidente. Esto significa que:",
+                        options: [
+                            "El candidato con más votos individuales directos a nivel nacional gana siempre automáticamente.",
+                            "Cada estado tiene un número de votos electorales proporcional a su representación total en el Congreso.",
+                            "Los gobernadores de los estados deciden de manera unánime quién será el próximo mandatario.",
+                            "La Suprema Corte de Justicia realiza una votación secreta interna para elegir al Poder Ejecutivo."
+                        ],
+                        correct: 1,
+                        hint: "No gana necesariamente el voto popular total, sino el que sume 270 votos asignados por los estados.",
+                        exp: "El Colegio Electoral asigna a cada estado un número de electores igual al total de sus senadores y representantes. El ganador de la mayoría de votos en un estado suele llevarse todos sus votos electorales."
+                    },
+                    {
+                        q: "¿Qué importante documento histórico de EE.UU. comienza con la famosa frase 'Nosotros, el Pueblo' ('We the People')?",
+                        options: [
+                            "La Declaración de Independencia.",
+                            "La Constitución de los Estados Unidos.",
+                            "Los Artículos de la Confederación.",
+                            "El Discurso de Gettysburg."
+                        ],
+                        correct: 1,
+                        hint: "Esta frase subraya que el poder del gobierno proviene directamente de los ciudadanos gobernados.",
+                        exp: "El Preámbulo de la Constitución de los EE.UU. inicia con 'Nosotros, el Pueblo', estableciendo el principio de la soberanía popular y la democracia representativa."
+                    },
+                    {
+                        q: "La Gran Depresión de la década de 1930 comenzó principalmente tras cuál de los siguientes eventos financieros históricos:",
+                        options: [
+                            "El colapso de la bolsa de valores de Nueva York en octubre de 1929.",
+                            "El fin de los subsidios agrícolas durante la Primera Guerra Mundial.",
+                            "La nacionalización masiva de las industrias siderúrgicas americanas.",
+                            "Una escasez mundial de petróleo crudo provocada por bloqueos."
+                        ],
+                        correct: 0,
+                        hint: "Se le conoce comúnmente como el 'Martes Negro'.",
+                        exp: "La caída estrepitosa del mercado de valores en 1929 expuso debilidades económicas subyacentes, provocando cierres masivos de bancos, desempleo récord y una crisis global prolongada."
+                    },
+                    {
+                        q: "En geografía, ¿qué factor climático explica por qué las regiones cercanas al ecuador terrestre tienden a ser significativamente más cálidas durante todo el año?",
+                        options: [
+                            "Reciben los rayos del sol de forma más directa y vertical continuamente.",
+                            "Tienen una altitud promedio mucho más baja que los polos geográficos.",
+                            "Están completamente exentas de corrientes de vientos marítimos.",
+                            "Poseen una mayor concentración de recursos minerales metálicos en el subsuelo."
+                        ],
+                        correct: 0,
+                        hint: "Tiene que ver con la curvatura de la Tierra y el ángulo en el que incide la luz solar.",
+                        exp: "Debido a la forma esférica de la Tierra, las zonas ecuatoriales reciben la radiación solar concentrada en un área menor debido a la incidencia vertical, a diferencia de los polos donde llega inclinada."
+                    },
+                    {
+                        q: "¿Cuál fue el propósito principal del programa económico conocido como el 'New Deal', implementado por el presidente Franklin D. Roosevelt?",
+                        options: [
+                            "Financiar la reconstrucción de los países europeos tras la Segunda Guerra Mundial.",
+                            "Aliviar los efectos de la Gran Depresión mediante programas de empleo masivo y regulación financiera.",
+                            "Establecer un sistema de libre comercio absoluto y sin aranceles con Asia.",
+                            "Privatizar los servicios postales y las redes nacionales de ferrocarriles."
+                        ],
+                        correct: 1,
+                        hint: "Se enfocó en las 'Tres R': Relieve (Alivio), Recuperación y Reforma.",
+                        exp: "El New Deal expandió significativamente el papel del gobierno federal en la economía, creando empleos públicos, asistencia social y regulando la banca para superar la crisis de los años 30."
+                    },
+                    {
+                        q: "La Primera Enmienda de la Carta de Derechos protege libertades fundamentales. ¿Cuál de las siguientes NO está protegida por esta enmienda?",
+                        options: [
+                            "La libertad de profesar cualquier religión o culto.",
+                            "El derecho a portar armas de fuego para la defensa de la propiedad.",
+                            "La libertad de expresión y de prensa libre.",
+                            "El derecho a reunirse pacíficamente y solicitar peticiones al gobierno."
+                        ],
+                        correct: 1,
+                        hint: "El derecho a portar armas pertenece a una enmienda diferente (la Segunda Enmienda).",
+                        exp: "La Primera Enmienda protege la religión, expresión, prensa, asamblea y petición. El derecho a portar armas está estipulado de forma independiente en la Segunda Enmienda."
+                    },
+                    {
+                        q: Durante el siglo XIX, el concepto del 'Destino Manifiesto' fue utilizado en los Estados Unidos para justificar:",
+                        options: [
+                            "La abolición inmediata e incondicional de la esclavitud en el Sur.",
+                            "La expansión territorial desde el océano Atlántico hasta el océano Pacífico.",
+                            "La participación militar del país en las guerras internas europeas.",
+                            "El desarrollo exclusivo de industrias manufactureras en las grandes ciudades."
+                        ],
+                        correct: 1,
+                        hint: "Era la creencia de que el país estaba destinado por Dios a expandirse por todo el continente.",
+                        exp: "El Destino Manifiesto fue una ideología popular que sostenía que los EE.UU. tenían el derecho divino e inevitable de extender sus fronteras e instituciones de este a oeste."
+                    },
+                    {
+                        q: "¿Cuál es la función principal de la rama legislativa del gobierno federal de los Estados Unidos?",
+                        options: [
+                            "Hacer cumplir, administrar y ejecutar las leyes nacionales en el país.",
+                            "Interpretar el significado constitucional de las leyes vigentes.",
+                            "Redactar, debatir y aprobar las leyes federales del país.",
+                            "Comandar directamente las fuerzas armadas en tiempos de conflicto."
+                        ],
+                        correct: 2,
+                        hint: "Esta rama está compuesta por el Congreso (el Senado y la Cámara de Representantes).",
+                        exp: "La rama legislativa (el Congreso) tiene la responsabilidad exclusiva de crear y votar leyes federales, además de controlar el presupuesto y declarar la guerra."
+                    },
+                    {
+                        q: "En microeconomía, si la oferta de un producto permanece constante pero la demanda de los consumidores aumenta rápidamente, ¿qué ocurrirá normalmente con el precio del bien?",
+                        options: [
+                            "El precio disminuirá de inmediato debido a la competencia de clientes.",
+                            "El precio aumentará ante la escasez relativa del producto.",
+                            "El precio permanecerá fijo por intervención directa del mercado.",
+                            "El precio caerá a cero porque los inventarios se agotarán rápido."
+                        ],
+                        correct: 1,
+                        hint: "Si muchas personas quieren comprar algo que es escaso, los vendedores pueden cobrar más.",
+                        exp: "De acuerdo con las leyes básicas del mercado, cuando hay más compradores interesados (alta demanda) por una cantidad fija de bienes (oferta), el precio del producto tiende a subir."
+                    },
+                    {
+                        q: "El movimiento por los Derechos Civiles en las décadas de 1950 y 1960, liderado por figuras como Martin Luther King Jr., buscaba principalmente:",
+                        options: [
+                            "Terminar con la segregación racial institucionalizada y asegurar el derecho al voto.",
+                            "Garantizar la independencia económica completa de los estados sureños.",
+                            "Permitir que los ciudadanos de otros países votaran en elecciones locales.",
+                            "Reemplazar el sistema capitalista por una economía planificada por el Estado."
+                        ],
+                        correct: 0,
+                        hint: "Luchaban contra las leyes represivas conocidas como leyes 'Jim Crow'.",
+                        exp: "El movimiento pacífico logró hitos históricos como la Ley de Derechos Civiles de 1964 y la Ley de Derecho al Voto de 1965, prohibiendo la discriminación por raza en lugares públicos y urnas."
+                    },
+                    {
+                        q: "¿Qué evento histórico militar provocó de forma directa la entrada oficial de los Estados Unidos en la Segunda Guerra Mundial en diciembre de 1941?",
+                        options: [
+                            "La invasión de las fuerzas alemanas a Polonia.",
+                            "El ataque sorpresivo de la aviación japonesa a la base naval de Pearl Harbor.",
+                            "El hundimiento del barco de pasajeros transatlántico Lusitania.",
+                            "La firma del pacto de no agresión entre Alemania y la Unión Soviética."
+                        ],
+                        correct: 1,
+                        hint: "Ocurrió en Hawái y el presidente Roosevelt lo llamó 'una fecha que vivirá en la infamia'.",
+                        exp: "El ataque bombardeo a Pearl Harbor destruyó gran parte de la flota del Pacífico estadounidense, obligando al Congreso a declarar la guerra al Imperio del Japón al día siguiente."
+                    },
+                    {
+                        q: "¿Cuál de las siguientes opcioneses describe el principio constitucional de 'Federalismo'?",
+                        options: [
+                            "Todo el poder político se concentra exclusivamente en el gobierno central en Washington D.C.",
+                            "La división y distribución del poder compartido entre el gobierno nacional y los gobiernos estatales.",
+                            "Un sistema donde el Presidente puede disolver el Congreso en cualquier momento.",
+                            "La selección de jueces federales mediante elecciones populares directas."
+                        ],
+                        correct: 1,
+                        hint: "Piensa en cómo interactúan las leyes de tu estado local con las leyes de todo el país.",
+                        exp: "El federalismo equilibra el poder delegando responsabilidades específicas al gobierno nacional (moneda, defensa) y reservando otras para los estados (educación, licencias, leyes locales)."
+                    },
+                    {
+                        q: "Un arancel comercial es una herramienta económica que consiste en:",
+                        options: [
+                            "Un impuesto aplicado directamente sobre los productos importados desde otros países.",
+                            "Un subsidio en efectivo otorgado a los productores locales de bajos ingresos.",
+                            "La fijación de un precio mínimo para la venta de combustibles fósiles.",
+                            "Un límite estricto al número de trabajadores extranjeros permitidos en una industria."
+                        ],
+                        correct: 0,
+                        hint: "Se utiliza a menudo para proteger los productos nacionales haciendo que los extranjeros sean más caros.",
+                        exp: "Los aranceles son impuestos aduaneros sobre las importaciones. Buscan aumentar el costo de bienes extranjeros para incentivar el consumo de bienes de producción nacional."
+                    },
+                    {
+                        q: "El principal argumento de los delegados conocidos como 'Antifederalistas' en contra de la ratificación de la Constitución original de 1787 fue:",
+                        options: [
+                            "Que no otorgaba suficiente poder militar al Presidente.",
+                            "Que carecía de una Carta de Derechos explícita para proteger a los ciudadanos individuales.",
+                            "Que mantenía demasiados lazos coloniales con la monarquía británica.",
+                            "Que establecía una capital federal demasiado grande y costosa."
+                        ],
+                        correct: 1,
+                        hint: "Exigían garantías por escrito para que el gobierno central poderoso no violara las libertades básicas.",
+                        exp: "Los Antifederalistas temían la tiranía de un gobierno central fuerte. Su oposición directa forzó el compromiso de añadir las primeras 10 enmiendas conocidas como la Carta de Derechos ('Bill of Rights')."
+                    },
+                    {
+                        q: "En el contexto de los sistemas económicos globales, ¿cuál es la característica que mejor define a una economía socialista o planificada?",
+                        options: [
+                            "Las fuerzas ciegas del mercado libre controlan todos los sectores de producción.",
+                            "El Estado o gobierno posee y controla colectivamente los principales medios de producción.",
+                            "No existe ningún tipo de moneda física y el comercio se basa en el trueque puro.",
+                            "Las corporaciones privadas tienen el derecho de dictar las leyes fiscales del país."
+                        ],
+                        correct: 1,
+                        hint: "Las decisiones económicas sobre qué producir y a qué precio las toma una autoridad central.",
+                        exp: "A diferencia del capitalismo, el socialismo puro se basa en la propiedad estatal o social de las industrias y recursos, buscando planificar la distribución para evitar desigualdades."
+                    },
+                    {
+                        q: "¿Cuál de los siguientes acontecimientos históricos de los EE.UU. eliminó formal y legalmente la esclavitud en todo el territorio nacional?",
+                        options: [
+                            "La firma de la Proclamación de Emancipación en 1863.",
+                            "La ratificación de la Decimotercera Enmienda constitucional en 1865.",
+                            "El discurso de inauguración del presidente Abraham Lincoln.",
+                            "La firma del Tratado de París que puso fin a la Guerra de Independencia."
+                        ],
+                        correct: 1,
+                        hint: "La Proclamación liberó solo a los esclavos en estados rebeldes, pero se necesitó una enmienda final al acabar la guerra.",
+                        exp: "Aunque la Proclamación fue un paso político crucial, la esclavitud fue abolida de forma total, permanente y constitucional mediante la Decimotercera Enmienda tras el triunfo de la Unión en la Guerra Civil."
+                    },
+                    {
+                        q: "El término de geografía humana 'urbanización' se refiere específicamente a:",
+                        options: [
+                            "El proceso de migración de la población desde las zonas rurales hacia las grandes ciudades.",
+                            "La división de un territorio nacional en estados federales independientes.",
+                            "La reforestación planificada de áreas boscosas destruidas por incendios.",
+                            "La transición de una sociedad agrícola hacia modelos de comercio marítimo."
+                        ],
+                        correct: 0,
+                        hint: "Piensa en el crecimiento de las ciudades debido a la industrialización y búsqueda de empleos.",
+                        exp: "La urbanización es el crecimiento físico y demográfico de los centros urbanos debido al movimiento constante de personas del campo a las ciudades en busca de mejores oportunidades."
+                    },
+                    {
+                        q: "La doctrina de control judicial llamada 'Revisión Judicial' ('Judicial Review'), establecida en el caso Marbury v. Madison (1803), otorga a la Suprema Corte el poder de:",
+                        options: [
+                            "Escribir nuevas leyes federales cuando el Congreso no llega a un acuerdo.",
+                            "Declarar una ley aprobada por el Congreso como inconstitucional y por lo tanto nula.",
+                            "Destituir de su cargo al Presidente mediante un juicio de destitución.",
+                            "Modificar de forma directa las fronteras territoriales de los estados del país."
+                        ],
+                        correct: 1,
+                        hint: "Permite a los jueces actuar como árbitros finales para verificar si una ley viola la Constitución.",
+                        exp: "La revisión judicial consolidó el poder de la rama judicial, permitiendo a la Corte Suprema anular acciones ejecutivas o leyes legislativas que contradigan los principios de la Constitución."
+                    },
+                    {
+                        q: "¿Cuál fue el motivo geopolítico principal para la creación de la Organización del Tratado del Atlántico Norte (OTAN) en 1949?",
+                        options: [
+                            "Promover acuerdos de libre comercio arancelario entre Europa y América.",
+                            "Coordinar una alianza de defensa colectiva contra la amenaza del expansionismo soviético.",
+                            "Administrar de forma conjunta los fondos financieros de reconstrucción del Plan Marshall.",
+                            "Evitar conflictos militares territoriales directos entre los países de América Latina."
+                        ],
+                        correct: 1,
+                        hint: "Es una alianza de seguridad basada en el principio de que un ataque a un miembro es un ataque a todos.",
+                        exp: "La OTAN nació durante la Guerra Fría como un bloque de defensa militar occidental frente a la influencia política y militar de la Unión Soviética y sus estados satélites en Europa del Este."
+                    },
+                    {
+                        q: "Un factor geográfico de infraestructura decisivo que facilitó el éxito de la industrialización temprana en la región de Nueva Inglaterra durante el siglo XIX fue:",
+                        options: [
+                            "La abundancia de ríos caudalosos de corriente rápida que proveían energía hidráulica.",
+                            "La existencia de climas tropicales ideales para plantaciones de algodón y tabaco.",
+                            "Su total aislamiento geográfico que impedía invasiones extranjeras por mar.",
+                            "La ausencia de cadenas montañosas que obstruyeran el paso de las carretas."
+                        ],
+                        correct: 0,
+                        hint: "Antes de la electricidad masiva, las primeras fábricas textiles necesitaban la fuerza del agua.",
+                        exp: "La geografía de Nueva Inglaterra ofrecía ríos caudalosos rápidos perfectos para hacer girar las ruedas de los molinos y fábricas textiles, impulsando la Revolución Industrial en el norte."
+                    },
+                    {
+                        q: "¿Qué es el Producto Interno Bruto (PIB) en términos de medición económica macroeconómica?",
+                        options: [
+                            "La cantidad total de dinero que posee guardado el gobierno en sus bancas de reserva.",
+                            "El valor monetario de todos los bienes y servicios finales producidos en un país durante un año.",
+                            "La tasa porcentual de ciudadanos que se encuentran desempleados en un mes dado.",
+                            "El total de deudas financieras acumuladas por las empresas privadas del país."
+                        ],
+                        correct: 1,
+                        hint: "Es el indicador más utilizado para medir la riqueza y el tamaño de la economía de una nación.",
+                        exp: "El PIB mide el valor total de la producción económica de un país dentro de sus fronteras geográficas, sirviendo como termómetro clave de su crecimiento o recesión."
+                    },
+                    {
+                        q: "El sistema de 'Pesos y Contrapesos' ('Checks and Balances') consagrado en la Constitución de EE.UU. permite, por ejemplo, que:",
+                        options: [
+                            "El Presidente apruebe el presupuesto nacional sin consultar al Poder Legislativo.",
+                            "El Presidente vete una ley aprobada por el Congreso, pero el Congreso pueda anular ese veto con mayoría calificada.",
+                            "La Suprema Corte de Justicia cambie el número de senadores de un estado por decreto.",
+                            "Los ciudadanos destituyan a los miembros del Congreso mediante firmas semanales."
+                        ],
+                        correct: 1,
+                        hint: "Garantiza que ninguna rama se vuelva demasiado poderosa al permitir que una controle las acciones de la otra.",
+                        exp: "Un ejemplo perfecto es el proceso legislativo: el Congreso crea la ley, el Ejecutivo puede usar su veto, pero el Legislativo puede anularlo con dos tercios de los votos, manteniendo el equilibrio."
+                    },
+                    {
+                        q: "¿Qué masiva migración interna en la historia de los EE.UU. durante la década de 1930 fue causada de forma combinada por una severa crisis económica y desastrosas tormentas de polvo agrícolas?",
+                        options: [
+                            "El éxodo de los mineros de la Fiebre del Oro hacia las regiones de California.",
+                            "El éxodo del 'Dust Bowl' de agricultores de las Grandes Llanuras hacia el oeste.",
+                            "La Gran Migración de afroamericanos del sur hacia los centros industriales del norte.",
+                            "La reubicación forzada de comunidades nativas americanas conocida como el Sendero de Lágrimas."
+                        ],
+                        correct: 1,
+                        hint: "Afectó severamente a estados como Oklahoma, Texas y Kansas, destruyendo millones de acres de cultivo.",
+                        exp: "El fenómeno climático del Dust Bowl (Cuenco de Polvo), provocado por sequías y malas técnicas de cultivo, arruinó a miles de familias agrícolas en las llanuras centrales, obligándolas a migrar masivamente hacia California."
                     }
                 ]
             }
         };
+                
 
         let activeSubject = 'matematicas';
         let questionIdx = 0;
