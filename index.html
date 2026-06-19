@@ -602,7 +602,7 @@
 
 <script>
     // ================================================================
-    //  BASE DE DATOS EXTENDIDA - ¡AHORA CON 25+ PREGUNTAS POR MATERIA!
+    //  BASE DE DATOS EXTENDIDA - ¡AHORA CON 55+ PREGUNTAS POR MATERIA!
     // ================================================================
     const gedDB = {
         matematicas: {
@@ -610,6 +610,78 @@
             icon: "➗",
             time: 6900,
             questions: [
+                
+    // ============================================================
+    //  NIVEL 1: FÁCIL (dificultad 1) - 15 preguntas
+    // ============================================================
+    { q: "¿Cuánto es 2 + 2 × 2?", opts: ["A) 4", "B) 6", "C) 8", "D) 2"], correct: 1, difficulty: 1, hint: "Multiplicación antes que suma.", exp: "2×2=4, 4+2=6." },
+    { q: "¿Cuál es el 25% de 200?", opts: ["A) 25", "B) 40", "C) 50", "D) 75"], correct: 2, difficulty: 1, hint: "25% es dividir entre 4.", exp: "200÷4=50." },
+    { q: "¿Cuánto es 10 × 10?", opts: ["A) 10", "B) 50", "C) 100", "D) 1000"], correct: 2, difficulty: 1, hint: "Multiplica 10 por sí mismo.", exp: "10×10=100." },
+    { q: "¿Cuál es la raíz cuadrada de 81?", opts: ["A) 7", "B) 8", "C) 9", "D) 10"], correct: 2, difficulty: 1, hint: "¿Qué número multiplicado por sí mismo da 81?", exp: "9×9=81." },
+    { q: "¿Cuánto es 15 + 27?", opts: ["A) 32", "B) 42", "C) 52", "D) 62"], correct: 1, difficulty: 1, hint: "Suma simple.", exp: "15+27=42." },
+    { q: "¿Qué fracción es equivalente a 0.5?", opts: ["A) 1/4", "B) 1/3", "C) 1/2", "D) 2/3"], correct: 2, difficulty: 1, hint: "0.5 es la mitad de 1.", exp: "1/2 = 0.5." },
+    { q: "¿Cuántos lados tiene un hexágono?", opts: ["A) 4", "B) 5", "C) 6", "D) 8"], correct: 2, difficulty: 1, hint: "El prefijo 'hexa' significa seis.", exp: "Un hexágono tiene 6 lados." },
+    { q: "¿Cuál es el área de un cuadrado de lado 5?", opts: ["A) 10", "B) 20", "C) 25", "D) 30"], correct: 2, difficulty: 1, hint: "Área = lado × lado", exp: "5×5 = 25" },
+    { q: "¿Cuánto es 1/2 + 1/4?", opts: ["A) 1/6", "B) 2/6", "C) 3/4", "D) 1/2"], correct: 2, difficulty: 1, hint: "Encuentra un denominador común.", exp: "2/4 + 1/4 = 3/4" },
+    { q: "¿Cuál es el perímetro de un rectángulo de largo 8 y ancho 3?", opts: ["A) 11", "B) 22", "C) 24", "D) 16"], correct: 1, difficulty: 1, hint: "Perímetro = 2(largo + ancho)", exp: "2(8+3) = 22" },
+    { q: "¿Cuánto es 7 × 8?", opts: ["A) 48", "B) 56", "C) 64", "D) 72"], correct: 1, difficulty: 1, hint: "Multiplicación básica.", exp: "7×8 = 56" },
+    { q: "¿Qué número es mayor: 0.75 o 3/4?", opts: ["A) 0.75", "B) 3/4", "C) Son iguales", "D) No se puede determinar"], correct: 2, difficulty: 1, hint: "Convierte la fracción a decimal.", exp: "3/4 = 0.75, son iguales" },
+    { q: "¿Cuánto es 100 - 37?", opts: ["A) 53", "B) 63", "C) 73", "D) 83"], correct: 1, difficulty: 1, hint: "Resta simple.", exp: "100 - 37 = 63" },
+    { q: "¿Cuál es el mínimo común múltiplo de 4 y 6?", opts: ["A) 8", "B) 10", "C) 12", "D) 24"], correct: 2, difficulty: 1, hint: "Es el múltiplo más pequeño que comparten.", exp: "Múltiplos de 4: 4,8,12; de 6: 6,12 → MCM = 12" },
+    { q: "¿Cuántos grados tiene un ángulo recto?", opts: ["A) 45°", "B) 60°", "C) 90°", "D) 180°"], correct: 2, difficulty: 1, hint: "Es un cuarto de vuelta completa.", exp: "Un ángulo recto mide 90°" },
+
+    // ============================================================
+    //  NIVEL 2: MEDIO (dificultad 2) - 15 preguntas
+    // ============================================================
+    { q: "Resuelve: 3x + 5 = 20. ¿Cuánto vale x?", opts: ["A) 3", "B) 5", "C) 7", "D) 10"], correct: 1, difficulty: 2, hint: "Aísla la variable restando 5 y dividiendo entre 3.", exp: "3x = 15 → x = 5" },
+    { q: "¿Cuál es el área de un triángulo con base 10 y altura 6?", opts: ["A) 30", "B) 60", "C) 15", "D) 120"], correct: 0, difficulty: 2, hint: "(base×altura)/2", exp: "(10×6)/2 = 30" },
+    { q: "Calcula la distancia entre (1,2) y (4,6).", opts: ["A) 4", "B) 5", "C) 6", "D) 7"], correct: 1, difficulty: 2, hint: "√[(x2-x1)²+(y2-y1)²]", exp: "√(9+16) = √25 = 5" },
+    { q: "¿Cuánto es 5! (factorial)?", opts: ["A) 20", "B) 60", "C) 120", "D) 240"], correct: 2, difficulty: 2, hint: "Multiplica 1×2×3×4×5", exp: "120" },
+    { q: "Si la probabilidad de lluvia es 0.3, ¿probabilidad de que NO llueva?", opts: ["A) 0.3", "B) 0.7", "C) 0.5", "D) 1.0"], correct: 1, difficulty: 2, hint: "Complemento: 1 - p", exp: "1 - 0.3 = 0.7" },
+    { q: "Resuelve: 2x - 7 = 11", opts: ["A) 6", "B) 7", "C) 8", "D) 9"], correct: 3, difficulty: 2, hint: "Suma 7 y divide entre 2", exp: "2x = 18 → x = 9" },
+    { q: "¿Cuál es el perímetro de un cuadrado de lado 8?", opts: ["A) 16", "B) 24", "C) 32", "D) 64"], correct: 2, difficulty: 2, hint: "Perímetro = 4 × lado", exp: "4×8 = 32" },
+    { q: "Simplifica: (x² - 4)/(x - 2)", opts: ["A) x-2", "B) x+2", "C) x²+4", "D) x²-4"], correct: 1, difficulty: 2, hint: "Factoriza el numerador", exp: "(x-2)(x+2)/(x-2) = x+2" },
+    { q: "¿Cuál es la pendiente de la recta que pasa por (0,0) y (2,4)?", opts: ["A) 1", "B) 2", "C) 3", "D) 4"], correct: 1, difficulty: 2, hint: "m = Δy/Δx", exp: "m = 4/2 = 2" },
+    { q: "Resuelve: 4x - 8 = 2x + 6", opts: ["A) 5", "B) 6", "C) 7", "D) 8"], correct: 2, difficulty: 2, hint: "Agrupa términos con x", exp: "4x - 2x = 6 + 8 → 2x = 14 → x = 7" },
+    { q: "¿Cuál es el área de un círculo de radio 4? (Usa π=3.14)", opts: ["A) 12.56", "B) 25.12", "C) 50.24", "D) 100.48"], correct: 2, difficulty: 2, hint: "A = π·r²", exp: "3.14 × 16 = 50.24" },
+    { q: "Encuentra la media de: 8, 12, 16, 20, 24", opts: ["A) 14", "B) 15", "C) 16", "D) 18"], correct: 2, difficulty: 2, hint: "Suma todo y divide entre 5", exp: "(8+12+16+20+24)/5 = 80/5 = 16" },
+    { q: "¿Cuál es la mediana de: 3, 7, 9, 12, 15, 18, 21?", opts: ["A) 9", "B) 10", "C) 12", "D) 15"], correct: 2, difficulty: 2, hint: "Es el valor del medio en datos ordenados", exp: "El 4to valor es 12" },
+    { q: "Resuelve la desigualdad: 2x + 3 > 11", opts: ["A) x > 4", "B) x < 4", "C) x > 5", "D) x < 5"], correct: 0, difficulty: 2, hint: "Resta 3 y divide entre 2", exp: "2x > 8 → x > 4" },
+    { q: "¿Cuánto es el 20% de 150?", opts: ["A) 20", "B) 25", "C) 30", "D) 35"], correct: 2, difficulty: 2, hint: "Multiplica 150 por 0.20", exp: "150 × 0.20 = 30" },
+
+    // ============================================================
+    //  NIVEL 3: DIFÍCIL (dificultad 3) - 15 preguntas
+    // ============================================================
+    { q: "Resuelve la ecuación cuadrática: x² - 7x + 12 = 0", opts: ["A) x = 3, 4", "B) x = -3, -4", "C) x = 6, 2", "D) x = -6, -2"], correct: 0, difficulty: 3, hint: "Factoriza: (x - a)(x - b) = 0", exp: "(x-3)(x-4) → x = 3,4" },
+    { q: "Simplifica: (2x³y²)³", opts: ["A) 6x⁶y⁵", "B) 8x⁹y⁶", "C) 8x⁶y⁵", "D) 6x⁹y⁶"], correct: 1, difficulty: 3, hint: "Aplica la potencia a cada factor", exp: "(2)³ = 8, (x³)³ = x⁹, (y²)³ = y⁶" },
+    { q: "Resuelve: 2(x - 3) + 4 = 3(x + 1) - 2", opts: ["A) x = 1", "B) x = 3", "C) x = -1", "D) x = -3"], correct: 2, difficulty: 3, hint: "Distribuye y despeja", exp: "2x-6+4 = 3x+3-2 → 2x-2 = 3x+1 → x = -3" },
+    { q: "Factoriza completamente: 4x² - 25", opts: ["A) (2x-5)(2x+5)", "B) (4x-5)(x+5)", "C) (2x-5)²", "D) (4x+5)(x-5)"], correct: 0, difficulty: 3, hint: "Diferencia de cuadrados: a²-b²=(a-b)(a+b)", exp: "(2x)²-5² = (2x-5)(2x+5)" },
+    { q: "Resuelve el sistema: 2x + y = 10, x - y = 2", opts: ["A) x=4,y=2", "B) x=3,y=4", "C) x=5,y=0", "D) x=2,y=6"], correct: 0, difficulty: 3, hint: "Suma ambas ecuaciones", exp: "3x=12 → x=4, y=2" },
+    { q: "¿Cuál es el valor de x en: log₂(x) = 5?", opts: ["A) 10", "B) 25", "C) 32", "D) 64"], correct: 2, difficulty: 3, hint: "2⁵ = x", exp: "x = 32" },
+    { q: "Encuentra la suma de las raíces de: x² - 8x + 15 = 0", opts: ["A) 8", "B) 15", "C) -8", "D) -15"], correct: 0, difficulty: 3, hint: "Suma de raíces = -b/a", exp: "-(-8)/1 = 8" },
+    { q: "Resuelve: |2x - 3| = 7", opts: ["A) x=5 o -2", "B) x=5 o 2", "C) x=-5 o 2", "D) x=-5 o -2"], correct: 0, difficulty: 3, hint: "Dos casos: 2x-3=7 o 2x-3=-7", exp: "x=5, x=-2" },
+    { q: "Encuentra el producto de las raíces de: 2x² + 5x - 3 = 0", opts: ["A) -3/2", "B) 3/2", "C) -5/2", "D) 5/2"], correct: 0, difficulty: 3, hint: "Producto de raíces = c/a", exp: "-3/2" },
+    { q: "Resuelve: 5^(x+1) = 125", opts: ["A) x=1", "B) x=2", "C) x=3", "D) x=4"], correct: 1, difficulty: 3, hint: "125 = 5³", exp: "x+1=3 → x=2" },
+    { q: "¿Cuál es el volumen de una esfera con radio 3? (π=3.14)", opts: ["A) 113.04", "B) 84.78", "C) 150.72", "D) 37.68"], correct: 0, difficulty: 3, hint: "V = (4/3)π·r³", exp: "(4/3)×3.14×27 = 113.04" },
+    { q: "En un triángulo, los ángulos miden 2x, 3x y 4x. ¿Cuánto mide el mayor?", opts: ["A) 60°", "B) 80°", "C) 100°", "D) 120°"], correct: 1, difficulty: 3, hint: "Suma de ángulos = 180°", exp: "9x=180 → x=20, mayor=4×20=80°" },
+    { q: "¿Cuál es el área total de un cilindro de radio 2 y altura 10? (π=3.14)", opts: ["A) 125.6", "B) 150.72", "C) 188.4", "D) 251.2"], correct: 1, difficulty: 3, hint: "A = 2π·r² + 2π·r·h", exp: "25.12+125.6 = 150.72" },
+    { q: "Simplifica: √48 - √12", opts: ["A) 2√3", "B) 4√3", "C) √36", "D) 2√6"], correct: 0, difficulty: 3, hint: "Factoriza radicandos: √48=4√3, √12=2√3", exp: "4√3 - 2√3 = 2√3" },
+    { q: "Resuelve la ecuación: 3x² - 5x - 2 = 0", opts: ["A) x=2, -1/3", "B) x=-2, 1/3", "C) x=1, -2/3", "D) x=-1, 2/3"], correct: 0, difficulty: 3, hint: "Usa fórmula cuadrática", exp: "x = [5±√(25+24)]/6 = [5±7]/6 → x=2, x=-1/3" },
+
+    // ============================================================
+    //  NIVEL EXTRA: GEOMETRÍA Y ESTADÍSTICA - 10 preguntas
+    // ============================================================
+    { q: "En un triángulo rectángulo, los catetos miden 6 y 8. ¿Cuánto mide la hipotenusa?", opts: ["A) 10", "B) 12", "C) 14", "D) 16"], correct: 0, difficulty: 2, hint: "Teorema de Pitágoras: a²+b²=c²", exp: "6²+8²=36+64=100, √100=10" },
+    { q: "Un rectángulo tiene largo 12 y ancho 5. ¿Cuál es su diagonal?", opts: ["A) 13", "B) 10", "C) 15", "D) 17"], correct: 0, difficulty: 2, hint: "Usa Pitágoras: d²=l²+a²", exp: "12²+5²=144+25=169, d=13" },
+    { q: "¿Cuánto mide el ángulo interior de un hexágono regular?", opts: ["A) 90°", "B) 108°", "C) 120°", "D) 135°"], correct: 2, difficulty: 2, hint: "(n-2)×180°/n", exp: "(6-2)×180/6 = 120°" },
+    { q: "Un cono tiene radio 4 y altura 9. ¿Cuál es su volumen? (π=3.14)", opts: ["A) 150.72", "B) 113.04", "C) 452.16", "D) 200.96"], correct: 0, difficulty: 3, hint: "V = (1/3)π·r²·h", exp: "(1/3)×3.14×16×9 = 150.72" },
+    { q: "¿Cuál es el área de un trapecio con bases 10 y 6, y altura 4?", opts: ["A) 32", "B) 24", "C) 40", "D) 16"], correct: 0, difficulty: 2, hint: "A = (B+b)/2 × h", exp: "(10+6)/2×4 = 8×4 = 32" },
+    { q: "Encuentra la moda de: 2, 3, 5, 2, 7, 8, 2, 5, 9", opts: ["A) 2", "B) 3", "C) 5", "D) 7"], correct: 0, difficulty: 1, hint: "El número que más se repite", exp: "El 2 aparece 3 veces" },
+    { q: "¿Cuál es el rango de: 10, 15, 22, 8, 30, 12, 25?", opts: ["A) 22", "B) 20", "C) 25", "D) 30"], correct: 0, difficulty: 1, hint: "Rango = mayor - menor", exp: "30 - 8 = 22" },
+    { q: "En una distribución normal, ¿qué % está dentro de 1 desviación estándar?", opts: ["A) 50%", "B) 68%", "C) 75%", "D) 95%"], correct: 1, difficulty: 3, hint: "Regla empírica", exp: "68% de los datos están dentro de ±1σ" },
+    { q: "La probabilidad de ganar es 1/4 y perder 1/2. ¿Probabilidad de empatar?", opts: ["A) 1/4", "B) 1/2", "C) 3/4", "D) 0"], correct: 0, difficulty: 2, hint: "Suma de probabilidades = 1", exp: "1 - 1/4 - 1/2 = 1/4" },
+    { q: "Si lanzas dos dados, ¿probabilidad de obtener suma 7?", opts: ["A) 1/6", "B) 5/36", "C) 1/12", "D) 1/8"], correct: 0, difficulty: 3, hint: "6 combinaciones de 36 posibles", exp: "6/36 = 1/6" }
+
                 // === NIVEL 1: FÁCIL (dificultad 1) ===
                 { q: "¿Cuánto es 2 + 2 × 2?", opts: ["A) 4", "B) 6", "C) 8", "D) 2"], correct: 1, difficulty: 1, hint: "Multiplicación antes que suma.", exp: "2×2=4, 4+2=6." },
                 { q: "¿Cuál es el 25% de 200?", opts: ["A) 25", "B) 40", "C) 50", "D) 75"], correct: 2, difficulty: 1, hint: "25% es dividir entre 4.", exp: "200÷4=50." },
@@ -618,96 +690,7 @@
                 { q: "¿Cuánto es 15 + 27?", opts: ["A) 32", "B) 42", "C) 52", "D) 62"], correct: 1, difficulty: 1, hint: "Suma simple.", exp: "15+27=42." },
                 { q: "¿Qué fracción es equivalente a 0.5?", opts: ["A) 1/4", "B) 1/3", "C) 1/2", "D) 2/3"], correct: 2, difficulty: 1, hint: "0.5 es la mitad de 1.", exp: "1/2 = 0.5." },
                 { q: "¿Cuántos lados tiene un hexágono?", opts: ["A) 4", "B) 5", "C) 6", "D) 8"], correct: 2, difficulty: 1, hint: "El prefijo 'hexa' significa seis.", exp: "Un hexágono tiene 6 lados." },
-                // ========== ÁLGEBRA AVANZADA ==========
-{ q: "Resuelve la ecuación cuadrática: x² - 7x + 12 = 0",
-  opts: ["A) x = 3, 4", "B) x = -3, -4", "C) x = 6, 2", "D) x = -6, -2"],
-  correct: 0, difficulty: 2,
-  hint: "Factoriza: (x - a)(x - b) = 0",
-  exp: "x² - 7x + 12 = (x-3)(x-4), por lo tanto x = 3 y x = 4." },
-
-{ q: "Simplifica: (2x³y²)³",
-  opts: ["A) 6x⁶y⁵", "B) 8x⁹y⁶", "C) 8x⁶y⁵", "D) 6x⁹y⁶"],
-  correct: 1, difficulty: 2,
-  hint: "Aplica la potencia a cada factor: (a·b)ⁿ = aⁿ·bⁿ",
-  exp: "(2)³ = 8, (x³)³ = x⁹, (y²)³ = y⁶ → 8x⁹y⁶" },
-
-{ q: "Resuelve la ecuación: 2(x - 3) + 4 = 3(x + 1) - 2",
-  opts: ["A) x = 1", "B) x = 3", "C) x = -1", "D) x = -3"],
-  correct: 2, difficulty: 2,
-  hint: "Distribuye y despeja la variable.",
-  exp: "2x - 6 + 4 = 3x + 3 - 2 → 2x - 2 = 3x + 1 → -3 = x → x = -3" },
-
-{ q: "Factoriza completamente: 4x² - 25",
-  opts: ["A) (2x - 5)(2x + 5)", "B) (4x - 5)(x + 5)", "C) (2x - 5)²", "D) (4x + 5)(x - 5)"],
-  correct: 0, difficulty: 2,
-  hint: "Diferencia de cuadrados perfectos: a² - b² = (a-b)(a+b)",
-  exp: "4x² - 25 = (2x)² - 5² = (2x-5)(2x+5)" },
-
-{ q: "Resuelve el sistema: 2x + y = 10, x - y = 2",
-  opts: ["A) x = 4, y = 2", "B) x = 3, y = 4", "C) x = 5, y = 0", "D) x = 2, y = 6"],
-  correct: 0, difficulty: 2,
-  hint: "Suma ambas ecuaciones para eliminar y.",
-  exp: "3x = 12 → x = 4, sustituyendo: 4 - y = 2 → y = 2" },
-
-{ q: "¿Cuál es el valor de x en: log₂(x) = 5?",
-  opts: ["A) 10", "B) 25", "C) 32", "D) 64"],
-  correct: 2, difficulty: 3,
-  hint: "log₂(x) = 5 significa 2⁵ = x",
-  exp: "2⁵ = 32, por lo tanto x = 32" },
-
-{ q: "Resuelve la desigualdad: -3x + 6 > 15",
-  opts: ["A) x > -3", "B) x < -3", "C) x > 3", "D) x < 3"],
-  correct: 1, difficulty: 2,
-  hint: "Aísla la variable, recuerda invertir el signo si divides por negativo.",
-  exp: "-3x > 9 → x < -3 (se invierte al dividir por -3)" },
-
-{ q: "Encuentra la suma de las raíces de: x² - 8x + 15 = 0",
-  opts: ["A) 8", "B) 15", "C) -8", "D) -15"],
-  correct: 0, difficulty: 3,
-  hint: "Para ax² + bx + c = 0, la suma de raíces es -b/a",
-  exp: "-(-8)/1 = 8" },
-
-{ q: "Simplifica: √48 - √12",
-  opts: ["A) 2√3", "B) 4√3", "C) √36", "D) 2√6"],
-  correct: 0, difficulty: 2,
-  hint: "Factoriza los radicandos: √48 = √(16·3) = 4√3, √12 = √(4·3) = 2√3",
-  exp: "4√3 - 2√3 = 2√3" },
-
-{ q: "Resuelve: 3x² - 5x - 2 = 0",
-  opts: ["A) x = 2, -1/3", "B) x = -2, 1/3", "C) x = 1, -2/3", "D) x = -1, 2/3"],
-  correct: 0, difficulty: 3,
-  hint: "Usa la fórmula cuadrática: x = [-b ± √(b²-4ac)] / 2a",
-  exp: "x = [5 ± √(25+24)]/6 = [5 ± 7]/6 → x = 2, x = -1/3" },
-
-{ q: "El producto de dos números es 48 y su suma es 14. ¿Cuáles son los números?",
-  opts: ["A) 6 y 8", "B) 4 y 12", "C) 3 y 16", "D) 2 y 24"],
-  correct: 0, difficulty: 2,
-  hint: "Resuelve el sistema: x·y = 48, x+y = 14",
-  exp: "Los números son 6 y 8: 6×8=48, 6+8=14" },
-
-{ q: "Simplifica: (x² - 16)/(x + 4)",
-  opts: ["A) x - 4", "B) x + 4", "C) x - 16", "D) (x-4)/(x+4)"],
-  correct: 0, difficulty: 2,
-  hint: "Factoriza el numerador como diferencia de cuadrados.",
-  exp: "(x-4)(x+4)/(x+4) = x-4, con x ≠ -4" },
-
-{ q: "Resuelve: |2x - 3| = 7",
-  opts: ["A) x = 5 o -2", "B) x = 5 o 2", "C) x = -5 o 2", "D) x = -5 o -2"],
-  correct: 0, difficulty: 3,
-  hint: "Dos casos: 2x-3 = 7 o 2x-3 = -7",
-  exp: "2x-3=7 → x=5; 2x-3=-7 → x=-2" },
-
-{ q: "Encuentra el producto de las raíces de: 2x² + 5x - 3 = 0",
-  opts: ["A) -3/2", "B) 3/2", "C) -5/2", "D) 5/2"],
-  correct: 0, difficulty: 3,
-  hint: "El producto de raíces es c/a para ax² + bx + c = 0",
-  exp: "c/a = -3/2" },
-
-{ q: "Resuelve: 5^(x+1) = 125",
-  opts: ["A) x = 1", "B) x = 2", "C) x = 3", "D) x = 4"],
-  correct: 1, difficulty: 3,
-  hint: "Escribe 125 como potencia de 5: 5³ = 125",
-  exp: "5^(x+1) = 5³ → x+1 = 3 → x = 2" }
+                
                 // === NIVEL 2: MEDIO (dificultad 2) ===
                 { q: "Resuelve: 3x + 5 = 20. ¿Cuánto vale x?", opts: ["A) 3", "B) 5", "C) 7", "D) 10"], correct: 1, difficulty: 2, hint: "Aísla la variable.", exp: "3x=15 → x=5." },
                 { q: "¿Cuál es el área de un triángulo con base 10 y altura 6?", opts: ["A) 30", "B) 60", "C) 15", "D) 120"], correct: 0, difficulty: 2, hint: "(base×altura)/2.", exp: "(10×6)/2=30." },
