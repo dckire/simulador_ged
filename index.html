@@ -776,33 +776,87 @@
     ]
 }
         ciencias: {
-            name: "Ciencias",
-            icon: "🔬",
-            time: 5400,
-            questions: [
-                // === NIVEL 1: FÁCIL ===
-                { q: "¿Qué orgánulo produce energía (ATP)?", opts: ["A) Núcleo", "B) Mitocondria", "C) Cloroplasto", "D) Ribosoma"], correct: 1, difficulty: 1, hint: "'Central energética' de la célula.", exp: "La mitocondria produce ATP." },
-                { q: "¿Cuál es el proceso por el cual las plantas convierten luz solar en energía química?", opts: ["A) Respiración", "B) Fotosíntesis", "C) Fermentación", "D) Digestión"], correct: 1, difficulty: 1, hint: "Ocurre en los cloroplastos.", exp: "Es la fotosíntesis." },
-                { q: "¿Cuál es la fuerza que mantiene a los planetas en órbita?", opts: ["A) Magnética", "B) Nuclear", "C) Gravitacional", "D) Centrífuga"], correct: 2, difficulty: 1, hint: "Descrita por Newton.", exp: "Es la gravedad." },
-                { q: "¿Qué tipo de roca se forma por enfriamiento del magma?", opts: ["A) Sedimentaria", "B) Metamórfica", "C) Ígnea", "D) Caliza"], correct: 2, difficulty: 1, hint: "Proviene del fuego ('ignis').", exp: "Son las rocas ígneas." },
-                { q: "¿Cuál es el pH de una sustancia neutra?", opts: ["A) 0", "B) 5", "C) 7", "D) 14"], correct: 2, difficulty: 1, hint: "El agua pura tiene este pH.", exp: "El pH 7 es neutro." },
-                { q: "¿Qué gas es el más abundante en la atmósfera?", opts: ["A) Oxígeno", "B) Dióxido de carbono", "C) Nitrógeno", "D) Argón"], correct: 2, difficulty: 1, hint: "Representa el 78% del aire.", exp: "Es el nitrógeno." },
-                
-                // === NIVEL 2: MEDIO ===
-                { q: "¿Qué produce la fotosíntesis?", opts: ["A) CO₂ y agua", "B) Glucosa y O₂", "C) ATP y NADH", "D) Etanol y CO₂"], correct: 1, difficulty: 2, hint: "Productos de la fotosíntesis.", exp: "Produce glucosa y oxígeno." },
-                { q: "¿Cuál es la función de los glóbulos rojos?", opts: ["A) Combatir infecciones", "B) Transportar oxígeno", "C) Coagular la sangre", "D) Producir hormonas"], correct: 1, difficulty: 2, hint: "Contienen hemoglobina.", exp: "Transportan oxígeno." },
-                { q: "¿Qué es la mitosis?", opts: ["A) División celular que produce gametos", "B) División celular que produce células idénticas", "C) Fusión de células", "D) Muerte celular programada"], correct: 1, difficulty: 2, hint: "Produce células hijas idénticas.", exp: "La mitosis es división celular no reproductiva." },
-                { q: "¿Cuál es la capa más externa de la Tierra?", opts: ["A) Manto", "B) Núcleo", "C) Corteza", "D) Astenosfera"], correct: 2, difficulty: 2, hint: "Donde vivimos.", exp: "Es la corteza terrestre." },
-                { q: "¿Qué fenómeno climático se produce por gases como el CO₂?", opts: ["A) Lluvia ácida", "B) Efecto invernadero", "C) Destrucción del ozono", "D) Inversión térmica"], correct: 1, difficulty: 2, hint: "Retiene el calor solar.", exp: "Es el efecto invernadero." },
-                { q: "¿Qué es un ecosistema?", opts: ["A) Solo plantas", "B) Seres vivos + medio físico", "C) Solo animales", "D) El clima de una región"], correct: 1, difficulty: 2, hint: "Incluye factores bióticos y abióticos.", exp: "Interacción entre seres vivos y su entorno." },
-                
-                // === NIVEL 3: DIFÍCIL ===
-                { q: "¿Qué postula la Teoría Celular?", opts: ["A) Las células aparecen por generación espontánea", "B) Todos los seres vivos están formados por células", "C) Solo los animales tienen células", "D) Las células no contienen ADN"], correct: 1, difficulty: 3, hint: "Unidad básica de la vida.", exp: "La célula es la unidad funcional de todos los seres vivos." },
-                { q: "¿Cuál es la función del sistema excretor?", opts: ["A) Transportar nutrientes", "B) Eliminar desechos y regular fluidos", "C) Producir hormonas", "D) Digerir alimentos"], correct: 1, difficulty: 3, hint: "Riñones y vejiga.", exp: "Filtra la sangre y elimina desechos." },
-                { q: "¿Qué ley explica que la masa no se crea ni se destruye?", opts: ["A) Ley de Gravitación", "B) Ley de Conservación de la Masa", "C) Ley de Inercia", "D) Ley de Coulomb"], correct: 1, difficulty: 3, hint: "Lavoisier.", exp: "En una reacción química, la masa total se conserva." },
-                { q: "¿Qué produce la tectónica de placas?", opts: ["A) Terremotos y volcanes", "B) Lluvias ácidas", "C) Erosión", "D) Corrientes marinas"], correct: 0, difficulty: 3, hint: "Movimiento de las placas terrestres.", exp: "Provoca sismos, volcanes y formación de montañas." }
-            ]
-        },
+    name: "Ciencias",
+    icon: "🔬",
+    time: 5400,
+    questions: [
+        // ============================================================
+        //  NIVEL 1: FÁCIL (dificultad 1) - 20 preguntas
+        // ============================================================
+        { q: "¿Qué orgánulo produce energía (ATP)?", opts: ["A) Núcleo", "B) Mitocondria", "C) Cloroplasto", "D) Ribosoma"], correct: 1, difficulty: 1, hint: "'Central energética' de la célula.", exp: "La mitocondria produce ATP." },
+        { q: "¿Cuál es el proceso por el cual las plantas convierten luz solar en energía química?", opts: ["A) Respiración", "B) Fotosíntesis", "C) Fermentación", "D) Digestión"], correct: 1, difficulty: 1, hint: "Ocurre en los cloroplastos.", exp: "Es la fotosíntesis." },
+        { q: "¿Cuál es la fuerza que mantiene a los planetas en órbita?", opts: ["A) Magnética", "B) Nuclear", "C) Gravitacional", "D) Centrífuga"], correct: 2, difficulty: 1, hint: "Descrita por Newton.", exp: "Es la gravedad." },
+        { q: "¿Qué tipo de roca se forma por enfriamiento del magma?", opts: ["A) Sedimentaria", "B) Metamórfica", "C) Ígnea", "D) Caliza"], correct: 2, difficulty: 1, hint: "Proviene del fuego ('ignis').", exp: "Son las rocas ígneas." },
+        { q: "¿Cuál es el pH de una sustancia neutra?", opts: ["A) 0", "B) 5", "C) 7", "D) 14"], correct: 2, difficulty: 1, hint: "El agua pura tiene este pH.", exp: "El pH 7 es neutro." },
+        { q: "¿Qué gas es el más abundante en la atmósfera?", opts: ["A) Oxígeno", "B) Dióxido de carbono", "C) Nitrógeno", "D) Argón"], correct: 2, difficulty: 1, hint: "Representa el 78% del aire.", exp: "Es el nitrógeno." },
+        { q: "¿Cuál es la función de los pulmones?", opts: ["A) Bombear sangre", "B) Intercambiar gases (oxígeno y CO₂)", "C) Digerir alimentos", "D) Producir hormonas"], correct: 1, difficulty: 1, hint: "Son parte del sistema respiratorio.", exp: "Los pulmones realizan el intercambio gaseoso." },
+        { q: "¿Qué tipo de célula son las bacterias?", opts: ["A) Eucariota", "B) Procariota", "C) Animal", "D) Vegetal"], correct: 1, difficulty: 1, hint: "No tienen núcleo definido.", exp: "Las bacterias son células procariotas." },
+        { q: "¿Cuál es el órgano más grande del cuerpo humano?", opts: ["A) Corazón", "B) Hígado", "C) Piel", "D) Cerebro"], correct: 2, difficulty: 1, hint: "Cubre todo el cuerpo.", exp: "La piel es el órgano más grande." },
+        { q: "¿Qué es un ser vivo?", opts: ["A) Objeto inerte", "B) Organismo que nace, crece, se reproduce y muere", "C) Solo los animales", "D) Solo las plantas"], correct: 1, difficulty: 1, hint: "Tiene ciclos de vida.", exp: "Los seres vivos cumplen funciones vitales." },
+        { q: "¿Qué es la cadena alimentaria?", opts: ["A) El ciclo del agua", "B) La secuencia de quién come a quién", "C) La formación de rocas", "D) El movimiento de placas"], correct: 1, difficulty: 1, hint: "Representa flujo de energía.", exp: "Muestra las relaciones alimenticias entre organismos." },
+        { q: "¿Cuál es el planeta más cercano al Sol?", opts: ["A) Venus", "B) Marte", "C) Mercurio", "D) Tierra"], correct: 2, difficulty: 1, hint: "Es el más pequeño.", exp: "Mercurio es el planeta más cercano al Sol." },
+        { q: "¿Qué es la gravedad?", opts: ["A) Fuerza de atracción entre masas", "B) Fuerza de repulsión", "C) Energía solar", "D) Viento"], correct: 0, difficulty: 1, hint: "Nos mantiene en el suelo.", exp: "Es la atracción entre objetos con masa." },
+        { q: "¿Qué parte de la célula contiene el material genético?", opts: ["A) Membrana", "B) Citoplasma", "C) Núcleo", "D) Ribosoma"], correct: 2, difficulty: 1, hint: "Es el 'cerebro' de la célula.", exp: "El núcleo contiene el ADN." },
+        { q: "¿Cuál es el elemento químico más abundante en el cuerpo humano?", opts: ["A) Carbono", "B) Oxígeno", "C) Hidrógeno", "D) Nitrógeno"], correct: 1, difficulty: 1, hint: "También es el gas que respiramos.", exp: "El oxígeno es el más abundante." },
+        { q: "¿Qué es un ecosistema?", opts: ["A) Solo animales", "B) Seres vivos + medio físico", "C) Solo plantas", "D) El clima de una región"], correct: 1, difficulty: 1, hint: "Incluye factores bióticos y abióticos.", exp: "Interacción entre seres vivos y su entorno." },
+        { q: "¿Cuál es el proceso por el cual el agua se convierte en vapor?", opts: ["A) Condensación", "B) Evaporación", "C) Precipitación", "D) Filtración"], correct: 1, difficulty: 1, hint: "Ocurre en el ciclo del agua.", exp: "La evaporación convierte líquido en gas." },
+        { q: "¿Qué tipo de energía utiliza una planta para hacer fotosíntesis?", opts: ["A) Energía química", "B) Energía solar", "C) Energía nuclear", "D) Energía eólica"], correct: 1, difficulty: 1, hint: "Viene del sol.", exp: "Usa energía solar." },
+        { q: "¿Qué es un fósil?", opts: ["A) Una roca", "B) Restos de seres vivos antiguos", "C) Un mineral", "D) Un tipo de suelo"], correct: 1, difficulty: 1, hint: "Evidencia de vida pasada.", exp: "Los fósiles son restos de organismos antiguos." },
+        { q: "¿Cuál es la unidad básica de la vida?", opts: ["A) El átomo", "B) La célula", "C) El tejido", "D) El órgano"], correct: 1, difficulty: 1, hint: "Todo ser vivo está hecho de estas.", exp: "La célula es la unidad básica de la vida." },
+
+        // ============================================================
+        //  NIVEL 2: MEDIO (dificultad 2) - 20 preguntas
+        // ============================================================
+        { q: "¿Qué produce la fotosíntesis?", opts: ["A) CO₂ y agua", "B) Glucosa y O₂", "C) ATP y NADH", "D) Etanol y CO₂"], correct: 1, difficulty: 2, hint: "Productos de la fotosíntesis.", exp: "Produce glucosa y oxígeno." },
+        { q: "¿Cuál es la función de los glóbulos rojos?", opts: ["A) Combatir infecciones", "B) Transportar oxígeno", "C) Coagular la sangre", "D) Producir hormonas"], correct: 1, difficulty: 2, hint: "Contienen hemoglobina.", exp: "Transportan oxígeno." },
+        { q: "¿Qué es la mitosis?", opts: ["A) División celular que produce gametos", "B) División celular que produce células idénticas", "C) Fusión de células", "D) Muerte celular programada"], correct: 1, difficulty: 2, hint: "Produce células hijas idénticas.", exp: "La mitosis es división celular no reproductiva." },
+        { q: "¿Cuál es la capa más externa de la Tierra?", opts: ["A) Manto", "B) Núcleo", "C) Corteza", "D) Astenosfera"], correct: 2, difficulty: 2, hint: "Donde vivimos.", exp: "Es la corteza terrestre." },
+        { q: "¿Qué fenómeno climático se produce por gases como el CO₂?", opts: ["A) Lluvia ácida", "B) Efecto invernadero", "C) Destrucción del ozono", "D) Inversión térmica"], correct: 1, difficulty: 2, hint: "Retiene el calor solar.", exp: "Es el efecto invernadero." },
+        { q: "¿Qué es un ecosistema?", opts: ["A) Solo plantas", "B) Seres vivos + medio físico", "C) Solo animales", "D) El clima de una región"], correct: 1, difficulty: 2, hint: "Incluye factores bióticos y abióticos.", exp: "Interacción entre seres vivos y su entorno." },
+        { q: "¿Cuál es la diferencia entre célula animal y vegetal?", opts: ["A) La animal tiene pared celular", "B) La vegetal tiene cloroplastos", "C) La animal tiene cloroplastos", "D) Son iguales"], correct: 1, difficulty: 2, hint: "La vegetal hace fotosíntesis.", exp: "Las células vegetales tienen cloroplastos y pared celular." },
+        { q: "¿Qué es la meiosis?", opts: ["A) División celular que produce células idénticas", "B) División celular que produce gametos", "C) Fusión de células", "D) Reproducción asexual"], correct: 1, difficulty: 2, hint: "Produce células reproductivas.", exp: "La meiosis produce gametos (óvulos y espermatozoides)." },
+        { q: "¿Qué es la biodiversidad?", opts: ["A) La variedad de vida en la Tierra", "B) El clima de una región", "C) El tipo de suelo", "D) La cantidad de agua"], correct: 0, difficulty: 2, hint: "Incluye especies, genes y ecosistemas.", exp: "Es la variedad de organismos vivos." },
+        { q: "¿Qué causa la lluvia ácida?", opts: ["A) El CO₂", "B) Óxidos de azufre y nitrógeno", "C) El metano", "D) El ozono"], correct: 1, difficulty: 2, hint: "Gases que reaccionan con el agua.", exp: "Los óxidos de azufre y nitrógeno producen lluvia ácida." },
+        { q: "¿Qué es la fotosíntesis en términos químicos?", opts: ["A) CO₂ + H₂O + luz → glucosa + O₂", "B) Glucosa + O₂ → CO₂ + H₂O + energía", "C) CO₂ + O₂ → glucosa + H₂O", "D) H₂O + O₂ → glucosa + CO₂"], correct: 0, difficulty: 2, hint: "Ecuación de la fotosíntesis.", exp: "6CO₂ + 6H₂O + luz → C₆H₁₂O₆ + 6O₂" },
+        { q: "¿Qué es un virus?", opts: ["A) Una célula", "B) Un parásito obligado", "C) Una bacteria", "D) Un hongo"], correct: 1, difficulty: 2, hint: "Necesita una célula huésped.", exp: "Los virus son parásitos intracelulares obligados." },
+        { q: "¿Cuál es la función de los riñones?", opts: ["A) Producir hormonas", "B) Filtrar la sangre y producir orina", "C) Digerir alimentos", "D) Transportar oxígeno"], correct: 1, difficulty: 2, hint: "Parte del sistema excretor.", exp: "Los riñones filtran desechos de la sangre." },
+        { q: "¿Qué es la selección natural?", opts: ["A) Los organismos eligen su alimento", "B) Los mejor adaptados sobreviven y se reproducen", "C) Todos los organismos sobreviven", "D) Los organismos cambian voluntariamente"], correct: 1, difficulty: 2, hint: "Darwin lo propuso.", exp: "La selección natural favorece a los mejor adaptados." },
+        { q: "¿Qué tipo de energía es la que almacena un objeto en altura?", opts: ["A) Energía cinética", "B) Energía potencial gravitacional", "C) Energía química", "D) Energía térmica"], correct: 1, difficulty: 2, hint: "Depende de la altura.", exp: "Es energía potencial gravitacional." },
+        { q: "¿Qué es la transpiración en las plantas?", opts: ["A) Absorción de agua", "B) Pérdida de agua por las hojas", "C) Producción de oxígeno", "D) Fotosíntesis"], correct: 1, difficulty: 2, hint: "Ocurre por los estomas.", exp: "La transpiración es la pérdida de agua en forma de vapor." },
+        { q: "¿Qué es una especie?", opts: ["A) Un grupo de organismos iguales", "B) Organismos que pueden reproducirse entre sí", "C) Un tipo de ecosistema", "D) Una categoría de clima"], correct: 1, difficulty: 2, hint: "Pueden tener descendencia fértil.", exp: "Especie es un grupo de organismos que se reproducen entre sí." },
+        { q: "¿Cuál es la función del sistema nervioso?", opts: ["A) Transportar sangre", "B) Coordinar y controlar el cuerpo", "C) Digerir alimentos", "D) Producir hormonas"], correct: 1, difficulty: 2, hint: "Incluye cerebro y nervios.", exp: "Controla las funciones del cuerpo." },
+        { q: "¿Qué es un compuesto químico?", opts: ["A) Un elemento puro", "B) La unión de dos o más elementos", "C) Una mezcla", "D) Un átomo"], correct: 1, difficulty: 2, hint: "Ejemplo: agua (H₂O).", exp: "Los compuestos están formados por átomos diferentes." },
+        { q: "¿Qué ocurre en la respiración celular?", opts: ["A) CO₂ + H₂O + luz → glucosa + O₂", "B) Glucosa + O₂ → CO₂ + H₂O + energía", "C) CO₂ + H₂O → glucosa + O₂", "D) Glucosa → CO₂ + H₂O"], correct: 1, difficulty: 2, hint: "Produce energía para la célula.", exp: "La respiración celular produce ATP." },
+
+        // ============================================================
+        //  NIVEL 3: DIFÍCIL (dificultad 3) - 15 preguntas
+        // ============================================================
+        { q: "¿Qué postula la Teoría Celular?", opts: ["A) Las células aparecen por generación espontánea", "B) Todos los seres vivos están formados por células", "C) Solo los animales tienen células", "D) Las células no contienen ADN"], correct: 1, difficulty: 3, hint: "Unidad básica de la vida.", exp: "La célula es la unidad funcional de todos los seres vivos." },
+        { q: "¿Cuál es la función del sistema excretor?", opts: ["A) Transportar nutrientes", "B) Eliminar desechos y regular fluidos", "C) Producir hormonas", "D) Digerir alimentos"], correct: 1, difficulty: 3, hint: "Riñones y vejiga.", exp: "Filtra la sangre y elimina desechos." },
+        { q: "¿Qué ley explica que la masa no se crea ni se destruye?", opts: ["A) Ley de Gravitación", "B) Ley de Conservación de la Masa", "C) Ley de Inercia", "D) Ley de Coulomb"], correct: 1, difficulty: 3, hint: "Lavoisier.", exp: "En una reacción química, la masa total se conserva." },
+        { q: "¿Qué produce la tectónica de placas?", opts: ["A) Terremotos y volcanes", "B) Lluvias ácidas", "C) Erosión", "D) Corrientes marinas"], correct: 0, difficulty: 3, hint: "Movimiento de las placas terrestres.", exp: "Provoca sismos, volcanes y formación de montañas." },
+        { q: "¿Qué es la homeóstasis?", opts: ["A) La capacidad de mantener un ambiente interno estable", "B) La producción de energía", "C) La reproducción celular", "D) La digestión"], correct: 0, difficulty: 3, hint: "Equilibrio interno del cuerpo.", exp: "Es el mantenimiento de condiciones internas estables." },
+        { q: "¿Qué es un átomo?", opts: ["A) La partícula más pequeña de un elemento", "B) Una molécula", "C) Un compuesto", "D) Una célula"], correct: 0, difficulty: 3, hint: "Incluye protones, neutrones y electrones.", exp: "El átomo es la unidad básica de la materia." },
+        { q: "¿Cuál es la diferencia entre ADN y ARN?", opts: ["A) El ADN tiene dos cadenas, el ARN una", "B) El ARN tiene dos cadenas, el ADN una", "C) Son iguales", "D) El ADN está en el citoplasma"], correct: 0, difficulty: 3, hint: "Estructura y función diferentes.", exp: "El ADN es bicatenario, el ARN monocatenario." },
+        { q: "¿Qué es la evolución?", opts: ["A) Los cambios en las especies a lo largo del tiempo", "B) La creación de nuevas especies", "C) La extinción de especies", "D) El movimiento de placas"], correct: 0, difficulty: 3, hint: "Darwin y la selección natural.", exp: "La evolución es el cambio en las poblaciones a lo largo del tiempo." },
+        { q: "¿Qué es la energía cinética?", opts: ["A) Energía de movimiento", "B) Energía almacenada", "C) Energía química", "D) Energía térmica"], correct: 0, difficulty: 3, hint: "Depende de la velocidad.", exp: "Es la energía de un objeto en movimiento." },
+        { q: "¿Qué es la capa de ozono?", opts: ["A) Capa de la atmósfera que protege de los rayos UV", "B) Capa del océano", "C) Capa del suelo", "D) Capa del núcleo"], correct: 0, difficulty: 3, hint: "Está en la estratosfera.", exp: "La capa de ozono filtra la radiación UV." },
+        { q: "¿Qué es un ecosistema acuático?", opts: ["A) Ecosistema terrestre", "B) Ecosistema en agua (dulce o salada)", "C) Ecosistema desértico", "D) Ecosistema de montaña"], correct: 1, difficulty: 3, hint: "Incluye océanos y ríos.", exp: "Los ecosistemas acuáticos están en el agua." },
+        { q: "¿Qué es la digestión química?", opts: ["A) Masticar los alimentos", "B) Descomponer los alimentos con enzimas", "C) Absorber nutrientes", "D) Eliminar desechos"], correct: 1, difficulty: 3, hint: "Ocurre con enzimas.", exp: "La digestión química rompe moléculas con enzimas." },
+        { q: "¿Qué es un ecosistema?", opts: ["A) Solo plantas", "B) Seres vivos + medio físico", "C) Solo animales", "D) El clima de una región"], correct: 1, difficulty: 3, hint: "Incluye factores bióticos y abióticos.", exp: "Interacción entre seres vivos y su entorno." },
+        { q: "¿Qué es la permeabilidad celular?", opts: ["A) La capacidad de la célula de permitir el paso de sustancias", "B) La producción de energía", "C) La división celular", "D) La muerte celular"], correct: 0, difficulty: 3, hint: "Controla lo que entra y sale.", exp: "La membrana celular regula el paso de sustancias." },
+        { q: "¿Qué es la transmisión de calor por radiación?", opts: ["A) Transferencia de calor por contacto", "B) Transferencia de calor por ondas electromagnéticas", "C) Transferencia de calor por fluidos", "D) Transferencia de calor por conducción"], correct: 1, difficulty: 3, hint: "No necesita medio material.", exp: "La radiación transmite calor en forma de ondas." },
+
+        // ============================================================
+        //  NIVEL EXTRA: CIENCIAS APLICADAS (dificultad 2-3) - 5 preguntas
+        // ============================================================
+        { q: "¿Qué sucede cuando una sustancia se congela?", opts: ["A) Las partículas se mueven más rápido", "B) Las partículas se ordenan y se mueven menos", "C) La sustancia se evapora", "D) La sustancia se vuelve más densa"], correct: 1, difficulty: 2, hint: "Cambio de estado líquido a sólido.", exp: "Al congelarse, las partículas se ordenan." },
+        { q: "¿Qué es la teoría atómica?", opts: ["A) Teoría sobre la estructura del átomo", "B) Teoría sobre el origen de la vida", "C) Teoría sobre el universo", "D) Teoría sobre el clima"], correct: 0, difficulty: 3, hint: "Dalton y Rutherford contribuyeron.", exp: "Explica la estructura y comportamiento de los átomos." },
+        { q: "¿Qué ocurre en la combustión?", opts: ["A) Oxidación rápida que produce calor y luz", "B) Evaporación de un líquido", "C) Congelación de un gas", "D) Fusión de metales"], correct: 0, difficulty: 2, hint: "El fuego es un ejemplo.", exp: "La combustión es una reacción de oxidación rápida." },
+        { q: "¿Qué es el sistema inmune?", opts: ["A) Sistema que transporta nutrientes", "B) Sistema que nos protege de enfermedades", "C) Sistema que regula el azúcar", "D) Sistema que produce hormonas"], correct: 1, difficulty: 2, hint: "Defiende al cuerpo.", exp: "El sistema inmune combate infecciones y enfermedades." },
+        { q: "¿Qué es la fotosíntesis en el ciclo del carbono?", opts: ["A) Elimina CO₂ de la atmósfera", "B) Libera CO₂ a la atmósfera", "C) No afecta el CO₂", "D) Produce metano"], correct: 0, difficulty: 3, hint: "Las plantas absorben CO₂.", exp: "La fotosíntesis fija el carbono al absorber CO₂." }
+    ]
+}
         sociales: {
             name: "Estudios Sociales",
             icon: "🌍",
