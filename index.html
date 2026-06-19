@@ -492,9 +492,9 @@
 </head>
 <body>
 
-<div class="container">
+    <div class="container">
 
-    <!-- HEADER -->
+    <!-- ===== HEADER ===== -->
     <header class="header">
         <h1>🎓 GED Simulator Pro</h1>
         <div class="header-badge">
@@ -503,6 +503,56 @@
         </div>
     </header>
 
+    <!-- ===== BANNER DE AFILIADO AMAZON (AQUÍ) ===== -->
+    <div style="
+        background: linear-gradient(135deg, #fffbeb, #fef3c7);
+        border: 3px solid #f59e0b;
+        border-radius: 16px;
+        padding: 16px 24px;
+        margin: 20px 0 30px 0;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+        flex-wrap: wrap;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    ">
+        <span style="font-weight: 700; color: #1a1a2e; font-size: 1.05rem;">
+            📚 Prepárate para el GED con los mejores libros:
+        </span>
+        <a href="https://amzn.to/4xJVgCU" target="_blank" rel="noopener noreferrer" style="
+            background: #f59e0b;
+            color: white;
+            padding: 10px 28px;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.3s;
+            display: inline-block;
+            font-size: 1rem;
+        " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+            🛒 GED TEST PREP
+        </a>
+        <span style="font-size: 0.85rem; color: #6b7280;">
+            (Compras con este enlace apoyan el simulador)
+        </span>
+    </div>
+
+    <!-- ===== TABS ===== -->
+    <div class="tabs">
+        <button class="tab-btn active" data-subject="matematicas" onclick="changeSubject('matematicas')">
+            <span class="icon">➗</span> Matemáticas
+        </button>
+        ...
+    </div>
+
+    <!-- ===== PANEL PRINCIPAL ===== -->
+    <div class="main-panel">
+        ...
+    </div>
+
+</div>
     <!-- TABS -->
     <div class="tabs">
         <button class="tab-btn active" data-subject="matematicas" onclick="changeSubject('matematicas')">
@@ -1212,41 +1262,6 @@
         changeSubject('matematicas');
     };
 </script>
-<!-- ===== BANNER DE AFILIADO AMAZON ===== -->
-<div style="
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: #ffffff;
-    border-top: 3px solid #f59e0b;
-    padding: 12px 20px;
-    text-align: center;
-    box-shadow: 0 -4px 12px rgba(0,0,0,0.1);
-    z-index: 1000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    flex-wrap: wrap;
-">
-    <span style="font-weight: 600; color: #1a1a2e;">📚 Prepárate para el GED con los mejores libros:</span>
-    <a href="https://amzn.to/4xJVgCU" target="_blank" rel="noopener noreferrer" style="
-        background: #f59e0b;
-        color: white;
-        padding: 8px 24px;
-        border-radius: 100px;
-        text-decoration: none;
-        font-weight: 700;
-        transition: 0.3s;
-        display: inline-block;
-    " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-        📖 Ver en Amazon
-    </a>
-    <span style="font-size: 0.8rem; color: #6b7280;">(Compras con este enlace apoyan el simulador)</span>
-</div>
 
-<!-- Espacio extra para que el contenido no quede oculto detrás del banner -->
-<div style="height: 80px;"></div>
 </body>
 </html>
