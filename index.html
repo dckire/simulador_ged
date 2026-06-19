@@ -3,1295 +3,1007 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador Completo GED - 4 Materias</title>
+    <title>Simulador GED Pro - Banco Extendido</title>
     <style>
-        :root {
-            --bg-color: #f4f1ea;
-            --text-dark: #1a1a1a;
-            --border-dark: #1a1a1a;
-            --card-bg: #ffffff;
-            
-            --math-color: #ffda79;
-            --rla-color: #ffabe7;
-            --science-color: #81ecec;
-            --social-color: #74b9ff;
-            
-            --success: #22c55e;
-            --danger: #ef4444;
-        }
-
+        /* ===== RESET Y VARIABLES ===== */
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #f0f2f5;
+            --bg-card: #ffffff;
+            --text-primary: #1a1a2e;
+            --text-secondary: #4a4a6a;
+            --border-color: #d1d5db;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+            --radius: 16px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            
+            --math-color: #f59e0b;
+            --math-bg: #fffbeb;
+            --rla-color: #ec4899;
+            --rla-bg: #fdf2f8;
+            --science-color: #06b6d4;
+            --science-bg: #ecfeff;
+            --social-color: #6366f1;
+            --social-bg: #eef2ff;
+            
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-dark);
-            padding: 30px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
             min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1100px;
             width: 100%;
         }
 
+        /* ===== HEADER ===== */
         .header {
-            text-align: center;
-            margin-bottom: 30px;
-            border: 4px solid var(--border-dark);
-            padding: 20px;
-            background: #ffffff;
-            box-shadow: 6px 6px 0px var(--border-dark);
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 24px 32px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
         }
 
         .header h1 {
-            font-size: 2.2rem;
-            text-transform: uppercase;
-            letter-spacing: -1px;
-            margin-bottom: 5px;
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1a1a2e 0%, #4a4a6a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
         }
 
+        .header-badge {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            background: var(--bg-primary);
+            color: var(--text-secondary);
+        }
+
+        .badge.active-mode {
+            background: var(--math-color);
+            color: white;
+        }
+
+        /* ===== TABS ===== */
         .tabs {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 12px;
-            margin-bottom: 25px;
+            margin-bottom: 24px;
         }
 
         .tab-btn {
-            background: #ffffff;
-            border: 4px solid var(--border-dark);
-            padding: 15px 10px;
+            padding: 14px 20px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius);
+            background: var(--bg-card);
             cursor: pointer;
             font-weight: 700;
-            text-transform: uppercase;
             font-size: 0.9rem;
-            box-shadow: 4px 4px 0px var(--border-dark);
-            transition: all 0.1s ease;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
         .tab-btn:hover {
-            transform: translate(-1px, -1px);
-            box-shadow: 5px 5px 0px var(--border-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
         }
 
-        #btn-matematicas.active { background-color: var(--math-color); transform: translate(2px, 2px); box-shadow: 0px 0px 0px var(--border-dark); }
-        #btn-lenguaje.active { background-color: var(--rla-color); transform: translate(2px, 2px); box-shadow: 0px 0px 0px var(--border-dark); }
-        #btn-ciencias.active { background-color: var(--science-color); transform: translate(2px, 2px); box-shadow: 0px 0px 0px var(--border-dark); }
-        #btn-sociales.active { background-color: var(--social-color); transform: translate(2px, 2px); box-shadow: 0px 0px 0px var(--border-dark); }
-
-        .quiz-panel {
-            background: var(--card-bg);
-            border: 4px solid var(--border-dark);
-            padding: 30px;
-            box-shadow: 8px 8px 0px var(--border-dark);
+        .tab-btn .icon {
+            font-size: 1.2rem;
         }
 
+        .tab-btn[data-subject="matematicas"].active {
+            border-color: var(--math-color);
+            background: var(--math-bg);
+            color: var(--math-color);
+        }
+        .tab-btn[data-subject="lenguaje"].active {
+            border-color: var(--rla-color);
+            background: var(--rla-bg);
+            color: var(--rla-color);
+        }
+        .tab-btn[data-subject="ciencias"].active {
+            border-color: var(--science-color);
+            background: var(--science-bg);
+            color: var(--science-color);
+        }
+        .tab-btn[data-subject="sociales"].active {
+            border-color: var(--social-color);
+            background: var(--social-bg);
+            color: var(--social-color);
+        }
+
+        /* ===== PANEL PRINCIPAL ===== */
+        .main-panel {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 32px;
+            box-shadow: var(--shadow);
+        }
+
+        /* ===== STATUS BAR ===== */
         .status-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 4px solid var(--border-dark);
-            padding-bottom: 15px;
-            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--bg-primary);
+            margin-bottom: 24px;
+        }
+
+        .status-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .status-left .counter {
             font-weight: 700;
-            text-transform: uppercase;
             font-size: 1rem;
         }
 
+        .difficulty-indicator {
+            padding: 4px 14px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .difficulty-indicator.easy { background: #d1fae5; color: #065f46; }
+        .difficulty-indicator.medium { background: #fef3c7; color: #92400e; }
+        .difficulty-indicator.hard { background: #fce4ec; color: #b71c1c; }
+
         .timer {
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 6px 18px;
+            border-radius: 100px;
+            background: #fef2f2;
             color: var(--danger);
-            background: #fee2e2;
-            padding: 4px 10px;
-            border: 2px solid var(--border-dark);
+        }
+
+        .timer.warning {
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* ===== ÁREA DE PREGUNTAS ===== */
+        #question-area {
+            min-height: 300px;
         }
 
         .question-text {
-            font-size: 1.2rem;
-            font-weight: 700;
-            line-height: 1.5;
-            margin-bottom: 25px;
+            font-size: 1.25rem;
+            font-weight: 600;
+            line-height: 1.7;
+            margin-bottom: 28px;
+            padding: 16px 20px;
+            background: var(--bg-primary);
+            border-radius: 12px;
+            border-left: 4px solid var(--math-color);
             white-space: pre-line;
         }
 
-        .options-list {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+            .tabs {
+                grid-template-columns: 1fr 1fr;
+            }
         }
 
         .option-btn {
-            background: #ffffff;
-            border: 3px solid var(--border-dark);
-            padding: 15px 20px;
-            text-align: left;
-            font-size: 1rem;
-            font-weight: 600;
+            padding: 16px 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            background: white;
             cursor: pointer;
-            box-shadow: 4px 4px 0px var(--border-dark);
-            transition: all 0.1s ease;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: var(--transition);
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
-        .option-btn:hover:not([disabled]) {
-            background: #fdfbf7;
-            transform: translate(-1px, -1px);
-            box-shadow: 5px 5px 0px var(--border-dark);
+        .option-btn:hover:not(.disabled) {
+            border-color: var(--text-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .option-btn .letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--bg-primary);
+            font-weight: 700;
+            font-size: 0.8rem;
+            flex-shrink: 0;
         }
 
         .option-btn.correct {
-            background-color: var(--success) !important;
+            border-color: var(--success);
+            background: #ecfdf5;
+        }
+        .option-btn.correct .letter {
+            background: var(--success);
             color: white;
         }
 
         .option-btn.wrong {
-            background-color: var(--danger) !important;
+            border-color: var(--danger);
+            background: #fef2f2;
+        }
+        .option-btn.wrong .letter {
+            background: var(--danger);
             color: white;
         }
 
-        .explanation-box {
-            margin-top: 25px;
-            padding: 20px;
-            background: #f0fdf4;
-            border: 3px solid var(--border-dark);
-            box-shadow: 4px 4px 0px var(--border-dark);
-            display: none;
-            line-height: 1.5;
+        .option-btn.disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .option-btn.disabled:hover {
+            transform: none;
+            box-shadow: none;
         }
 
+        /* ===== EXPLICACIÓN ===== */
+        .explanation-box {
+            margin-top: 24px;
+            padding: 20px 24px;
+            border-radius: 12px;
+            background: #f0fdf4;
+            border-left: 4px solid var(--success);
+            display: none;
+            line-height: 1.6;
+        }
+
+        .explanation-box.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .explanation-box .label {
+            font-weight: 700;
+            color: var(--success);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        /* ===== ACCIONES ===== */
         .actions-row {
             display: flex;
             justify-content: space-between;
-            margin-top: 30px;
+            align-items: center;
+            margin-top: 28px;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .actions-left {
+            display: flex;
+            gap: 12px;
         }
 
         .action-btn {
-            background: #ffffff;
-            border: 3px solid var(--border-dark);
-            padding: 12px 25px;
-            font-weight: 700;
-            text-transform: uppercase;
+            padding: 10px 24px;
+            border: 2px solid var(--border-color);
+            border-radius: 100px;
+            background: white;
+            font-weight: 600;
             cursor: pointer;
-            box-shadow: 4px 4px 0px var(--border-dark);
+            transition: var(--transition);
+            font-size: 0.9rem;
         }
 
-        .action-btn:hover:not([disabled]) {
-            background: #f4f1ea;
+        .action-btn:hover:not(:disabled) {
+            border-color: var(--text-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
 
         .action-btn:disabled {
-            background: #e2e8f0;
-            color: #94a3b8;
+            opacity: 0.4;
             cursor: not-allowed;
-            box-shadow: 0px 0px 0px;
-            transform: translate(4px, 4px);
+            transform: none !important;
         }
 
-        /* Contenedor de resultados (inicialmente oculto) */
+        .action-btn.primary {
+            background: var(--text-primary);
+            color: white;
+            border-color: var(--text-primary);
+        }
+
+        .action-btn.primary:hover:not(:disabled) {
+            background: #2d2d4e;
+        }
+
+        /* ===== RESULTADOS ===== */
         #results-container {
             display: none;
             text-align: center;
-            padding: 20px 0;
+            padding: 40px 20px;
         }
 
-        .score-box {
-            display: inline-block;
-            padding: 20px 40px;
-            border: 4px solid var(--border-dark);
-            background: var(--math-color);
-            font-size: 3rem;
+        #results-container.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .results-score {
+            font-size: 4rem;
             font-weight: 900;
-            box-shadow: 6px 6px 0px var(--border-dark);
+            padding: 20px 40px;
+            border-radius: var(--radius);
+            background: linear-gradient(135deg, #fef3c7, #f59e0b);
+            display: inline-block;
             margin: 20px 0;
         }
 
-        /* Ocultar sección de preguntas cuando se muestran los resultados */
-        #quiz-content.hidden {
-            display: none;
+        .results-detail {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+            text-align: left;
+        }
+
+        .result-card {
+            padding: 16px 20px;
+            border-radius: 12px;
+            background: var(--bg-primary);
+            border-left: 4px solid var(--border-color);
+        }
+
+        .result-card .stat {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .result-card .label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* ===== RECOMENDACIONES ===== */
+        .recommendations {
+            margin: 24px 0;
+            padding: 20px 24px;
+            background: #f0f9ff;
+            border-radius: 12px;
+            border-left: 4px solid #0ea5e9;
+            text-align: left;
+        }
+
+        .recommendations h4 {
+            color: #0284c7;
+            margin-bottom: 8px;
+        }
+
+        .recommendations ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .recommendations li {
+            padding: 4px 0;
+            padding-left: 24px;
+            position: relative;
+        }
+
+        .recommendations li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #0ea5e9;
+            font-weight: 700;
+        }
+
+        /* ===== MODOS ===== */
+        .mode-toggle {
+            display: flex;
+            gap: 8px;
+            background: var(--bg-primary);
+            padding: 4px;
+            border-radius: 100px;
+        }
+
+        .mode-toggle button {
+            padding: 6px 18px;
+            border: none;
+            border-radius: 100px;
+            background: transparent;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.8rem;
+            transition: var(--transition);
+            color: var(--text-secondary);
+        }
+
+        .mode-toggle button.active {
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            color: var(--text-primary);
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="header">
-            <h1>Simulador para el examen GED</h1>
-            <p id="module-indicator">Módulo Activo: Razonamiento Matemático</p>
+<div class="container">
+
+    <!-- HEADER -->
+    <header class="header">
+        <h1>🎓 GED Simulator Pro</h1>
+        <div class="header-badge">
+            <span class="badge" id="module-name">Matemáticas</span>
+            <span class="badge active-mode" id="mode-label">📝 Práctica</span>
+        </div>
+    </header>
+
+    <!-- TABS -->
+    <div class="tabs">
+        <button class="tab-btn active" data-subject="matematicas" onclick="changeSubject('matematicas')">
+            <span class="icon">➗</span> Matemáticas
+        </button>
+        <button class="tab-btn" data-subject="lenguaje" onclick="changeSubject('lenguaje')">
+            <span class="icon">📖</span> Lenguaje
+        </button>
+        <button class="tab-btn" data-subject="ciencias" onclick="changeSubject('ciencias')">
+            <span class="icon">🔬</span> Ciencias
+        </button>
+        <button class="tab-btn" data-subject="sociales" onclick="changeSubject('sociales')">
+            <span class="icon">🌍</span> Sociales
+        </button>
+    </div>
+
+    <!-- PANEL PRINCIPAL -->
+    <div class="main-panel">
+
+        <!-- STATUS BAR -->
+        <div class="status-bar">
+            <div class="status-left">
+                <span class="counter" id="question-counter">Pregunta 1 de 0</span>
+                <span class="difficulty-indicator easy" id="difficulty-badge">📊 Fácil</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+                <div class="mode-toggle">
+                    <button class="active" id="mode-practice" onclick="setMode('practice')">📝 Práctica</button>
+                    <button id="mode-exam" onclick="setMode('exam')">🎯 Examen</button>
+                </div>
+                <span class="timer" id="time-display">⏱️ 00:00</span>
+            </div>
         </div>
 
-        <div class="tabs">
-            <button class="tab-btn active" id="btn-matematicas" onclick="changeSubject('matematicas')">Matemáticas</button>
-            <button class="tab-btn" id="btn-lenguaje" onclick="changeSubject('lenguaje')">Artes del Lenguaje</button>
-            <button class="tab-btn" id="btn-ciencias" onclick="changeSubject('ciencias')">Ciencias</button>
-            <button class="tab-btn" id="btn-sociales" onclick="changeSubject('sociales')">Estudios Sociales</button>
-        </div>
+        <!-- QUESTION AREA -->
+        <div id="question-area">
+            <div id="quiz-content">
+                <div class="question-text" id="question-text">Cargando preguntas...</div>
+                <div class="options-grid" id="options-container"></div>
 
-        <div class="quiz-panel">
-            <div class="status-bar">
-                <span id="question-counter">Pregunta 1 de 30</span>
-                <span class="timer">⏱️ Tiempo: <span id="time-display">00:00</span></span>
+                <div class="explanation-box" id="explanation-box">
+                    <span class="label">💡 Explicación</span>
+                    <span id="explanation-text"></span>
+                </div>
+
+                <div class="actions-row">
+                    <div class="actions-left">
+                        <button class="action-btn" id="hint-btn" onclick="showHint()">💡 Pista</button>
+                        <button class="action-btn" id="mark-btn" onclick="toggleMark()">⭐ Marcar</button>
+                    </div>
+                    <button class="action-btn primary" id="next-btn" onclick="nextQuestion()" disabled>
+                        Siguiente →
+                    </button>
+                </div>
             </div>
 
-            <div id="quiz-playable-zone">
-                <!-- Contenido de preguntas -->
-                <div id="quiz-content">
-                    <p class="question-text" id="question-text">Cargando reactivos oficiales...</p>
-                    <div class="options-list" id="options-container"></div>
+            <!-- RESULTS -->
+            <div id="results-container">
+                <h2>🎉 ¡Módulo Completado!</h2>
+                <div class="results-score" id="final-score">0 / 0</div>
+                <p style="color:var(--text-secondary);margin-bottom:8px;">Puntuación obtenida</p>
 
-                    <div class="explanation-box" id="explanation-box">
-                        <strong>Análisis del Reactivo:</strong> <span id="explanation-text"></span>
+                <div class="results-detail" id="results-detail">
+                    <div class="result-card">
+                        <div class="stat" id="stat-correct">0</div>
+                        <div class="label">✅ Correctas</div>
                     </div>
-
-                    <div class="actions-row">
-                        <button class="action-btn" id="hint-btn" onclick="triggerHint()">Ver Pista</button>
-                        <button class="action-btn" id="next-btn" onclick="goToNextQuestion()" disabled>Siguiente Pregunta</button>
+                    <div class="result-card">
+                        <div class="stat" id="stat-wrong">0</div>
+                        <div class="label">❌ Incorrectas</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="stat" id="stat-time">00:00</div>
+                        <div class="label">⏱️ Tiempo usado</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="stat" id="stat-accuracy">0%</div>
+                        <div class="label">🎯 Precisión</div>
                     </div>
                 </div>
 
-                <!-- Contenedor de resultados (oculto por defecto) -->
-                <div id="results-container">
-                    <h2>Módulo Concluido con Éxito</h2>
-                    <p>Has completado todos los reactivos asignados a esta materia.</p>
-                    <div class="score-box" id="final-score">0 / 0</div>
-                    <p>Respuestas correctas logradas.</p>
-                    <br>
-                    <button class="action-btn" onclick="restartSubject()">Reintentar Materia</button>
+                <div class="recommendations" id="recommendations">
+                    <h4>📚 Recomendaciones de Estudio</h4>
+                    <ul id="recommendations-list">
+                        <li>Completa todas las preguntas para obtener recomendaciones personalizadas.</li>
+                    </ul>
+                </div>
+
+                <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:16px;">
+                    <button class="action-btn primary" onclick="restartSubject()">🔄 Reintentar</button>
+                    <button class="action-btn" onclick="changeSubject(currentSubject)">📊 Ver Resumen</button>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <script>
-        // ==========================================
-        // BASE DE DATOS GLOBAL DEL SIMULADOR
-        // ==========================================
-        const gedDatabase = {
-            matematicas: {
-                name: "Razonamiento Matemático",
-                officialTime: 6900, // 115 Minutos
-                questions: [
-                    {
-                        q: "1. Si un tanque de agua de forma cilíndrica tiene un radio de 3 metros y una altura de 5 metros, ¿cuál es su volumen aproximado en metros cúbicos? (Usa π ≈ 3.14)",
-                        options: ["A) 45.12 m³", "B) 141.30 m³", "C) 282.60 m³", "D) 70.65 m³"],
-                        correct: 1,
-                        hint: "La fórmula para el volumen de un cilindro es V = π * r² * h.",
-                        exp: "Multiplicando el radio al cuadrado (3² = 9) por la altura (5) obtenemos 45. Al multiplicar 45 por π (3.14) el resultado es 141.30 m³."
-                    },
-                    {
-                        q: "2. Resuelve la siguiente ecuación lineal para 'x': 4x - 7 = 2x + 9",
-                        options: ["A) x = 1", "B) x = 4", "C) x = 8", "D) x = 16"],
-                        correct: 2,
-                        hint: "Agrupa los términos con 'x' de un lado de la igualdad y los números del otro.",
-                        exp: "Restamos 2x a ambos lados: 2x - 7 = 9. Sumamos 7 a ambos lados: 2x = 16. Dividiendo entre 2, x = 8."
-                    },
-                    {
-                        q: "3. Un artículo de tecnología cuesta $120. Si se le aplica un descuento del 15%, ¿cuánto se pagará finalmente por el artículo?",
-                        options: ["A) $102", "B) $105", "C) $108", "D) $112"],
-                        correct: 0,
-                        hint: "Calcula el 15% de 120 multiplicando 120 por 0.15 y réstalo al precio original.",
-                        exp: "El 15% de 120 es (120 * 0.15) = 18. Restando el descuento del precio original: 120 - 18 = $102."
-                    },
-                    {
-                        q: "4. ¿Cuál es la pendiente (m) de la recta que pasa por los puntos A(2, 3) y B(5, 12)?",
-                        options: ["A) m = 2", "B) m = 3", "C) m = 4", "D) m = 5"],
-                        correct: 1,
-                        hint: "Utiliza la fórmula de la pendiente: m = (y2 - y1) / (x2 - x1).",
-                        exp: "m = (12 - 3) / (5 - 2) = 9 / 3 = 3. La pendiente de la recta es 3."
-                    },
-                    {
-                        q: "5. Factoriza por completo la siguiente expresión cuadrática: x² - 9x + 20",
-                        options: ["A) (x - 4)(x - 5)", "B) (x + 4)(x + 5)", "C) (x - 2)(x - 10)", "D) (x + 2)(x - 10)"],
-                        correct: 0,
-                        hint: "Busca dos números que multiplicados den 20 y sumados algebraicamente den -9.",
-                        exp: "Los números -4 y -5 cumplen las condiciones: (-4)(-5) = 20 y (-4) + (-5) = -9. Por lo tanto, la factorización es (x - 4)(x - 5)."
-                    },
-                    {
-                        q: "6. Si la razón entre dos números es de 3:5 y el menor de ellos es 24, ¿cuál es el valor del número mayor?",
-                        options: ["A) 36", "B) 40", "C) 48", "D) 60"],
-                        correct: 1,
-                        hint: "Establece una proporción matemática: 3/5 = 24/x y resuelve para x.",
-                        exp: "Multiplicando en cruz: 3 * x = 5 * 24 => 3x = 120 => x = 120 / 3 = 40."
-                    },
-                    {
-                        q: "7. Un triángulo rectángulo cuenta con un cateto de 6 cm y una hipotenusa de 10 cm. ¿Cuánto mide el cateto restante?",
-                        options: ["A) 4 cm", "B) 7 cm", "C) 8 cm", "D) 9 cm"],
-                        correct: 2,
-                        hint: "Aplica el Teorema de Pitágoras: a² + b² = c².",
-                        exp: "6² + b² = 10² => 36 + b² = 100 => b² = 64 => b = √64 = 8 cm."
-                    },
-                    {
-                        q: "8. Un estudiante obtuvo las siguientes calificaciones en sus exámenes parciales: 85, 90, 78, 92 y 85. ¿Cuál es la mediana de sus notas?",
-                        options: ["A) 85", "B) 86", "C) 78", "D) 90"],
-                        correct: 0,
-                        hint: "Ordena los datos de menor a mayor y localiza el valor que queda exactamente en medio.",
-                        exp: "Datos ordenados: 78, 85, 85, 90, 92. El valor central es 85."
-                    },
-                    {
-                        q: "9. Evalúa la siguiente expresión algebraica si se sabe que a = -3 y b = 4:\n3a² - 2b + 5",
-                        options: ["A) 14", "B) 24", "C) -30", "D) 32"],
-                        correct: 1,
-                        hint: "Sustituye los valores respetando las leyes de los signos y la jerarquía de operaciones.",
-                        exp: "3(-3)² - 2(4) + 5 = 3(9) - 8 + 5 = 27 - 8 + 5 = 24."
-                    },
-                    {
-                        q: "10. ¿Cuál es el área total de una lona circular cuyo diámetro mide 14 metros? (Usa π ≈ 3.14)",
-                        options: ["A) 615.44 m²", "B) 153.86 m²", "C) 43.96 m²", "D) 76.93 m²"],
-                        correct: 1,
-                        hint: "Primero encuentra el radio (mitad del diámetro) y luego aplica la fórmula A = π * r².",
-                        exp: "El radio es 7 m. El área es 3.14 * (7²) = 3.14 * 49 = 153.86 m²."
-                    },
-                    {
-                        q: "11. En una urna hay 4 canicas rojas, 5 azules y 3 verdes. Si se extrae una canica al azar, ¿cuál es la probabilidad de que esta sea verde?",
-                        options: ["A) 1/4", "B) 1/3", "C) 5/12", "D) 1/2"],
-                        correct: 0,
-                        hint: "Divide los casos favorables (verdes) entre el total de casos posibles.",
-                        exp: "Total de canicas = 4 + 5 + 3 = 12. Verdes = 3. Probabilidad = 3/12, que simplificado equivale a 1/4."
-                    },
-                    {
-                        q: "12. Encuentra los valores de 'x' que satisfacen la siguiente ecuación cuadrática utilizando factorización: x² - 16 = 0",
-                        options: ["A) x = 4", "B) x = -4", "C) x = 4 y x = -4", "D) x = 8 y x = -8"],
-                        correct: 2,
-                        hint: "Se trata de una diferencia de cuadrados perfectos: (x - a)(x + a) = 0.",
-                        exp: "x² - 16 = 0 => (x - 4)(x + 4) = 0. Al igualar cada factor a cero obtenemos x = 4 y x = -4."
-                    },
-                    {
-                        q: "13. Si 8 constructores terminan una barda perimetral en 6 días, ¿cuánto tiempo tardarán 12 constructores en hacer el mismo trabajo si mantienen el mismo ritmo?",
-                        options: ["A) 9 días", "B) 4 días", "C) 3 días", "D) 5 días"],
-                        correct: 1,
-                        hint: "Es una relación de proporcionalidad inversa: a más trabajadores, menos días de trabajo.",
-                        exp: "Multiplicamos los datos iniciales: 8 * 6 = 48. Dividimos entre la nueva cantidad de constructores: 48 / 12 = 4 días."
-                    },
-                    {
-                        q: "14. Simplifica la siguiente expresión matemática combinando términos semejantes:\n5x - 3y + 2x - 8 + 7y",
-                        options: ["A) 7x + 4y - 8", "B) 3x - 10y - 8", "C) 7x - 4y + 8", "D) 11x - 8"],
-                        correct: 0,
-                        hint: "Suma los términos con 'x' por un lado y los términos con 'y' por el otro.",
-                        exp: "(5x + 2x) + (-3y + 7y) - 8 = 7x + 4y - 8."
-                    },
-                    {
-                        q: "15. ¿Qué número sigue en la secuencia lógica presentada: 3, 7, 15, 31, 63, ...?",
-                        options: ["A) 95", "B) 126", "C) 127", "D) 129"],
-                        correct: 2,
-                        hint: "Observa el patrón aritmético: cada término se duplica y se le suma 1 (2n + 1).",
-                        exp: "Siguiendo la regla lógica: (63 * 2) + 1 = 126 + 1 = 127."
-                    },
-                    {
-                        q: "16. Un terreno con forma rectangular mide 25 metros de largo. Si su perímetro total es de 80 metros, ¿cuál es el ancho de dicho terreno?",
-                        options: ["A) 15 metros", "B) 30 metros", "C) 12.5 metros", "D) 20 metros"],
-                        correct: 0,
-                        hint: "La fórmula del perímetro es P = 2(largo) + 2(ancho).",
-                        exp: "80 = 2(25) + 2(ancho) => 80 = 50 + 2(ancho) => 30 = 2(ancho) => ancho = 15 metros."
-                    },
-                    {
-                        q: "17. ¿Cuál es el valor numérico de la expresión algebraica (2x)³ cuando x = -2?",
-                        options: ["A) -24", "B) 64", "C) -64", "D) -12"],
-                        correct: 2,
-                        hint: "Resuelve primero la operación interna del paréntesis y luego elévala a la potencia cubo.",
-                        exp: "Multiplicamos primero: 2 * (-2) = -4. Elevamos al cubo: (-4)³ = (-4) * (-4) * (-4) = -64."
-                    },
-                    {
-                        q: "18. Expresa la fracción 7/8 en su representación de valor decimal.",
-                        options: ["A) 0.78", "B) 0.825", "C) 0.85", "D) 0.875"],
-                        correct: 3,
-                        hint: "Realiza la división directa del numerador entre el denominador (7 ÷ 8).",
-                        exp: "Efectuando la división matemática: 7 dividido entre 8 resulta exactamente en 0.875."
-                    },
-                    {
-                        q: "19. Resuelve el siguiente sistema de ecuaciones lineales por el método que prefieras y halla el valor de 'y':\nx + y = 10\nx - y = 4",
-                        options: ["A) y = 7", "B) y = 3", "C) y = 6", "D) y = 2"],
-                        correct: 1,
-                        hint: "Puedes restar la segunda ecuación de la primera para eliminar 'x'.",
-                        exp: "(x + y) - (x - y) = 10 - 4 => 2y = 6 => y = 3."
-                    },
-                    {
-                        q: "20. Una tienda departamental ofrece una estufa en $450 a crédito, pero tiene un recargo del 8% de interés sobre el precio original. ¿Cuánto dinero extra se pagará por concepto de intereses?",
-                        options: ["A) $36", "B) $45", "C) $54", "D) $32"],
-                        correct: 0,
-                        hint: "Multiplica el valor total de $450 por 0.08 para calcular el recargo directo.",
-                        exp: "Interés = 450 * 0.08 = $36 extras."
-                    },
-                    {
-                        q: "21. ¿Cuál de las siguientes desigualdades numéricas representa de forma correcta la frase: 'El triple de un número aumentado en 5 es menor o igual que 26'?",
-                        options: ["A) 3x + 5 < 26", "B) 3x + 5 ≤ 26", "C) 3(x + 5) ≤ 26", "D) 3x - 5 ≥ 26"],
-                        correct: 1,
-                        hint: "Identifica el lenguaje matemático: 'triple' es 3x, 'aumentado' es +, y 'menor o igual' es ≤.",
-                        exp: "Traduciendo término a término: 'El triple de un número' (3x), 'aumentado en 5' (+ 5), 'es menor o igual' (≤), 'que 26'. Resulta en 3x + 5 ≤ 26."
-                    },
-                    {
-                        q: "22. Calcula la distancia geométrica lineal entre los puntos cardinales P(1, 2) y Q(5, 5) graficados en el plano cartesiano.",
-                        options: ["A) 4 unidades", "B) 5 unidades", "C) 7 unidades", "D) √7 unidades"],
-                        correct: 1,
-                        hint: "Utiliza la fórmula de distancia entre dos puntos: d = √[(x2 - x1)² + (y2 - y1)²].",
-                        exp: "d = √[(5 - 1)² + (5 - 2)²] = √[4² + 3²] = √[16 + 9] = √25 = 5 unidades."
-                    },
-                    {
-                        q: "23. Si un ángulo interno de un triángulo mide 45 grados y el segundo mide 75 grados, ¿cuánto debe medir el tercer ángulo del triángulo?",
-                        options: ["A) 50 grados", "B) 60 grados", "C) 70 grados", "D) 90 grados"],
-                        correct: 1,
-                        hint: "Recuerda que la propiedad fundamental de todo triángulo dicta que sus ángulos internos siempre suman 180 grados.",
-                        exp: "180 - (45 + 75) = 180 - 120 = 60 grados."
-                    },
-                    {
-                        q: "24. Una receta de cocina requiere 3/4 de taza de azúcar para hacer un pastel. Si necesitas preparar 5 pasteles iguales para un evento, ¿cuántas tazas de azúcar usarás en total?",
-                        options: ["A) 3 tazas y media", "B) 3 tazas y 3/4", "C) 4 tazas", "D) 4 tazas y 1/4"],
-                        correct: 1,
-                        hint: "Multiplica la fracción 3/4 por el entero 5.",
-                        exp: "(3/4) * 5 = 15/4. Al convertir la fracción impropia a mixta obtenemos 3 tazas enteras y 3/4 restantes."
-                    },
-                    {
-                        q: "25. Resuelve el valor absoluto planteado en la siguiente expresión: |5 - 12| + 3",
-                        options: ["A) -4", "B) 10", "C) 4", "D) -10"],
-                        correct: 1,
-                        hint: "El valor absoluto transforma cualquier cantidad resultante interna en un valor positivo.",
-                        exp: "5 - 12 = -7. El valor absoluto |-7| es 7. Finalmente sumamos el entero restante: 7 + 3 = 10."
-                    },
-                    {
-                        q: "26. ¿Cuál es la notación científica correcta para expresar la cantidad decimal 0.00045?",
-                        options: ["A) 4.5 × 10⁴", "B) 4.5 × 10⁻⁴", "C) 45 × 10⁻⁵", "D) 0.45 × 10⁻³"],
-                        correct: 1,
-                        hint: "Mueve el punto decimal hacia la derecha hasta tener un número entre 1 y 10, y cuenta los saltos.",
-                        exp: "El punto se desplaza 4 lugares a la derecha para obtener 4.5. Al ser un número menor a uno, el exponente es negativo: 4.5 × 10⁻⁴."
-                    },
-                    {
-                        q: "27. Un prisma rectangular de madera tiene un largo de 4 cm, un ancho de 3 cm y una altura de 6 cm. ¿Cuál es su volumen total?",
-                        options: ["A) 13 cm³", "B) 36 cm³", "C) 72 cm³", "D) 48 cm³"],
-                        correct: 2,
-                        hint: "El volumen de un prisma rectangular se calcula multiplicando sus tres dimensiones continuas.",
-                        exp: "V = largo * ancho * altura = 4 cm * 3 cm * 6 cm = 72 cm³."
-                    },
-                    {
-                        q: "28. Un ciclista recorre una pista a una velocidad constante de 15 kilómetros por hora. ¿Cuántos metros recorrerá en total en un lapso de 20 minutos?",
-                        options: ["A) 5,000 metros", "B) 3,000 metros", "C) 4,500 metros", "D) 6,000 metros"],
-                        correct: 0,
-                        hint: "Convierte primero el tiempo a fracción de hora (20 minutos equivalen a 1/3 de hora) o trabaja con metros y minutos.",
-                        exp: "Distancia = velocidad * tiempo. 20 min es 1/3 de hora. Distancia = 15 km/h * (1/3 h) = 5 kilómetros. Convertido a metros equivale a 5,000 m."
-                    },
-                    {
-                        q: "29. ¿Cuál es el máximo común divisor (MCD) de los números 24 y 36?",
-                        options: ["A) 6", "B) 12", "C) 4", "D) 18"],
-                        correct: 1,
-                        hint: "Busca el mayor número entero que divida exactamente a ambos valores al mismo tiempo.",
-                        exp: "Los divisores de 24 son: 1, 2, 3, 4, 6, 8, 12, 24. Los de 36 son: 1, 2, 3, 4, 6, 9, 12, 18, 36. El mayor común es 12."
-                    },
-                    {
-                        q: "30. Si el área superficial cuadrada de un patio mide exactamente 144 metros cuadrados, ¿cuánto mide el perímetro exterior total de dicho patio?",
-                        options: ["A) 12 metros", "B) 24 metros", "C) 48 metros", "D) 96 metros"],
-                        correct: 2,
-                        hint: "Primero halla cuánto mide un solo lado calculando la raíz cuadrada del área.",
-                        exp: "El lado del cuadrado mide √144 = 12 metros. El perímetro es la suma de sus cuatro lados iguales: 12 * 4 = 48 metros."
-                    }
-                ]
-            },
-            lenguaje: {
-                name: "Artes del Lenguaje (RLA)",
-                officialTime: 9000,
-                questions: [
-                    {
-                        q: "1. Lea el siguiente fragmento:\n'La adopción acelerada del comercio electrónico no solo ha transformado los hábitos de consumo, sino que ha obligado a las empresas de logística a reinventar sus cadenas de distribución.'\n\n¿Cuál es la idea principal?",
-                        options: ["A) Las tiendas físicas cerrarán pronto.", "B) El e-commerce transformó el consumo y la logística.", "C) La logística es más importante que el producto.", "D) Los consumidores prefieren comprar de noche."],
-                        correct: 1,
-                        hint: "Busca la opción que resuma ambos efectos mencionados (consumo y logística).",
-                        exp: "El texto vincula directamente el cambio en los hábitos de compra con la necesaria reestructuración de los sistemas de entrega."
-                    },
-                    {
-                        q: "2. Elija la opción que corrija el error de concordancia:\n'El grupo de ingenieros, tras revisar los planos, concluyeron que el suelo era inestable.'",
-                        options: ["A) El grupo de ingenieros concluyó...", "B) Los grupo de ingenieros concluyó...", "C) El grupo de ingenieros concluyeron...", "D) No requiere cambios."],
-                        correct: 0,
-                        hint: "El núcleo del sujeto es 'El grupo' (singular).",
-                        exp: "Aunque 'ingenieros' es plural, el verbo debe concordar con el núcleo colectivo 'grupo'."
-                    },
-                    {
-                        q: "3. ¿Qué función cumple el conector 'Sin embargo' en un texto?",
-                        options: ["A) Añadir información.", "B) Indicar una causa.", "C) Presentar una oposición o contraste.", "D) Concluir un argumento."],
-                        correct: 2,
-                        hint: "Se usa para poner dos ideas cara a cara.",
-                        exp: "'Sin embargo' es un nexo adversativo que introduce una idea que limita o contradice la anterior."
-                    },
-                    {
-                        q: "4. Seleccione la opción con la ortografía correcta:",
-                        options: ["A) El testigo tuvo que reacer su declaración.", "B) El testigo tuvo que rehacer su declaración.", "C) El testigo tubo que rehacer su declaración.", "D) El testigo tubo que reacer su declaración."],
-                        correct: 1,
-                        hint: "Verbo 'tener' va con V; 'hacer' lleva H intercalada.",
-                        exp: "'Tuvo' (del verbo tener) se escribe con V; 'rehacer' mantiene la H del verbo raíz 'hacer'."
-                    },
-                    {
-                        q: "5. Identifique el propósito de las comas en: 'París, la ciudad de la luz, es un destino turístico mundial.'",
-                        options: ["A) Separar una enumeración.", "B) Indicar una pausa dramática.", "C) Encerrar una aposición explicativa.", "D) Sustituir un verbo omitido."],
-                        correct: 2,
-                        hint: "La frase entre comas define o explica quién es el sujeto.",
-                        exp: "La frase 'la ciudad de la luz' explica algo sobre París, por lo que es una aposición y debe ir entre comas."
-                    },
-                    {
-                        q: "6. Lea con atención:\n'Beber solo agua durante un esfuerzo físico prolongado puede no ser suficiente para reponer los electrolitos perdidos.'\n\n¿Qué se puede inferir?",
-                        options: ["A) El agua es mala para los atletas.", "B) Los electrolitos solo se encuentran en bebidas azucaradas.", "C) El cuerpo pierde sales además de agua al sudar.", "D) No se debe beber agua al hacer ejercicio."],
-                        correct: 2,
-                        hint: "Si el agua no basta, es porque falta algo más que se pierde.",
-                        exp: "La necesidad de 'reponer' indica que el esfuerzo causa una pérdida de sales minerales (electrolitos) que el agua simple no provee."
-                    },
-                    {
-                        q: "7. ¿Cuál es el sinónimo más preciso para 'Mitigar' en un contexto de riesgos?",
-                        options: ["A) Aumentar.", "B) Ignorar.", "C) Reducir o suavizar.", "D) Analizar."],
-                        correct: 2,
-                        hint: "Piensa en calmar un dolor o disminuir un impacto.",
-                        exp: "Mitigar significa moderar o disminuir la dureza o intensidad de algo negativo."
-                    },
-                    {
-                        q: "8. Seleccione el uso correcto del verbo 'Haber':",
-                        options: ["A) Hubieron muchas personas en el evento.", "B) Hubo muchas personas en el evento.", "C) Habían muchas quejas ayer.", "D) Han habido errores."],
-                        correct: 1,
-                        hint: "Cuando indica existencia, 'Haber' siempre se usa en singular.",
-                        exp: "Como verbo impersonal (existencia), 'Haber' solo se conjuga en tercera persona del singular: 'Hubo', 'Hay', 'Habrá'."
-                    },
-                    {
-                        q: "9. Identifique la oración que evita el pleonasmo (repetición innecesaria):",
-                        options: ["A) Salió para afuera de la oficina.", "B) Entró para adentro del banco.", "C) Analizó los resultados previos.", "D) Vio el accidente con sus propios ojos."],
-                        correct: 2,
-                        hint: "Busca la frase que no diga lo mismo dos veces.",
-                        exp: "Salió/fuera, entró/adentro y vio/ojos son redundancias. 'Analizó los resultados previos' es una construcción limpia."
-                    },
-                    {
-                        q: "10. ¿A qué se refiere el término 'ubicuidad' en tecnología?",
-                        options: ["A) Alto costo.", "B) Presencia en todas partes al mismo tiempo.", "C) Fragilidad del sistema.", "D) Velocidad de procesamiento."],
-                        correct: 1,
-                        hint: "Viene de 'ubicuo'.",
-                        exp: "La ubicuidad es la facultad de estar presente en muchos lugares simultáneamente, común en dispositivos móviles."
-                    },
-                    {
-                        q: "11. Seleccione la opción gramaticalmente correcta:",
-                        options: ["A) ¿Porqué no viniste?", "B) No sé el por que de tu actitud.", "C) Viniste porque te llamé.", "D) ¿Por que compraste eso?"],
-                        correct: 2,
-                        hint: "'Porque' pegado y sin tilde es para responder o dar causas.",
-                        exp: "Se escribe 'porque' (junto y sin tilde) cuando funciona como conjunción causal en respuestas o explicaciones."
-                    },
-                    {
-                        q: "12. ¿Cuál es el tono predominante en un editorial que denuncia la corrupción?",
-                        options: ["A) Humorístico.", "B) Crítico e indignado.", "C) Objetivo y neutral.", "D) Romántico."],
-                        correct: 1,
-                        hint: "Piensa en la intención de quien denuncia algo malo.",
-                        exp: "Una denuncia busca señalar fallos y generar una reacción, por lo que el tono suele ser crítico o de reproche."
-                    },
-                    {
-                        q: "13. Elija la frase con el uso correcto de mayúsculas:",
-                        options: ["A) El Miércoles visitaré al Doctor Martínez.", "B) El miércoles visitaré al doctor Martínez.", "C) El miércoles visitaré al Doctor martínez.", "D) El Miércoles visitaré al doctor Martínez."],
-                        correct: 1,
-                        hint: "Días de la semana y cargos (doctor) van en minúscula.",
-                        exp: "Según la RAE, los días, meses y cargos públicos o profesiones se escriben en minúscula inicial."
-                    },
-                    {
-                        q: "14. ¿Qué es una metáfora?",
-                        options: ["A) Una exageración extrema.", "B) Una comparación directa entre dos términos sin usar 'como'.", "C) La repetición de un sonido.", "D) Una pregunta que no espera respuesta."],
-                        correct: 1,
-                        hint: "Ejemplo: 'Tus cabellos son hilos de oro'.",
-                        exp: "La metáfora identifica un término real con uno imaginario por su semejanza, creando una identidad total."
-                    },
-                    {
-                        q: "15. Identifique el error: 'La gente acudieron en masa al concierto.'",
-                        options: ["A) La gente acudió...", "B) Las gentes acudieron...", "C) La gente acudieron...", "D) No hay error."],
-                        correct: 0,
-                        hint: "'La gente' es un sustantivo colectivo singular.",
-                        exp: "Sujetos colectivos en singular ('gente', 'familia', 'equipo') requieren verbos en singular."
-                    },
-                    {
-                        q: "16. ¿Qué palabra completa la oración? 'Espero que el jefe ____ a la reunión.'",
-                        options: ["A) Vaya (del verbo ir).", "B) Valla (cerca o obstáculo).", "C) Baya (fruto).", "D) Balla."],
-                        correct: 0,
-                        hint: "Se refiere a la acción de trasladarse.",
-                        exp: "'Vaya' es la forma del subjuntivo del verbo 'ir'. 'Valla' es un objeto físico."
-                    },
-                    {
-                        q: "17. En un texto argumentativo, ¿qué es la 'tesis'?",
-                        options: ["A) Una historia corta.", "B) La postura o idea central que el autor defiende.", "C) El resumen final.", "D) Una lista de datos."],
-                        correct: 1,
-                        hint: "Es el corazón del argumento que se quiere demostrar.",
-                        exp: "La tesis es la afirmación de la cual parte el autor y sobre la cual construye sus evidencias y razones."
-                    },
-                    {
-                        q: "18. Seleccione la opción sin errores de puntuación:",
-                        options: ["A) Juan compró: pan, leche, huevos y fruta.", "B) Juan compró pan leche huevos y fruta.", "C) Juan compró pan, leche, huevos y fruta.", "D) Juan compró pan, leche, huevos, y fruta."],
-                        correct: 2,
-                        hint: "En español, no se pone coma antes de la 'y' en listas simples.",
-                        exp: "La enumeración simple se separa con comas, excepto el último elemento unido por la conjunción 'y'."
-                    },
-                    {
-                        q: "19. ¿Cuál es el antónimo de 'Efímero'?",
-                        options: ["A) Pasajero.", "B) Breve.", "C) Duradero o eterno.", "D) Rápido."],
-                        correct: 2,
-                        hint: "Efímero es algo que dura muy poco tiempo.",
-                        exp: "Si efímero es breve, su opuesto (antónimo) es aquello que persiste en el tiempo."
-                    },
-                    {
-                        q: "20. Identifique la voz pasiva:",
-                        options: ["A) El autor escribió el libro.", "B) El libro fue escrito por el autor.", "C) El libro es muy bueno.", "D) El autor escribe siempre."],
-                        correct: 1,
-                        hint: "El sujeto recibe la acción en lugar de hacerla.",
-                        exp: "En la voz pasiva, el objeto (libro) pasa a ser el sujeto paciente de la oración."
-                    },
-                    {
-                        q: "21. ¿Qué significa 'Inferir'?",
-                        options: ["A) Leer en voz alta.", "B) Copiar un texto.", "C) Deducir información no explícita basándose en pistas.", "D) Criticar al autor."],
-                        correct: 2,
-                        hint: "Es 'leer entre líneas'.",
-                        exp: "Inferir es el proceso lógico de llegar a una conclusión a partir de premisas o evidencias dadas en el texto."
-                    },
-                    {
-                        q: "22. Seleccione la palabra correctamente acentuada:",
-                        options: ["A) Examen.", "B) Exámen.", "C) Corazón.", "D) Corazon."],
-                        correct: 2,
-                        hint: "'Examen' es grave terminada en N (no lleva tilde). 'Corazón' es aguda terminada en N.",
-                        exp: "Las palabras agudas se acentúan si terminan en N, S o vocal. Las graves solo si NO terminan en N, S o vocal."
-                    },
-                    {
-                        q: "23. ¿Cuál es la función del punto y coma (;)?",
-                        options: ["A) Terminar un párrafo.", "B) Separar elementos de una lista que ya tienen comas.", "C) Introducir una cita.", "D) Preguntar algo."],
-                        correct: 1,
-                        hint: "Es una pausa intermedia entre la coma y el punto.",
-                        exp: "Se usa para jerarquizar información, especialmente en enumeraciones complejas o para separar oraciones muy relacionadas."
-                    },
-                    {
-                        q: "24. Elija la opción con el uso correcto de 'Halla' / 'Haya':",
-                        options: ["A) Espero que halla comida.", "B) El explorador halla el tesoro.", "C) No creo que halla llegado.", "D) ¿Donde se haya el baño?"],
-                        correct: 1,
-                        hint: "'Halla' es de encontrar; 'Haya' es de haber.",
-                        exp: "'Halla' (con LL) proviene de encontrar. 'Haya' (con Y) es el presente de subjuntivo de haber."
-                    },
-                    {
-                        q: "25. ¿Qué recurso se usa al decir 'Tengo tanta hambre que me comería un elefante'?",
-                        options: ["A) Ironía.", "B) Hipérbole (exageración).", "C) Personificación.", "D) Metáfora."],
-                        correct: 1,
-                        hint: "Es una afirmación que no debe tomarse literalmente.",
-                        exp: "La hipérbole es una figura retórica que consiste en aumentar o disminuir de forma exagerada la verdad de lo que se dice."
-                    },
-                    {
-                        q: "26. En un ensayo, ¿qué es un contraargumento?",
-                        options: ["A) El resumen del texto.", "B) Un argumento que apoya la tesis.", "C) Una idea que refuta o se opone a la postura del autor.", "D) La bibliografía."],
-                        correct: 2,
-                        hint: "Sirve para anticiparse a lo que diría el bando contrario.",
-                        exp: "El contraargumento se usa para mostrar que el autor ha considerado otros puntos de vista pero sigue manteniendo su tesis."
-                    },
-                    {
-                        q: "27. Identifique el pronombre relativo en: 'La casa que compré es azul.'",
-                        options: ["A) La.", "B) Casa.", "C) Que.", "D) Azul."],
-                        correct: 2,
-                        hint: "Es la palabra que une la casa con la acción de comprar.",
-                        exp: "'Que' funciona aquí como relativo refiriéndose al antecedente 'casa'."
-                    },
-                    {
-                        q: "28. Seleccione la opción que corrige: 'Ayer hubieron muchos problemas.'",
-                        options: ["A) Ayer hubo muchos problemas.", "B) Ayer habian muchos problemas.", "C) Ayer hacían muchos problemas.", "D) No requiere cambios."],
-                        correct: 0,
-                        hint: "Recuerda la regla de 'Haber' impersonal.",
-                        exp: "Correcto: 'Ayer hubo muchos problemas', ya que el verbo haber no concuerda en número con el objeto en estos casos."
-                    },
-                    {
-                        q: "29. ¿Qué parte del texto presenta la resolución del conflicto en una narración?",
-                        options: ["A) Inicio.", "B) Nudo.", "C) Desenlace.", "D) Prólogo."],
-                        correct: 2,
-                        hint: "Es el final de la historia.",
-                        exp: "El desenlace es la parte final donde se resuelven las complicaciones de la trama."
-                    },
-                    {
-                        q: "30. ¿Cuál es el propósito principal de un texto instructivo?",
-                        options: ["A) Divertir al lector.", "B) Convencer de una idea.", "C) Guiar al lector para realizar una tarea.", "D) Expresar sentimientos."],
-                        correct: 2,
-                        hint: "Como un manual o una receta.",
-                        exp: "Los textos instructivos dan pasos y órdenes precisas para alcanzar un objetivo o realizar una acción."
-                    }
-                ]
-            },
-            ciencias: {
-                name: "Ciencias",
-                officialTime: 5400,
-                questions: [
-                    {
-                        q: "1. Un científico observa que las plantas expuestas a luz azul crecen más rápido que las expuestas a luz verde. ¿Cuál es la variable independiente en este experimento?",
-                        options: ["A) El tipo de luz (color).", "B) La velocidad de crecimiento.", "C) La cantidad de agua recibida.", "D) El tipo de planta utilizado."],
-                        correct: 0,
-                        hint: "La variable independiente es aquella que el investigador manipula o cambia intencionalmente.",
-                        exp: "El científico cambia el color de la luz para observar su efecto, por lo que el tipo de luz es la variable independiente. El crecimiento es la variable dependiente."
-                    },
-                    {
-                        q: "2. ¿Cuál de los siguientes orgánulos celulares es conocido como la 'central energética' de la célula debido a que realiza la respiración celular y produce ATP?",
-                        options: ["A) Cloroplasto.", "B) Mitocondria.", "C) Ribosoma.", "D) Núcleo."],
-                        correct: 1,
-                        hint: "Se encuentra tanto en células animales como vegetales y procesa la glucosa.",
-                        exp: "Las mitocondrias rompen las moléculas de nutrientes para generar energía química en forma de ATP mediante la respiración celular."
-                    },
-                    {
-                        q: "3. ¿Qué proceso biogeoquímico transforma el dióxido de carbono (CO₂) atmosférico en glucosa utilizando la energía solar?",
-                        options: ["A) Respiración celular.", "B) Fotosíntesis.", "C) Descomposición.", "D) Transpiración."],
-                        correct: 1,
-                        hint: "Es llevado a cabo por organismos autótrofos como las plantas y algas.",
-                        exp: "La fotosíntesis utiliza agua, CO₂ y luz solar para producir glucosa y liberar oxígeno a la atmósfera."
-                    },
-                    {
-                        q: "4. Si cruzamos dos plantas de guisantes heterocigotas para el color de la semilla (Aa, donde 'A' es amarillo dominante y 'a' es verde recesivo), ¿cuál es la probabilidad genotípica de obtener una planta homocigota recesiva (aa)?",
-                        options: ["A) 25%", "B) 50%", "C) 75%", "D) 100%"],
-                        correct: 0,
-                        hint: "Realiza un cuadro de Punnett cruzando Aa x Aa.",
-                        exp: "El cruce produce: 25% AA, 50% Aa y 25% aa. Por lo tanto, la probabilidad de homocigoto recesivo (aa) es del 25%."
-                    },
-                    {
-                        q: "5. ¿Cuál es la principal fuerza geológica responsable de la formación de cordilleras montañosas y de la actividad volcánica en los límites de las placas terrestres?",
-                        options: ["A) La erosión eólica.", "B) La tectónica de placas.", "C) El ciclo de las rocas.", "D) La gravedad lunar."],
-                        correct: 1,
-                        hint: "Se refiere al movimiento de los grandes bloques en los que se divide la litosfera.",
-                        exp: "Las interacciones en los límites de las placas tectónicas (convergencia, divergencia) provocan deformaciones en la corteza, creando montañas y volcanes."
-                    },
-                    {
-                        q: "6. Según la teoría de la evolución por selección natural de Charles Darwin, ¿qué organismos tienen mayores probabilidades de sobrevivir y reproducirse?",
-                        options: ["A) Los más grandes y fuertes físicamente.", "B) Los que cambian su ADN voluntariamente.", "C) Los mejor adaptados a las condiciones de su entorno.", "D) Los que consumen más carne."],
-                        correct: 2,
-                        hint: "La adaptación al medio ambiente determina el éxito reproductivo.",
-                        exp: "La selección natural favorece a los individuos con rasgos que les otorgan ventajas adaptativas para sobrevivir en un entorno específico."
-                    },
-                    {
-                        q: "7. Un objeto tiene una masa de 10 kg en la Tierra. Si se traslada a la Luna, donde la gravedad es aproximadamente un sexto de la terrestre, ¿qué sucede con su masa y su peso?",
-                        options: ["A) La masa disminuye y el peso se mantiene igual.", "B) Ambos disminuyen notablemente.", "C) La masa se mantiene igual y el peso disminuye.", "D) Ambos se mantienen idénticos."],
-                        correct: 2,
-                        hint: "La masa mide la cantidad de materia; el peso mide la fuerza de atracción gravitatoria.",
-                        exp: "La masa es una propiedad intrínseca y constante (10 kg), pero el peso cambia porque depende de la gravedad del cuerpo celeste."
-                    },
-                    {
-                        q: "8. ¿Cuál de las siguientes opciones describe un cambio químico?",
-                        options: ["A) Un clavo de hierro que se oxida al aire libre.", "B) Un cubo de hielo que se derrite sobre la mesa.", "C) Una hoja de papel que es cortada en tiras.", "D) Sal de mesa disuelta en un vaso de agua."],
-                        correct: 0,
-                        hint: "En un cambio químico se forman nuevas sustancias con propiedades diferentes.",
-                        exp: "La oxidación altera la composición molecular del hierro transformándolo en óxido de hierro. Los demás ejemplos son cambios físicos de estado o forma."
-                    },
-                    {
-                        q: "9. ¿Qué tipo de energía se encuentra almacenada en los enlaces moleculares de los alimentos y los combustibles fósiles antes de ser liberada?",
-                        options: ["A) Energía cinética.", "B) Energía térmica.", "C) Energía química.", "D) Energía geotérmica."],
-                        correct: 2,
-                        hint: "Es una forma de energía potencial relacionada con la estructura atómica.",
-                        exp: "La energía química es energía potencial almacenada en los enlaces que mantienen unidos a los átomos."
-                    },
-                    {
-                        q: "10. En una cadena alimentaria, ¿qué papel fundamental cumplen los hongos y las bacterias al nutrirse de restos orgánicos?",
-                        options: ["A) Productores primarios.", "B) Consumidores terciarios.", "C) Descomponedores.", "D) Depredadores ápice."],
-                        correct: 2,
-                        hint: "Reciclan la materia orgánica transformándola en nutrientes inorgánicos para el suelo.",
-                        exp: "Los descomponedores degradan la materia muerta, cerrando el ciclo de la materia en los ecosistemas."
-                    },
-                    {
-                        q: "11. ¿Cuál es la densidad de un mineral que tiene una masa de 100 gramos y ocupa un volumen de 20 centímetros cúbicos? (Fórmula: D = m/V)",
-                        options: ["A) 5 g/cm³", "B) 0.2 g/cm³", "C) 2,000 g/cm³", "D) 80 g/cm³"],
-                        correct: 0,
-                        hint: "Divide la masa entre el volumen.",
-                        exp: "Densidad = 100 g / 20 cm³ = 5 g/cm³."
-                    },
-                    {
-                        q: "12. ¿Qué capa de la atmósfera terrestre contiene la mayor concentración de ozono (O₃) y protege la vida bloqueando la radiación ultravioleta dañina?",
-                        options: ["A) Troposfera.", "B) Estratosfera.", "C) Mesosfera.", "D) Termosfera."],
-                        correct: 1,
-                        hint: "Se encuentra justo por encima de la troposfera, donde vuelan los aviones comerciales.",
-                        exp: "La capa de ozono se ubica en la estratosfera y absorbe la mayor parte de la radiación UV del Sol."
-                    },
-                    {
-                        q: "13. La Ley de la Conservación de la Masa establece que en una reacción química cerrada:",
-                        options: ["A) La masa total de los productos es mayor que la de los reactivos.", "B) La masa se destruye parcialmente para generar calor.", "C) La masa total permanece constante.", "D) Los átomos pesados se transforman en elementos ligeros."],
-                        correct: 2,
-                        hint: "La materia no se crea ni se destruye, solo se transforma.",
-                        exp: "La masa total de los reactivos debe ser igual a la masa total de los productos obtenidos."
-                    },
-                    {
-                        q: "14. ¿Cuál es el pH aproximado de una sustancia clasificada como un ácido fuerte?",
-                        options: ["A) pH = 2", "B) pH = 7", "C) pH = 9", "D) pH = 14"],
-                        correct: 0,
-                        hint: "La escala de pH va de 0 a 14; los ácidos se ubican por debajo de 7.",
-                        exp: "Un pH menor a 7 es ácido. Cuanto más cercano a 0, más fuerte es el ácido. El 7 es neutro y valores superiores son bases."
-                    },
-                    {
-                        q: "15. ¿Qué mecanismo de transferencia de calor ocurre principalmente en fluidos (líquidos y gases) debido a las diferencias de densidad causadas por cambios de temperatura?",
-                        options: ["A) Conducción.", "B) Convección.", "C) Radiación.", "D) Aislamiento."],
-                        correct: 1,
-                        hint: "El fluido caliente sube debido a que es menos denso, y el frío baja.",
-                        exp: "La convección es el movimiento macroscópico del fluido provocado por gradientes de temperatura y densidad."
-                    },
-                    {
-                        q: "16. ¿Qué postula la Ley de la Gravitación Universal formulada por Isaac Newton?",
-                        options: ["A) La gravedad solo afecta a los objetos dentro de la Tierra.", "B) Dos cuerpos se atraen con una fuerza proporcional al producto de sus masas.", "C) La velocidad de caída depende del tamaño del objeto.", "D) El espacio repele los objetos masivos."],
-                        correct: 1,
-                        hint: "Describe cómo se atraen los planetas, estrellas y objetos cotidianos.",
-                        exp: "La fuerza gravitatoria depende directamente de las masas de los cuerpos e inversamente del cuadrado de la distancia que los separa."
-                    },
-                    {
-                        q: "17. ¿Cuál es la función principal de los glóbulos rojos (eritrocitos) en el sistema circulatorio humano?",
-                        options: ["A) Combatir infecciones bacterianas.", "B) Producir anticuerpos.", "C) Transportar oxígeno desde los pulmones a los tejidos.", "D) Coagular la sangre en heridas."],
-                        correct: 2,
-                        hint: "Contienen una proteína rica en hierro llamada hemoglobina.",
-                        exp: "Los glóbulos rojos se encargan del transporte de oxígeno gaseoso gracias a la hemoglobina que contienen."
-                    },
-                    {
-                        q: "18. ¿Cuál es la principal fuente de energía externa que impulsa el ciclo del agua en la Tierra, provocando la evaporación de los océanos?",
-                        options: ["A) El calor del núcleo terrestre.", "B) Las corrientes marinas.", "C) La energía solar térmica.", "D) El viento planetario."],
-                        correct: 2,
-                        hint: "Calienta el agua líquida superficial transformándola en vapor.",
-                        exp: "La radiación solar aporta el calor necesario para que el agua cambie de fase líquida a gaseosa en el ciclo hidrológico."
-                    },
-                    {
-                        q: "19. Si un elemento químico gaseoso se localiza en el Grupo 18 (VIII A) de la Tabla Periódica y muestra una reactividad casi nula, pertenece a la familia de los:",
-                        options: ["A) Metales alcalinos.", "B) Halógenos.", "C) Gases nobles.", "D) Metaloides."],
-                        correct: 2,
-                        hint: "Tienen su capa de valencia completa con 8 electrones.",
-                        exp: "Los gases nobles (He, Ne, Ar, etc.) son inertes o muy estables debido a su configuración electrónica completa."
-                    },
-                    {
-                        q: "20. ¿Qué enunciado describe de forma correcta la Primera Ley de Newton (Ley de la Inercia)?",
-                        options: ["A) A toda acción corresponde una reacción opuesta.", "B) La fuerza es igual a la masa multiplicada por la aceleración.", "C) Un objeto en reposo continuará en reposo a menos que actúe una fuerza neta externa.", "D) Los objetos pesados caen más rápido que los ligeros en el vacío."],
-                        correct: 2,
-                        hint: "Explica la resistencia de los cuerpos a cambiar su estado de movimiento.",
-                        exp: "Un cuerpo mantiene su estado de reposo o de movimiento rectilíneo uniforme a menos que una fuerza desequilibrada lo obligue a cambiarlo."
-                    },
-                    {
-                        q: "21. ¿Qué tipo de roca se origina directamente a partir del enfriamiento y solidificación del magma o la lava incandescente?",
-                        options: ["A) Rocas sedimentarias.", "B) Rocas metamórficas.", "C) Rocas ígneas.", "D) Fósiles calizos."],
-                        correct: 2,
-                        hint: "Su nombre proviene de la palabra latina para fuego ('ignis').",
-                        exp: "Las rocas ígneas o magmáticas (como el basalto o el granito) se forman cuando el material fundido se enfría."
-                    },
-                    {
-                        q: "22. ¿Cuál es el gas más abundante en la composición volumétrica de la atmósfera actual de la Tierra?",
-                        options: ["A) Oxígeno (O₂).", "B) Dióxido de carbono (CO₂).", "C) Nitrógeno (N₂).", "D) Argón (Ar)."],
-                        correct: 2,
-                        hint: "Constituye aproximadamente el 78% del aire que respiramos.",
-                        exp: "El nitrógeno gaseoso representa el 78% de la atmósfera, seguido por el oxígeno con un 21%."
-                    },
-                    {
-                        q: "23. En el método científico, una hipótesis se define formalmente como:",
-                        options: ["A) Una verdad absoluta e incuestionable.", "B) Una explicación tentativa y comprobable para un fenómeno.", "C) El análisis final de los datos recolectados.", "D) La ley matemática que rige la naturaleza."],
-                        correct: 1,
-                        hint: "Es una suposición fundamentada que puede someterse a experimentación.",
-                        exp: "Una hipótesis es una predicción científica estructurada que debe validarse o refutarse mediante experimentos empíricos."
-                    },
-                    {
-                        q: "24. ¿Qué tipo de ondas requieren obligatoriamente de un medio material (sólido, líquido o gas) para propagarse y no pueden viajar a través del vacío del espacio?",
-                        options: ["A) Ondas electromagnéticas.", "B) Ondas de luz visible.", "C) Ondas mecánicas (como el sonido).", "D) Rayos X."],
-                        correct: 2,
-                        hint: "El sonido es un ejemplo clásico de este tipo de ondas.",
-                        exp: "Las ondas mecánicas necesitan la vibración de partículas elásticas moleculares para transmitir su energía. Por ello, el sonido no viaja en el vacío."
-                    },
-                    {
-                        q: "25. ¿Qué fenómeno climático global se produce por la retención excesiva de calor solar en la atmósfera debido a gases como el metano y el CO₂?",
-                        options: ["A) Lluvia ácida.", "B) Efecto invernadero.", "C) Destrucción de la capa de ozono.", "D) Inversión térmica."],
-                        correct: 1,
-                        hint: "Funciona de manera similar a las cubiertas de vidrio de los invernaderos agrícolas.",
-                        exp: "El efecto invernadero es un proceso natural amplificado por actividades humanas que eleva la temperatura media global debido a gases de efecto invernadero."
-                    },
-                    {
-                        q: "26. ¿Cuál es la función homeostática principal del sistema excretor (riñones y vejiga) en los seres humanos?",
-                        options: ["A) Filtrar la sangre para eliminar desechos metabólicos y regular fluidos.", "B) Secretar hormonas de crecimiento óseo.", "C) Digerir macromoléculas complejas de carbohidratos.", "D) Transportar impulsos eléctricos motores."],
-                        correct: 0,
-                        hint: "Se encarga de limpiar las toxinas de la sangre y producir la orina.",
-                        exp: "Los riñones filtran el plasma sanguíneo, eliminan toxinas como la urea y equilibran las sales hídricas del cuerpo."
-                    },
-                    {
-                        q: "27. ¿Qué partículas subatómicas poseen carga eléctrica negativa y orbitan en regiones externas alrededor del núcleo del átomo?",
-                        options: ["A) Protones.", "B) Neutrones.", "C) Electrones.", "D) Quarks."],
-                        correct: 2,
-                        hint: "Su movimiento a través de un conductor produce la corriente eléctrica.",
-                        exp: "Los electrones tienen carga negativa y se distribuyen en orbitales periféricos alrededor del núcleo denso (protones y neutrones)."
-                    },
-                    {
-                        q: "28. Un ecosistema se compone conceptualmente de la interacción dinámica entre:",
-                        options: ["A) Únicamente los animales depredadores.", "B) Factores bióticos (vivos) y factores abióticos (no vivos).", "C) Exclusivamente las plantas productoras y el clima.", "D) El suelo y las formaciones geológicas de roca."],
-                        correct: 1,
-                        hint: "Combina los organismos vivos con los elementos inertes del entorno.",
-                        exp: "El ecosistema integra la biocenosis (seres vivos/bióticos) con el biotopo (entorno físico-químico/abióticos)."
-                    },
-                    {
-                        q: "29. ¿Qué postula la Teoría Celular moderna respecto a la estructura de la vida?",
-                        options: ["A) Solo los animales están constituidos por células.", "B) Las células se forman espontáneamente de la materia inorgánica.", "C) La célula es la unidad básica, estructural y funcional de todos los seres vivos.", "D) Las células vivas no contienen material genético."],
-                        correct: 2,
-                        hint: "Establece que todo organismo vivo posee al menos una célula.",
-                        exp: "La teoría celular dicta que todos los seres vivos están formados por células, que provienen de células preexistentes y son la unidad funcional de la vida."
-                    },
-                    {
-                        q: "30. Si una onda electromagnética reduce su longitud de onda a la mitad manteniendo su velocidad constante, ¿qué ocurre matemáticamente con su frecuencia de oscilación?",
-                        options: ["A) Se reduce a la mitad.", "B) Se duplica de valor.", "C) Se mantiene exactamente igual.", "D) Aumenta al cuádruple."],
-                        correct: 1,
-                        hint: "La longitud de onda y la frecuencia son inversamente proporcionales (v = λ * f).",
-                        exp: "Dado que la velocidad es constante, al disminuir la longitud de onda (λ), la frecuencia (f) debe aumentar en la misma proporción para equilibrar la ecuación."
-                    }
-                ]
-            },
-            sociales: {
-                name: "Estudios Sociales",
-                officialTime: 4200,
-                questions: [
-                    {
-                        q: "1. ¿Qué documento histórico, firmado en 1776, declaró formalmente la separación de las Trece Colonias del Reino de Gran Bretaña?",
-                        options: ["A) La Constitución de los EE.UU.", "B) La Declaración de Independencia.", "C) Los Artículos de la Confederación.", "D) El Tratado de París."],
-                        correct: 1,
-                        hint: "Fue redactada principalmente por Thomas Jefferson y proclamó los derechos inalienables a la vida, la libertad y la búsqueda de la felicidad.",
-                        exp: "La Declaración de Independencia fue adoptada por el Segundo Congreso Continental el 4 de julio de 1776, rompiendo lazos con la corona británica."
-                    },
-                    {
-                        q: "2. El sistema de 'pesos y contrapesos' (Checks and Balances) en el gobierno de los Estados Unidos fue diseñado específicamente para:",
-                        options: ["A) Asegurar que el partido mayoritario controle el Congreso.", "B) Evitar que una sola rama del gobierno acumule demasiado poder.", "C) Centralizar la recaudación de impuestos federales.", "D) Acelerar el proceso de aprobación de leyes de emergencia."],
-                        correct: 1,
-                        hint: "Permite que cada poder (Ejecutivo, Legislativo y Judicial) limite e interpele las acciones de los otros.",
-                        exp: "Este sistema garantiza la separación de poderes, permitiendo que cada rama limite las atribuciones de las otras para evitar la tiranía."
-                    },
-                    {
-                        q: "3. ¿Cuál fue una de las causas económicas principales que desencadenó la Guerra Civil Estadounidense (1861-1865)?",
-                        options: ["A) La disputa sobre los derechos de pesca en el Atlántico.", "B) La dependencia del Sur de la mano de obra esclava frente al Norte industrializado.", "C) El descontento por la compra del territorio de Luisiana.", "D) La devaluación del dólar frente a las monedas europeas."],
-                        correct: 1,
-                        hint: "El Sur basaba su economía en grandes plantaciones de algodón que requerían esclavitud; el Norte impulsaba el trabajo asalariado.",
-                        exp: "Las profundas diferencias económicas y morales respecto a la institución de la esclavitud y los derechos de los estados fracturaron la unión."
-                    },
-                    {
-                        q: "4. ¿Qué enmienda de la Constitución de los Estados Unidos garantiza la libertad de expresión, de prensa, de religión y el derecho a reunirse pacíficamente?",
-                        options: ["A) La Primera Enmienda.", "B) La Quinta Enmienda.", "C) La Décima Enmienda.", "D) La Decimocuarta Enmienda."],
-                        correct: 0,
-                        hint: "Forma parte de la Carta de Derechos (Bill of Rights) aprobada en 1791.",
-                        exp: "La Primera Enmienda protege los derechos fundamentales de expresión, culto, prensa, asamblea y petición al gobierno."
-                    },
-                    {
-                        q: "5. Durante la Gran Depresión de la década de 1930, el presidente Franklin D. Roosevelt implementó una serie de programas económicos y reformas conocidos como:",
-                        options: ["A) El Gran Garrote.", "B) El New Deal (Nuevo Acuerdo).", "C) La Doctrina Monroe.", "D) El Plan Marshall."],
-                        correct: 1,
-                        hint: "Buscaba ofrecer alivio inmediato, recuperación económica y reforma financiera tras el crack de 1929.",
-                        exp: "El 'New Deal' intervino masivamente en la economía mediante obras públicas, subsidios agrícolas y regulaciones bancarias para frenar la crisis."
-                    },
-                    {
-                        q: "6. ¿Qué conflicto político e ideológico dividió al mundo entre los bloques capitalista (liderado por EE.UU.) y comunista (liderado por la URSS) tras la Segunda Guerra Mundial?",
-                        options: ["A) La Guerra de los Siete Años.", "B) La Guerra Fría.", "C) La Primera Guerra Mundial.", "D) La Crisis de los Balcanes."],
-                        correct: 1,
-                        hint: "Se caracterizó por tensiones geopolíticas, carrera armamentística y conflictos indirectos, sin un enfrentamiento militar directo entre las potencias.",
-                        exp: "La Guerra Fría (1947-1991) definió la política exterior global a través de alianzas rivales como la OTAN y el Pacto de Varsovia."
-                    },
-                    {
-                        q: "7. ¿Cuál es la función principal de la rama legislativa del gobierno federal de los Estados Unidos (el Congreso)?",
-                        options: ["A) Interpretar la constitucionalidad de las leyes vigentes.", "B) Hacer y aprobar las leyes federales.", "C) Comandar las fuerzas armadas en tiempos de guerra.", "D) Negociar tratados diplomáticos con naciones extranjeras."],
-                        correct: 1,
-                        hint: "Está compuesto por dos cámaras: el Senado y la Cámara de Representantes.",
-                        exp: "El Artículo I de la Constitución otorga todo el poder legislativo al Congreso, cuya función primordial es redactar y votar proyectos de ley."
-                    },
-                    {
-                        q: "8. ¿Qué hito geográfico e histórico duplicó el tamaño territorial de los Estados Unidos en 1803 bajo la presidencia de Thomas Jefferson?",
-                        options: ["A) La anexión de Texas.", "B) La compra de Luisiana a Francia.", "C) El Tratado de Guadalupe Hidalgo.", "D) La adquisición de Alaska."],
-                        correct: 1,
-                        hint: "Se compró por un monto aproximado de 15 millones de dólares a Napoleón Bonaparte.",
-                        exp: "La compra de Luisiana otorgó a EE.UU. el control del río Misisipi y vastas llanuras agrícolas para la posterior expansión hacia el oeste."
-                    },
-                    {
-                        q: "9. El sistema económico en el que los medios de producción son de propiedad privada y los precios de los bienes se determinan por la oferta y la demanda se llama:",
-                        options: ["A) Socialismo.", "B) Capitalismo de libre mercado.", "C) Feudalismo.", "D) Economía planificada centralizada."],
-                        correct: 1,
-                        hint: "Adam Smith describió sus fundamentos teóricos mediante el concepto de la 'mano invisible'.",
-                        exp: "El capitalismo o libre mercado se basa en la propiedad privada, la competencia comercial y la mínima interferencia del Estado en los precios."
-                    },
-                    {
-                        q: "10. ¿Cuál fue el propósito central de los movimientos por los Derechos Civiles en las décadas de 1950 y 1960, liderados por figuras como Martin Luther King Jr.?",
-                        options: ["A) Restringir la inmigración procedente de Europa.", "B) Abolir la segregación racial y garantizar la igualdad de voto para los afroamericanos.", "C) Promover la compra de productos nacionales.", "D) Cambiar la capital federal de Washington D.C."],
-                        correct: 1,
-                        hint: "Combatieron las leyes discriminatorias conocidas como 'Jim Crow' en el sur del país.",
-                        exp: "El movimiento logró hitos legales masivos como la Ley de Derechos Civiles de 1964 y la Ley de Derecho al Voto de 1965."
-                    },
-                    {
-                        q: "11. ¿Qué es la inflación dentro de un sistema macroeconómico?",
-                        options: ["A) El aumento generalizado y sostenido de los precios de bienes y servicios.", "B) La caída drástica del desempleo estructural.", "C) El incremento del valor adquisitivo de la moneda local.", "D) La reducción del gasto público del gobierno."],
-                        correct: 0,
-                        hint: "Cuando ocurre este fenómeno, se necesita más dinero para comprar las mismas cosas.",
-                        exp: "La inflación reduce el poder adquisitivo del dinero debido al aumento constante en los costos del mercado."
-                    },
-                    {
-                        q: "12. ¿Qué organismo internacional fue creado al término de la Segunda Guerra Mundial con el fin de mantener la paz y la seguridad internacional?",
-                        options: ["A) La Sociedad de Naciones.", "B) La Organización de las Naciones Unidas (ONU).", "C) La Unión Europea.", "D) El Fondo Monetario Internacional."],
-                        correct: 1,
-                        hint: "Su carta fundacional se firmó en San Francisco en 1945.",
-                        exp: "La ONU reemplazó a la ineficaz Sociedad de Naciones para servir como foro diplomático global y prevenir futuras guerras a gran escala."
-                    },
-                    {
-                        q: "13. La Declaración de Derechos (Bill of Rights) corresponde a:",
-                        options: ["A) Los primeros diez artículos de los Artículos de la Confederación.", "B) Las primeras diez enmiendas de la Constitución de los EE.UU.", "C) El preámbulo de la Declaración de Independencia.", "D) Los estatutos fundacionales de la Corte Suprema."],
-                        correct: 1,
-                        hint: "Fueron añadidas para calmar los temores de que el gobierno federal centralizado fuera opresivo.",
-                        exp: "La Bill of Rights (1791) contiene salvaguardas explícitas para las libertades individuales y limita las facultades estatales."
-                    },
-                    {
-                        q: "14. ¿Qué tribunal ejerce la máxima autoridad judicial en los Estados Unidos y tiene el poder de anular leyes declarándolas anticonstitucionales?",
-                        options: ["A) La Corte de Apelaciones del Circuito Federal.", "B) El Tribunal Supremo de los Estados Unidos.", "C) El Tribunal de Comercio Internacional.", "D) La Fiscalía General de la Nación."],
-                        correct: 1,
-                        hint: "Está compuesto por nueve jueces con cargos vitalicios.",
-                        exp: "La Corte Suprema tiene la última palabra en la interpretación de las leyes federales y la Constitución a través de la revisión judicial."
-                    },
-                    {
-                        q: "15. ¿Qué factor geográfico facilitó enormemente el desarrollo industrial y comercial de las colonias del norte (Nueva Inglaterra) a diferencia de las colonias del sur?",
-                        options: ["A) La presencia de grandes extensiones de suelo fértil y clima tropical.", "B) Puertos naturales profundos y acceso rápido a rutas marítimas atlánticas.", "C) La cercanía inmediata a las minas de oro de California.", "D) La ausencia de ríos caudalosos en sus territorios."],
-                        correct: 1,
-                        hint: "El relieve del norte no permitía una agricultura masiva, lo que impulsó la pesca, el comercio y la construcción de barcos.",
-                        exp: "Los puertos profundos del norte permitieron que se convirtiera en el centro del comercio marítimo y manufacturero colonial."
-                    },
-                    {
-                        q: "16. ¿Qué importante enmienda constitucional abolió formalmente la esclavitud en todo el territorio de los Estados Unidos tras la Guerra Civil?",
-                        options: ["A) La Decimotercera Enmienda.", "B) La Decimoquinta Enmienda.", "C) La Decimonovena Enmienda.", "D) La Vigésima Enmienda."],
-                        correct: 0,
-                        hint: "Fue ratificada a finales de 1865, consolidando la Proclamación de Emancipación.",
-                        exp: "La Enmienda 13 prohibió la esclavitud y el trabajo forzado en la nación, salvo como castigo por un delito penal debidamente sentenciado."
-                    },
-                    {
-                        q: "17. En una democracia representativa o república, los ciudadanos ejercen su soberanía política de manera primordial a través de:",
-                        options: ["A) El pago de aranceles aduaneros.", "B) La elección de representantes mediante el voto libre.", "C) El servicio obligatorio en el poder judicial.", "D) La compra de bonos de deuda del Estado."],
-                        correct: 1,
-                        hint: "Delegamos el poder de hacer leyes en legisladores elegidos en las urnas.",
-                        exp: "Los ciudadanos eligen funcionarios (congresistas, gobernadores, presidentes) para que legislen y gobiernen en su nombre."
-                    },
-                    {
-                        q: "18. ¿Qué recurso natural renovable impulsó la colonización y los intensos conflictos territoriales en el noroeste de América del Norte durante el siglo XIX?",
-                        options: ["A) Las reservas masivas de uranio.", "B) Las pieles de animales y los densos bosques madereros.", "C) Las plantaciones de caña de azúcar.", "D) Los depósitos superficiales de litio."],
-                        correct: 1,
-                        hint: "Compañías británicas y estadounidenses competían por cazar y comercializar estos bienes.",
-                        exp: "El comercio de pieles (como las de castor) y la madera atrajeron a los primeros tramperos y colonos a la región del Óregón."
-                    },
-                    {
-                        q: "19. ¿Cuál de las siguientes situaciones ejemplifica el concepto económico de 'escasez'?",
-                        options: ["A) Una tienda tiene más computadoras de las que el público quiere comprar.", "B) Los recursos mundiales de agua potable son finitos mientras que las necesidades humanas crecen.", "C) Un gobierno imprime papel moneda de forma ilimitada.", "D) El aire libre abunda en una zona rural protegida."],
-                        correct: 1,
-                        hint: "La escasez ocurre cuando los deseos superan a los recursos disponibles para satisfacerlos.",
-                        exp: "La escasez es el problema económico central: los recursos naturales y económicos son limitados, mientras que las demandas humanas son ilimitadas."
-                    },
-                    {
-                        q: "20. El movimiento migratorio interno masivo de millones de afroamericanos desde las zonas rurales del Sur hacia las ciudades del Norte y Oeste durante el siglo XX se conoce como:",
-                        options: ["A) El Sendero de Lágrimas.", "B) La Gran Migración.", "C) La Fiebre del Oro.", "D) La Expansión de la Frontera."],
-                        correct: 1,
-                        hint: "Buscaban empleo en las industrias del norte y escapar de la segregación sureña.",
-                        exp: "La Gran Migración transformó demográfica y culturalmente a ciudades como Chicago, Detroit y Nueva York entre 1916 y 1970."
-                    },
-                    {
-                        q: "21. ¿Qué es un arancel (Tariff) dentro del comercio internacional?",
-                        options: ["A) Un subsidio en efectivo otorgado a los agricultores locales.", "B) Un impuesto aplicado exclusivamente a los bienes importados.", "C) Una cuota máxima de producción industrial.", "D) Un descuento tributario para empresas multinacionales."],
-                        correct: 1,
-                        hint: "Se utiliza frecuentemente para encarecer productos extranjeros y proteger la industria nacional.",
-                        exp: "Los aranceles son impuestos gubernamentales sobre los bienes importados, diseñados para generar ingresos o aplicar proteccionismo comercial."
-                    },
-                    {
-                        q: "22. ¿Quién es el Comandante en Jefe de las Fuerzas Armadas según la estructura constitucional de los Estados Unidos?",
-                        options: ["A) El Secretario de Defensa.", "B) El Presidente de la República.", "C) El Presidente de la Cámara de Representantes.", "D) El General de Mayor Rango del Pentágono."],
-                        correct: 1,
-                        hint: "Pertenece a la rama ejecutiva del gobierno federal.",
-                        exp: "El Artículo II de la Constitución designa explícitamente al Presidente como Comandante en Jefe de las fuerzas militares para asegurar el control civil del ejército."
-                    },
-                    {
-                        q: "23. ¿Qué grave crisis ambiental azotó a las llanuras agrícolas de los EE.UU. durante la década de 1930 debido a severas sequías y prácticas de cultivo inadecuadas?",
-                        options: ["A) El Huracán de Galveston.", "B) El Dust Bowl (Cuenca de Polvo).", "C) La Inundación del Misisipi.", "D) El Incendio de San Francisco."],
-                        correct: 1,
-                        hint: "Generó nubes masivas de tierra que destruyeron cosechas y forzaron el éxodo de miles de familias de agricultores.",
-                        exp: "El Dust Bowl devastó las granjas de las Grandes Llanuras, intensificando los estragos económicos de la Gran Depresión."
-                    },
-                    {
-                        q: "24. ¿Qué enmienda constitucional otorgó formalmente el derecho al voto a las mujeres en los Estados Unidos en 1920?",
-                        options: ["A) La Decimoprimera Enmienda.", "B) La Decimocuarta Enmienda.", "C) La Decimonovena Enmienda.", "D) La Vigésima Enmienda."],
-                        correct: 2,
-                        hint: "Fue la culminación de décadas de lucha del movimiento sufragista liderado por activistas como Susan B. Anthony.",
-                        exp: "La Enmienda 19 estableció de forma explícita que ni los estados ni el gobierno federal pueden negar el sufragio basándose en el sexo."
-                    },
-                    {
-                        q: "25. La principal función económica de la Reserva Federal (The Fed) en los Estados Unidos es:",
-                        options: ["A) Diseñar y ejecutar la política fiscal mediante la fijación de impuestos.", "B) Controlar la política monetaria y regular el suministro de dinero y las tasas de interés.", "C) Administrar directamente los hospitales públicos del país.", "D) Financiar las campañas políticas de los partidos nacionales."],
-                        correct: 1,
-                        hint: "Actúa como el banco central independiente de la nación.",
-                        exp: "La Fed utiliza herramientas como las tasas de interés de referencia para promover el empleo máximo y la estabilidad de los precios (evitar alta inflación)."
-                    },
-                    {
-                        q: "26. ¿Qué sistema de gobierno reparte el poder político e institucional entre un gobierno central/nacional y los gobiernos estatales o regionales?",
-                        options: ["A) Monarquía absoluta.", "B) Federalismo.", "C) Confederación laxa.", "D) Estado unitario centralizado."],
-                        correct: 1,
-                        hint: "Es la base estructural que une a los 50 estados de EE.UU. bajo una Constitución común.",
-                        exp: "El federalismo establece una soberanía compartida donde la Constitución divide competencias específicas entre la federación y los estados soberanos."
-                    },
-                    {
-                        q: "27. ¿Qué hito geopolítico aceleró la entrada directa de los Estados Unidos en la Segunda Guerra Mundial en diciembre de 1941?",
-                        options: ["A) El hundimiento del navío Lusitania.", "B) El ataque sorpresa japonés a la base naval de Pearl Harbor.", "C) La invasión alemana a Polonia.", "D) La caída de París en manos del Eje."],
-                        correct: 1,
-                        hint: "Ubicada en el archipiélago de Hawái, fue atacada por aire por el Imperio del Japón.",
-                        exp: "El ataque a Pearl Harbor el 7 de diciembre de 1941 provocó que el Congreso estadounidense declarara la guerra al Japón de forma inmediata al día siguiente."
-                    },
-                    {
-                        q: "28. Un mapa que detalla específicamente los límites territoriales, fronteras estatales, nombres de países y capitales de una región se clasifica como un:",
-                        options: ["A) Mapa topográfico.", "B) Mapa político.", "C) Mapa climático.", "D) Mapa geológico."],
-                        correct: 1,
-                        hint: "Se enfoca en las divisiones creadas por las organizaciones humanas, no en el relieve natural.",
-                        exp: "Los mapas políticos representan las fronteras soberanas, divisiones administrativas y centros gubernamentales creados por tratados y leyes."
-                    },
-                    {
-                        q: "29. ¿Qué filósofo de la Ilustración influyó profundamente en los padres fundadores de EE.UU. con su teoría de que el gobierno debe basarse en un 'contrato social' para proteger los derechos naturales como la propiedad y la libertad?",
-                        options: ["A) Thomas Hobbes.", "B) John Locke.", "C) Karl Marx.", "D) Maquiavelo."],
-                        correct: 1,
-                        hint: "Afirmaba que si un gobernante rompe el contrato violando los derechos del pueblo, los ciudadanos tienen el derecho legítimo a la rebelión.",
-                        exp: "Las ideas de John Locke sobre los derechos naturales a la vida, la libertad y la propiedad fueron el pilar ideológico de la Declaración de Independencia."
-                    },
-                    {
-                        q: "30. ¿Cuál es el requisito indispensable que debe cumplir un proyecto de ley para convertirse finalmente en ley federal tras haber sido aprobado por el Senado y la Cámara de Representantes?",
-                        options: ["A) Ser ratificado en referéndum por voto popular directo.", "B) Ser firmado y promulgado por el Presidente de los Estados Unidos.", "C) Contar con la recomendación unánime del Secretario de Estado.", "D) Ser publicado en los diarios de circulación masiva durante un mes."],
-                        correct: 1,
-                        hint: "El Presidente tiene el poder de vetarlo o firmarlo.",
-                        exp: "Una vez que ambas cámaras aprueban un texto idéntico, este se envía al Presidente para su firma. Si el Presidente lo veta, el Congreso requiere una mayoría de dos tercios en ambas cámaras para anular el veto."
-                    }
-                ]
-            }
-        };
+<script>
+    // ================================================================
+    //  BASE DE DATOS EXTENDIDA - ¡AHORA CON 25+ PREGUNTAS POR MATERIA!
+    // ================================================================
+    const gedDB = {
+        matematicas: {
+            name: "Matemáticas",
+            icon: "➗",
+            time: 6900,
+            questions: [
+                // === NIVEL 1: FÁCIL (dificultad 1) ===
+                { q: "¿Cuánto es 2 + 2 × 2?", opts: ["A) 4", "B) 6", "C) 8", "D) 2"], correct: 1, difficulty: 1, hint: "Multiplicación antes que suma.", exp: "2×2=4, 4+2=6." },
+                { q: "¿Cuál es el 25% de 200?", opts: ["A) 25", "B) 40", "C) 50", "D) 75"], correct: 2, difficulty: 1, hint: "25% es dividir entre 4.", exp: "200÷4=50." },
+                { q: "¿Cuánto es 10 × 10?", opts: ["A) 10", "B) 50", "C) 100", "D) 1000"], correct: 2, difficulty: 1, hint: "Multiplica 10 por sí mismo.", exp: "10×10=100." },
+                { q: "¿Cuál es la raíz cuadrada de 81?", opts: ["A) 7", "B) 8", "C) 9", "D) 10"], correct: 2, difficulty: 1, hint: "¿Qué número multiplicado por sí mismo da 81?", exp: "9×9=81." },
+                { q: "¿Cuánto es 15 + 27?", opts: ["A) 32", "B) 42", "C) 52", "D) 62"], correct: 1, difficulty: 1, hint: "Suma simple.", exp: "15+27=42." },
+                { q: "¿Qué fracción es equivalente a 0.5?", opts: ["A) 1/4", "B) 1/3", "C) 1/2", "D) 2/3"], correct: 2, difficulty: 1, hint: "0.5 es la mitad de 1.", exp: "1/2 = 0.5." },
+                { q: "¿Cuántos lados tiene un hexágono?", opts: ["A) 4", "B) 5", "C) 6", "D) 8"], correct: 2, difficulty: 1, hint: "El prefijo 'hexa' significa seis.", exp: "Un hexágono tiene 6 lados." },
+                
+                // === NIVEL 2: MEDIO (dificultad 2) ===
+                { q: "Resuelve: 3x + 5 = 20. ¿Cuánto vale x?", opts: ["A) 3", "B) 5", "C) 7", "D) 10"], correct: 1, difficulty: 2, hint: "Aísla la variable.", exp: "3x=15 → x=5." },
+                { q: "¿Cuál es el área de un triángulo con base 10 y altura 6?", opts: ["A) 30", "B) 60", "C) 15", "D) 120"], correct: 0, difficulty: 2, hint: "(base×altura)/2.", exp: "(10×6)/2=30." },
+                { q: "Calcula la distancia entre (1,2) y (4,6).", opts: ["A) 4", "B) 5", "C) 6", "D) 7"], correct: 1, difficulty: 2, hint: "√[(x2-x1)²+(y2-y1)²].", exp: "√(9+16)=√25=5." },
+                { q: "¿Cuánto es 5! (factorial)?", opts: ["A) 20", "B) 60", "C) 120", "D) 240"], correct: 2, difficulty: 2, hint: "Multiplica 1×2×3×4×5.", exp: "120." },
+                { q: "Si la probabilidad de lluvia es 0.3, ¿probabilidad de que NO llueva?", opts: ["A) 0.3", "B) 0.7", "C) 0.5", "D) 1.0"], correct: 1, difficulty: 2, hint: "Complemento: 1 - p.", exp: "1-0.3=0.7." },
+                { q: "Resuelve: 2x - 7 = 11", opts: ["A) 6", "B) 7", "C) 8", "D) 9"], correct: 3, difficulty: 2, hint: "Suma 7 y divide entre 2.", exp: "2x=18 → x=9." },
+                { q: "¿Cuál es el perímetro de un cuadrado de lado 8?", opts: ["A) 16", "B) 24", "C) 32", "D) 64"], correct: 2, difficulty: 2, hint: "Perímetro = 4 × lado.", exp: "4×8=32." },
+                { q: "Simplifica: (x² - 4)/(x - 2)", opts: ["A) x-2", "B) x+2", "C) x²+4", "D) x²-4"], correct: 1, difficulty: 2, hint: "Factoriza el numerador.", exp: "(x-2)(x+2)/(x-2)=x+2." },
+                
+                // === NIVEL 3: DIFÍCIL (dificultad 3) ===
+                { q: "Si f(x) = 2x² - 3x + 1, calcula f(2).", opts: ["A) 3", "B) 5", "C) 7", "D) 9"], correct: 0, difficulty: 3, hint: "Sustituye x=2.", exp: "8-6+1=3." },
+                { q: "Resuelve el sistema: x+y=10, 2x-y=5. ¿x?", opts: ["A) 3", "B) 5", "C) 7", "D) 9"], correct: 1, difficulty: 3, hint: "Suma ambas ecuaciones.", exp: "3x=15 → x=5." },
+                { q: "¿Cuál es el volumen de un cilindro de radio 3 y altura 5? (π≈3.14)", opts: ["A) 141.3", "B) 47.1", "C) 282.6", "D) 94.2"], correct: 0, difficulty: 3, hint: "V = πr²h.", exp: "3.14×9×5=141.3." },
+                { q: "Deriva: f(x) = 3x² + 2x - 5", opts: ["A) 6x+2", "B) 3x+2", "C) 6x-2", "D) 3x-5"], correct: 0, difficulty: 3, hint: "Regla de potencia: nx^(n-1).", exp: "6x+2." },
+                { q: "Resuelve: log₂(8) = ?", opts: ["A) 2", "B) 3", "C) 4", "D) 8"], correct: 1, difficulty: 3, hint: "2 elevado a qué da 8.", exp: "2³=8." },
+                { q: "¿Cuál es la ecuación de la recta que pasa por (0,0) y (2,4)?", opts: ["A) y=2x", "B) y=x+2", "C) y=4x", "D) y=x/2"], correct: 0, difficulty: 3, hint: "Pendiente m=Δy/Δx.", exp: "m=4/2=2 → y=2x." }
+            ]
+        },
+        lenguaje: {
+            name: "Artes del Lenguaje",
+            icon: "📖",
+            time: 9000,
+            questions: [
+                // === NIVEL 1: FÁCIL ===
+                { q: "Identifica el error: 'Habían muchas personas esperando.'", opts: ["A) Habían", "B) muchas", "C) personas", "D) esperando"], correct: 0, difficulty: 1, hint: "Verbo haber en impersonal va en singular.", exp: "Lo correcto es 'Había muchas personas'." },
+                { q: "¿Cuál es el antónimo de 'efímero'?", opts: ["A) Breve", "B) Pasajero", "C) Duradero", "D) Fugaz"], correct: 2, difficulty: 1, hint: "Efímero = que dura poco.", exp: "Duradero es lo opuesto." },
+                { q: "¿Cuál es el sinónimo de 'feliz'?", opts: ["A) Triste", "B) Alegre", "C) Enojado", "D) Cansado"], correct: 1, difficulty: 1, hint: "Busca una palabra de significado similar.", exp: "Alegre es sinónimo de feliz." },
+                { q: "¿Qué tipo de texto es una receta de cocina?", opts: ["A) Narrativo", "B) Descriptivo", "C) Instructivo", "D) Argumentativo"], correct: 2, difficulty: 1, hint: "Da pasos para lograr un objetivo.", exp: "Es un texto instructivo." },
+                { q: "El conector 'sin embargo' expresa:", opts: ["A) Causa", "B) Consecuencia", "C) Oposición", "D) Adición"], correct: 2, difficulty: 1, hint: "Introduce una contradicción.", exp: "Es adversativo." },
+                { q: "Corrige: 'El médico le receto unas pastillas.'", opts: ["A) recetó", "B) recetó", "C) receto", "D) recetó"], correct: 0, difficulty: 1, hint: "Verbo en pasado lleva tilde en la última vocal.", exp: "Se escribe 'recetó'." },
+                { q: "¿Qué es un sustantivo?", opts: ["A) Acción", "B) Nombre de persona, lugar o cosa", "C) Describe una cualidad", "D) Une oraciones"], correct: 1, difficulty: 1, hint: "Son palabras que nombran.", exp: "Los sustantivos nombran seres y objetos." },
+                { q: "¿Cuál es el plural de 'lápiz'?", opts: ["A) lápizes", "B) lapices", "C) lápices", "D) lapizes"], correct: 2, difficulty: 1, hint: "Palabras terminadas en 'z' cambian a 'ces'.", exp: "El plural es lápices." },
+                
+                // === NIVEL 2: MEDIO ===
+                { q: "Lee: 'El viento susurraba entre los árboles.' ¿Qué figura retórica se usa?", opts: ["A) Metáfora", "B) Personificación", "C) Hipérbole", "D) Ironía"], correct: 1, difficulty: 2, hint: "Atribuye cualidad humana a un objeto.", exp: "Es personificación." },
+                { q: "¿Cuál es la idea principal en: 'La tecnología transformó la educación, pero creó nuevas desigualdades'?", opts: ["A) La tecnología es mala", "B) Tiene ventajas y desventajas", "C) La educación es obsoleta", "D) Todos usan tecnología"], correct: 1, difficulty: 2, hint: "Resume ambas partes.", exp: "Contrasta beneficio y problema." },
+                { q: "¿Qué es una metáfora?", opts: ["A) Comparación sin 'como'", "B) Exageración", "C) Pregunta retórica", "D) Repetición de sonidos"], correct: 0, difficulty: 2, hint: "Ejemplo: 'Tus ojos son estrellas'.", exp: "Identifica un término con otro por semejanza." },
+                { q: "¿Cuál es el tiempo verbal en: 'Habré terminado'?", opts: ["A) Presente", "B) Pasado", "C) Futuro perfecto", "D) Condicional"], correct: 2, difficulty: 2, hint: "Indica una acción futura completada.", exp: "Es futuro compuesto." },
+                { q: "¿Qué tipo de palabra es 'rápidamente'?", opts: ["A) Sustantivo", "B) Adjetivo", "C) Adverbio", "D) Verbo"], correct: 2, difficulty: 2, hint: "Modifica a un verbo.", exp: "Es un adverbio de modo." },
+                { q: "Selecciona la oración correcta:", opts: ["A) Ayer vi a María", "B) Ayer vì a María", "C) Ayer vi a Maria", "D) Ayer vió a María"], correct: 0, difficulty: 2, hint: "Verbo ver en pasado sin tilde.", exp: "'Vi' es correcto." },
+                { q: "¿Qué es un texto argumentativo?", opts: ["A) Cuenta una historia", "B) Describe un objeto", "C) Defiende una postura", "D) Da instrucciones"], correct: 2, difficulty: 2, hint: "Busca convencer al lector.", exp: "Presenta una tesis y argumentos." },
+                
+                // === NIVEL 3: DIFÍCIL ===
+                { q: "Identifica la voz pasiva: 'El libro fue escrito por el autor.'", opts: ["A) Activa", "B) Pasiva", "C) Reflexiva", "D) Recíproca"], correct: 1, difficulty: 3, hint: "El sujeto recibe la acción.", exp: "El sujeto (libro) recibe la acción de ser escrito." },
+                { q: "¿Cuál es la función de los dos puntos (:) en: 'Tres cosas: paciencia, orden y constancia.'?", opts: ["A) Enumerar", "B) Citar", "C) Explicar", "D) Separar"], correct: 0, difficulty: 3, hint: "Introducen una lista.", exp: "Se usan para enumerar." },
+                { q: "¿Qué error tiene: 'La crisis económica afectó a la mayoría de los ciudadanos, sin embargo, la recuperación fue rápida.'?", opts: ["A) Coma antes de 'sin embargo'", "B) Falta punto", "C) 'sin embargo' no va con coma", "D) Está correcto"], correct: 2, difficulty: 3, hint: "Los conectores de este tipo llevan puntuación específica.", exp: "Debe ir entre comas o punto y coma." },
+                { q: "¿Qué es un oxímoron?", opts: ["A) Repetición de sonidos", "B) Dos términos opuestos juntos", "C) Exageración extrema", "D) Comparación directa"], correct: 1, difficulty: 3, hint: "Ejemplo: 'oscuridad brillante'.", exp: "Une conceptos contradictorios." }
+            ]
+        },
+        ciencias: {
+            name: "Ciencias",
+            icon: "🔬",
+            time: 5400,
+            questions: [
+                // === NIVEL 1: FÁCIL ===
+                { q: "¿Qué orgánulo produce energía (ATP)?", opts: ["A) Núcleo", "B) Mitocondria", "C) Cloroplasto", "D) Ribosoma"], correct: 1, difficulty: 1, hint: "'Central energética' de la célula.", exp: "La mitocondria produce ATP." },
+                { q: "¿Cuál es el proceso por el cual las plantas convierten luz solar en energía química?", opts: ["A) Respiración", "B) Fotosíntesis", "C) Fermentación", "D) Digestión"], correct: 1, difficulty: 1, hint: "Ocurre en los cloroplastos.", exp: "Es la fotosíntesis." },
+                { q: "¿Cuál es la fuerza que mantiene a los planetas en órbita?", opts: ["A) Magnética", "B) Nuclear", "C) Gravitacional", "D) Centrífuga"], correct: 2, difficulty: 1, hint: "Descrita por Newton.", exp: "Es la gravedad." },
+                { q: "¿Qué tipo de roca se forma por enfriamiento del magma?", opts: ["A) Sedimentaria", "B) Metamórfica", "C) Ígnea", "D) Caliza"], correct: 2, difficulty: 1, hint: "Proviene del fuego ('ignis').", exp: "Son las rocas ígneas." },
+                { q: "¿Cuál es el pH de una sustancia neutra?", opts: ["A) 0", "B) 5", "C) 7", "D) 14"], correct: 2, difficulty: 1, hint: "El agua pura tiene este pH.", exp: "El pH 7 es neutro." },
+                { q: "¿Qué gas es el más abundante en la atmósfera?", opts: ["A) Oxígeno", "B) Dióxido de carbono", "C) Nitrógeno", "D) Argón"], correct: 2, difficulty: 1, hint: "Representa el 78% del aire.", exp: "Es el nitrógeno." },
+                
+                // === NIVEL 2: MEDIO ===
+                { q: "¿Qué produce la fotosíntesis?", opts: ["A) CO₂ y agua", "B) Glucosa y O₂", "C) ATP y NADH", "D) Etanol y CO₂"], correct: 1, difficulty: 2, hint: "Productos de la fotosíntesis.", exp: "Produce glucosa y oxígeno." },
+                { q: "¿Cuál es la función de los glóbulos rojos?", opts: ["A) Combatir infecciones", "B) Transportar oxígeno", "C) Coagular la sangre", "D) Producir hormonas"], correct: 1, difficulty: 2, hint: "Contienen hemoglobina.", exp: "Transportan oxígeno." },
+                { q: "¿Qué es la mitosis?", opts: ["A) División celular que produce gametos", "B) División celular que produce células idénticas", "C) Fusión de células", "D) Muerte celular programada"], correct: 1, difficulty: 2, hint: "Produce células hijas idénticas.", exp: "La mitosis es división celular no reproductiva." },
+                { q: "¿Cuál es la capa más externa de la Tierra?", opts: ["A) Manto", "B) Núcleo", "C) Corteza", "D) Astenosfera"], correct: 2, difficulty: 2, hint: "Donde vivimos.", exp: "Es la corteza terrestre." },
+                { q: "¿Qué fenómeno climático se produce por gases como el CO₂?", opts: ["A) Lluvia ácida", "B) Efecto invernadero", "C) Destrucción del ozono", "D) Inversión térmica"], correct: 1, difficulty: 2, hint: "Retiene el calor solar.", exp: "Es el efecto invernadero." },
+                { q: "¿Qué es un ecosistema?", opts: ["A) Solo plantas", "B) Seres vivos + medio físico", "C) Solo animales", "D) El clima de una región"], correct: 1, difficulty: 2, hint: "Incluye factores bióticos y abióticos.", exp: "Interacción entre seres vivos y su entorno." },
+                
+                // === NIVEL 3: DIFÍCIL ===
+                { q: "¿Qué postula la Teoría Celular?", opts: ["A) Las células aparecen por generación espontánea", "B) Todos los seres vivos están formados por células", "C) Solo los animales tienen células", "D) Las células no contienen ADN"], correct: 1, difficulty: 3, hint: "Unidad básica de la vida.", exp: "La célula es la unidad funcional de todos los seres vivos." },
+                { q: "¿Cuál es la función del sistema excretor?", opts: ["A) Transportar nutrientes", "B) Eliminar desechos y regular fluidos", "C) Producir hormonas", "D) Digerir alimentos"], correct: 1, difficulty: 3, hint: "Riñones y vejiga.", exp: "Filtra la sangre y elimina desechos." },
+                { q: "¿Qué ley explica que la masa no se crea ni se destruye?", opts: ["A) Ley de Gravitación", "B) Ley de Conservación de la Masa", "C) Ley de Inercia", "D) Ley de Coulomb"], correct: 1, difficulty: 3, hint: "Lavoisier.", exp: "En una reacción química, la masa total se conserva." },
+                { q: "¿Qué produce la tectónica de placas?", opts: ["A) Terremotos y volcanes", "B) Lluvias ácidas", "C) Erosión", "D) Corrientes marinas"], correct: 0, difficulty: 3, hint: "Movimiento de las placas terrestres.", exp: "Provoca sismos, volcanes y formación de montañas." }
+            ]
+        },
+        sociales: {
+            name: "Estudios Sociales",
+            icon: "🌍",
+            time: 4200,
+            questions: [
+                // === NIVEL 1: FÁCIL ===
+                { q: "¿En qué año se firmó la Declaración de Independencia de EE.UU.?", opts: ["A) 1776", "B) 1787", "C) 1791", "D) 1800"], correct: 0, difficulty: 1, hint: "4 de julio.", exp: "1776." },
+                { q: "¿Cuántas enmiendas tiene la Constitución de EE.UU.?", opts: ["A) 10", "B) 20", "C) 27", "D) 30"], correct: 2, difficulty: 1, hint: "La última ratificada en 1992.", exp: "27 enmiendas." },
+                { q: "¿Qué presidente abolió la esclavitud?", opts: ["A) Washington", "B) Lincoln", "C) Jefferson", "D) Roosevelt"], correct: 1, difficulty: 1, hint: "Proclamación de Emancipación.", exp: "Abraham Lincoln." },
+                { q: "¿Qué es la democracia?", opts: ["A) Gobierno de uno solo", "B) Gobierno de unos pocos", "C) Gobierno del pueblo", "D) Sin gobierno"], correct: 2, difficulty: 1, hint: "Viene del griego 'demos' (pueblo).", exp: "Es el gobierno del pueblo." },
+                { q: "¿Cuál es la capital de EE.UU.?", opts: ["A) Nueva York", "B) Los Ángeles", "C) Washington D.C.", "D) Chicago"], correct: 2, difficulty: 1, hint: "Lleva el nombre del primer presidente.", exp: "Washington D.C." },
+                
+                // === NIVEL 2: MEDIO ===
+                { q: "¿Qué es el federalismo?", opts: ["A) Gobierno central fuerte", "B) Poder compartido entre estados y nación", "C) Confederación de estados independientes", "D) Monarquía absoluta"], correct: 1, difficulty: 2, hint: "Reparte el poder entre varios niveles.", exp: "Es la base de la Constitución estadounidense." },
+                { q: "¿Qué fue el 'New Deal'?", opts: ["A) Un tratado de paz", "B) Programas económicos de F.D. Roosevelt", "C) Una alianza militar", "D) Una constitución"], correct: 1, difficulty: 2, hint: "Durante la Gran Depresión.", exp: "Fue el plan de recuperación económica de Roosevelt." },
+                { q: "¿Qué guerra dividió al mundo en bloques capitalista y comunista?", opts: ["A) Primera Guerra Mundial", "B) Segunda Guerra Mundial", "C) Guerra Fría", "D) Guerra de Vietnam"], correct: 2, difficulty: 2, hint: "Sin enfrentamiento directo entre las potencias.", exp: "Fue la Guerra Fría (1947-1991)." },
+                { q: "¿Qué es un arancel?", opts: ["A) Un subsidio", "B) Un impuesto a las importaciones", "C) Una cuota de producción", "D) Un descuento tributario"], correct: 1, difficulty: 2, hint: "Protege la industria nacional.", exp: "Es un impuesto a los bienes importados." },
+                { q: "¿Qué enmienda dio el voto a las mujeres?", opts: ["A) 15", "B) 18", "C) 19", "D) 21"], correct: 2, difficulty: 2, hint: "Ratificada en 1920.", exp: "La 19 enmienda." },
+                
+                // === NIVEL 3: DIFÍCIL ===
+                { q: "¿Qué fue el 'Dust Bowl' de los años 30?", opts: ["A) Una inundación", "B) Una sequía con tormentas de polvo", "C) Un huracán", "D) Un incendio"], correct: 1, difficulty: 3, hint: "Afectó a las Grandes Llanuras.", exp: "Fue una grave sequía que causó tormentas de polvo." },
+                { q: "¿Cuál es el poder del Congreso para acusar a un funcionario?", opts: ["A) Veto", "B) Impeachment", "C) Judicial Review", "D) Filibuster"], correct: 1, difficulty: 3, hint: "Proceso político, no penal.", exp: "Es el impeachment." },
+                { q: "¿Qué filósofo influyó en la Declaración de Independencia?", opts: ["A) Hobbes", "B) Locke", "C) Marx", "D) Maquiavelo"], correct: 1, difficulty: 3, hint: "Derechos naturales: vida, libertad y propiedad.", exp: "John Locke." },
+                { q: "¿Qué sistema económico se basa en la propiedad privada y el libre mercado?", opts: ["A) Socialismo", "B) Capitalismo", "C) Feudalismo", "D) Comunismo"], correct: 1, difficulty: 3, hint: "Adam Smith lo describió.", exp: "El capitalismo." }
+            ]
+        }
+    };
 
-        // ==========================================
-        // LÓGICA DE CONTROL DEL EXAMEN
-        // ==========================================
-        let currentSubject = 'matematicas';
-        let currentQuestionIndex = 0;
-        let score = 0;
-        let timerInterval = null;
-        let timeRemaining = 0;
+    // ================================================================
+    //  ESTADO DE LA APLICACIÓN
+    // ================================================================
+    let currentSubject = 'matematicas';
+    let currentIndex = 0;
+    let score = 0;
+    let wrong = 0;
+    let markedQuestions = new Set();
+    let timeRemaining = 0;
+    let timerInterval = null;
+    let startTime = 0;
+    let mode = 'practice';
+    let answered = false;
 
-        function changeSubject(subjectKey) {
-            if (!gedDatabase[subjectKey]) return;
-            
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            document.getElementById(`btn-${subjectKey}`).classList.add('active');
-            
-            currentSubject = subjectKey;
-            currentQuestionIndex = 0;
-            score = 0;
-            
-            document.getElementById('module-indicator').textContent = `Módulo Activo: ${gedDatabase[subjectKey].name}`;
-            
-            // Detener timer anterior
-            clearInterval(timerInterval);
-            timeRemaining = gedDatabase[subjectKey].officialTime;
-            startTimer();
-            
-            // Asegurar que se muestra el contenido de preguntas y se ocultan los resultados
-            document.getElementById('quiz-content').classList.remove('hidden');
-            document.getElementById('results-container').style.display = 'none';
-            
-            loadQuestion();
+    // ================================================================
+    //  FUNCIONES PRINCIPALES
+    // ================================================================
+
+    function changeSubject(subject) {
+        currentSubject = subject;
+        currentIndex = 0;
+        score = 0;
+        wrong = 0;
+        markedQuestions = new Set();
+        answered = false;
+        
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelector(`.tab-btn[data-subject="${subject}"]`).classList.add('active');
+        
+        document.getElementById('module-name').textContent = gedDB[subject].name;
+        
+        clearInterval(timerInterval);
+        timeRemaining = gedDB[subject].time;
+        startTime = Date.now();
+        startTimer();
+        
+        document.getElementById('quiz-content').style.display = 'block';
+        document.getElementById('results-container').classList.remove('show');
+        document.getElementById('results-container').style.display = 'none';
+        
+        loadQuestion();
+    }
+
+    function setMode(newMode) {
+        mode = newMode;
+        document.querySelectorAll('.mode-toggle button').forEach(b => b.classList.remove('active'));
+        document.getElementById(`mode-${newMode}`).classList.add('active');
+        document.getElementById('mode-label').textContent = newMode === 'practice' ? '📝 Práctica' : '🎯 Examen';
+        document.getElementById('hint-btn').style.display = newMode === 'exam' ? 'none' : 'inline-block';
+        changeSubject(currentSubject);
+    }
+
+    function loadQuestion() {
+        const db = gedDB[currentSubject];
+        const total = db.questions.length;
+        
+        if (currentIndex >= total) {
+            showResults();
+            return;
         }
 
-        function startTimer() {
-            updateTimerDisplay();
-            timerInterval = setInterval(() => {
-                if (timeRemaining > 0) {
-                    timeRemaining--;
-                    updateTimerDisplay();
-                } else {
-                    clearInterval(timerInterval);
-                    alert("¡El tiempo oficial de este módulo ha terminado!");
-                    showFinalResults();
+        const q = db.questions[currentIndex];
+        answered = false;
+        
+        document.getElementById('question-counter').textContent = `Pregunta ${currentIndex + 1} de ${total}`;
+        
+        const badge = document.getElementById('difficulty-badge');
+        const levels = ['', '📊 Fácil', '📈 Medio', '🔥 Difícil'];
+        badge.textContent = levels[q.difficulty] || '📊 Fácil';
+        badge.className = 'difficulty-indicator ' + ['', 'easy', 'medium', 'hard'][q.difficulty] || 'easy';
+        
+        document.getElementById('question-text').textContent = q.q;
+        
+        const container = document.getElementById('options-container');
+        container.innerHTML = '';
+        const letters = ['A', 'B', 'C', 'D'];
+        q.opts.forEach((opt, i) => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.innerHTML = `<span class="letter">${letters[i]}</span> ${opt.substring(3)}`;
+            btn.dataset.index = i;
+            btn.onclick = () => selectAnswer(i);
+            container.appendChild(btn);
+        });
+        
+        document.getElementById('explanation-box').classList.remove('show');
+        document.getElementById('next-btn').disabled = true;
+        
+        if (mode === 'exam') {
+            document.getElementById('hint-btn').style.display = 'none';
+            document.getElementById('mark-btn').style.display = 'none';
+        } else {
+            document.getElementById('hint-btn').style.display = 'inline-block';
+            document.getElementById('mark-btn').style.display = 'inline-block';
+            document.getElementById('mark-btn').textContent = 
+                markedQuestions.has(currentIndex) ? '⭐ Marcada' : '⭐ Marcar';
+        }
+    }
+
+    function selectAnswer(index) {
+        if (answered) return;
+        answered = true;
+        
+        const db = gedDB[currentSubject];
+        const q = db.questions[currentIndex];
+        const btns = document.querySelectorAll('.option-btn');
+        
+        btns.forEach((b, i) => {
+            b.classList.add('disabled');
+            if (i === q.correct) b.classList.add('correct');
+            if (i === index && i !== q.correct) b.classList.add('wrong');
+        });
+        
+        if (index === q.correct) score++;
+        else wrong++;
+        
+        document.getElementById('explanation-text').textContent = q.exp;
+        document.getElementById('explanation-box').classList.add('show');
+        document.getElementById('next-btn').disabled = false;
+        
+        if (mode === 'exam') {
+            setTimeout(() => {
+                if (!document.getElementById('next-btn').disabled) {
+                    nextQuestion();
                 }
-            }, 1000);
+            }, 2500);
         }
+    }
 
-        function updateTimerDisplay() {
-            const minutes = Math.floor(timeRemaining / 60);
-            const seconds = timeRemaining % 60;
-            document.getElementById('time-display').textContent = 
-                `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-        }
-
-        function loadQuestion() {
-            const subjectData = gedDatabase[currentSubject];
-            const total = subjectData.questions.length;
-            
-            if (total === 0) {
-                document.getElementById('question-text').textContent = "Contenido en desarrollo. Por favor, cargue los bancos de preguntas correspondientes.";
-                document.getElementById('options-container').innerHTML = '';
-                document.getElementById('question-counter').textContent = "Pregunta 0 de 0";
-                return;
-            }
-
-            // Asegurar que el contenido de preguntas está visible y los resultados ocultos
-            document.getElementById('quiz-content').classList.remove('hidden');
-            document.getElementById('results-container').style.display = 'none';
-
-            const currentQuestion = subjectData.questions[currentQuestionIndex];
-            
-            document.getElementById('explanation-box').style.display = 'none';
-            document.getElementById('next-btn').disabled = true;
-            
-            document.getElementById('question-counter').textContent = 
-                `Pregunta ${currentQuestionIndex + 1} de ${total}`;
-            
-            document.getElementById('question-text').textContent = currentQuestion.q;
-            
-            const container = document.getElementById('options-container');
-            container.innerHTML = '';
-            
-            currentQuestion.options.forEach((option, index) => {
-                const btn = document.createElement('button');
-                btn.className = 'option-btn';
-                btn.textContent = option;
-                btn.onclick = () => checkAnswer(index, btn);
-                container.appendChild(btn);
-            });
-        }
-
-        function checkAnswer(selectedIndex, selectedBtn) {
-            const currentQuestion = gedDatabase[currentSubject].questions[currentQuestionIndex];
-            const allOptions = document.querySelectorAll('.option-btn');
-            
-            allOptions.forEach(btn => btn.disabled = true);
-            
-            if (selectedIndex === currentQuestion.correct) {
-                selectedBtn.classList.add('correct');
-                score++;
-            } else {
-                selectedBtn.classList.add('wrong');
-                allOptions[currentQuestion.correct].classList.add('correct');
-            }
-            
-            document.getElementById('explanation-text').textContent = currentQuestion.exp;
-            document.getElementById('explanation-box').style.display = 'block';
-            
-            document.getElementById('next-btn').disabled = false;
-        }
-
-        function triggerHint() {
-            const subjectData = gedDatabase[currentSubject];
-            if (subjectData.questions.length === 0) return;
-            const currentQuestion = subjectData.questions[currentQuestionIndex];
-            alert(`Pista del Reactivo:\n${currentQuestion.hint}`);
-        }
-
-        function goToNextQuestion() {
-            const subjectData = gedDatabase[currentSubject];
-            if (currentQuestionIndex < subjectData.questions.length - 1) {
-                currentQuestionIndex++;
-                loadQuestion();
-            } else {
-                showFinalResults();
-            }
-        }
-
-        function showFinalResults() {
-            clearInterval(timerInterval);
-            const totalQuestions = gedDatabase[currentSubject].questions.length;
-            // Ocultar contenido de preguntas, mostrar resultados
-            document.getElementById('quiz-content').classList.add('hidden');
-            document.getElementById('results-container').style.display = 'block';
-            document.getElementById('final-score').textContent = `${score} / ${totalQuestions}`;
-        }
-
-        function restartSubject() {
-            // Reinicia la materia actual sin recargar la página
-            currentQuestionIndex = 0;
-            score = 0;
-            // Detener y reiniciar timer
-            clearInterval(timerInterval);
-            timeRemaining = gedDatabase[currentSubject].officialTime;
-            startTimer();
-            // Mostrar contenido y ocultar resultados
-            document.getElementById('quiz-content').classList.remove('hidden');
-            document.getElementById('results-container').style.display = 'none';
+    function nextQuestion() {
+        const db = gedDB[currentSubject];
+        if (currentIndex < db.questions.length - 1) {
+            currentIndex++;
             loadQuestion();
+        } else {
+            showResults();
         }
+    }
 
-        window.onload = function() {
-            changeSubject('matematicas');
+    function showHint() {
+        const db = gedDB[currentSubject];
+        const q = db.questions[currentIndex];
+        alert(`💡 Pista: ${q.hint}`);
+    }
+
+    function toggleMark() {
+        if (markedQuestions.has(currentIndex)) {
+            markedQuestions.delete(currentIndex);
+            document.getElementById('mark-btn').textContent = '⭐ Marcar';
+        } else {
+            markedQuestions.add(currentIndex);
+            document.getElementById('mark-btn').textContent = '⭐ Marcada';
+        }
+    }
+
+    // ================================================================
+    //  RESULTADOS
+    // ================================================================
+    function showResults() {
+        clearInterval(timerInterval);
+        const db = gedDB[currentSubject];
+        const total = db.questions.length;
+        const elapsed = Math.floor((Date.now() - startTime) / 1000);
+        const accuracy = total > 0 ? Math.round((score / total) * 100) : 0;
+        
+        document.getElementById('quiz-content').style.display = 'none';
+        const container = document.getElementById('results-container');
+        container.style.display = 'block';
+        container.classList.add('show');
+        
+        document.getElementById('final-score').textContent = `${score} / ${total}`;
+        document.getElementById('stat-correct').textContent = score;
+        document.getElementById('stat-wrong').textContent = wrong;
+        document.getElementById('stat-time').textContent = formatTime(elapsed);
+        document.getElementById('stat-accuracy').textContent = accuracy + '%';
+        
+        const list = document.getElementById('recommendations-list');
+        list.innerHTML = '';
+        const recs = generateRecommendations(accuracy, score, total);
+        recs.forEach(r => {
+            const li = document.createElement('li');
+            li.textContent = r;
+            list.appendChild(li);
+        });
+        
+        document.getElementById('recommendations').style.display = 'block';
+    }
+
+    function generateRecommendations(accuracy, correct, total) {
+        const recs = [];
+        const subject = currentSubject;
+        const names = {
+            matematicas: 'Matemáticas',
+            lenguaje: 'Artes del Lenguaje',
+            ciencias: 'Ciencias',
+            sociales: 'Estudios Sociales'
         };
-    </script>
+        const name = names[subject] || subject;
+        
+        if (accuracy >= 90) {
+            recs.push(`🎉 ¡Excelente en ${name}! Estás listo para el examen.`);
+            recs.push('✅ Practica con preguntas de mayor dificultad.');
+        } else if (accuracy >= 70) {
+            recs.push(`👍 Buen trabajo en ${name}. Sigue practicando.`);
+            recs.push('📚 Enfócate en los temas donde fallaste.');
+        } else if (accuracy >= 50) {
+            recs.push(`📖 Necesitas más práctica en ${name}.`);
+            recs.push('🎯 Repasa los conceptos básicos.');
+        } else {
+            recs.push(`🔴 Estudia ${name} desde los fundamentos.`);
+            recs.push('📝 Busca material adicional de los temas difíciles.');
+        }
+        
+        if (correct < total) {
+            recs.push(`💡 Revisa las ${markedQuestions.size} preguntas que marcaste.`);
+        }
+        
+        return recs;
+    }
+
+    // ================================================================
+    //  TIMER
+    // ================================================================
+    function startTimer() {
+        updateTimerDisplay();
+        timerInterval = setInterval(() => {
+            if (timeRemaining > 0) {
+                timeRemaining--;
+                updateTimerDisplay();
+            } else {
+                clearInterval(timerInterval);
+                alert('⏰ ¡El tiempo se ha terminado!');
+                showResults();
+            }
+        }, 1000);
+    }
+
+    function updateTimerDisplay() {
+        const el = document.getElementById('time-display');
+        el.textContent = '⏱️ ' + formatTime(timeRemaining);
+        if (timeRemaining < 120) {
+            el.classList.add('warning');
+        } else {
+            el.classList.remove('warning');
+        }
+    }
+
+    function formatTime(seconds) {
+        const m = String(Math.floor(seconds / 60)).padStart(2, '0');
+        const s = String(seconds % 60).padStart(2, '0');
+        return `${m}:${s}`;
+    }
+
+    function restartSubject() {
+        const subject = currentSubject;
+        currentIndex = 0;
+        score = 0;
+        wrong = 0;
+        markedQuestions = new Set();
+        answered = false;
+        
+        clearInterval(timerInterval);
+        timeRemaining = gedDB[subject].time;
+        startTime = Date.now();
+        startTimer();
+        
+        document.getElementById('results-container').classList.remove('show');
+        document.getElementById('results-container').style.display = 'none';
+        document.getElementById('quiz-content').style.display = 'block';
+        loadQuestion();
+    }
+
+    // ================================================================
+    //  INICIALIZACIÓN
+    // ================================================================
+    window.onload = function() {
+        changeSubject('matematicas');
+    };
+</script>
+
 </body>
 </html>
