@@ -694,37 +694,87 @@
                 { q: "¿Cuál es la ecuación de la recta que pasa por (0,0) y (2,4)?", opts: ["A) y=2x", "B) y=x+2", "C) y=4x", "D) y=x/2"], correct: 0, difficulty: 3, hint: "Pendiente m=Δy/Δx.", exp: "m=4/2=2 → y=2x." }
             ]
         },
-        lenguaje: {
-            name: "Artes del Lenguaje",
-            icon: "📖",
-            time: 9000,
-            questions: [
-                // === NIVEL 1: FÁCIL ===
-                { q: "Identifica el error: 'Habían muchas personas esperando.'", opts: ["A) Habían", "B) muchas", "C) personas", "D) esperando"], correct: 0, difficulty: 1, hint: "Verbo haber en impersonal va en singular.", exp: "Lo correcto es 'Había muchas personas'." },
-                { q: "¿Cuál es el antónimo de 'efímero'?", opts: ["A) Breve", "B) Pasajero", "C) Duradero", "D) Fugaz"], correct: 2, difficulty: 1, hint: "Efímero = que dura poco.", exp: "Duradero es lo opuesto." },
-                { q: "¿Cuál es el sinónimo de 'feliz'?", opts: ["A) Triste", "B) Alegre", "C) Enojado", "D) Cansado"], correct: 1, difficulty: 1, hint: "Busca una palabra de significado similar.", exp: "Alegre es sinónimo de feliz." },
-                { q: "¿Qué tipo de texto es una receta de cocina?", opts: ["A) Narrativo", "B) Descriptivo", "C) Instructivo", "D) Argumentativo"], correct: 2, difficulty: 1, hint: "Da pasos para lograr un objetivo.", exp: "Es un texto instructivo." },
-                { q: "El conector 'sin embargo' expresa:", opts: ["A) Causa", "B) Consecuencia", "C) Oposición", "D) Adición"], correct: 2, difficulty: 1, hint: "Introduce una contradicción.", exp: "Es adversativo." },
-                { q: "Corrige: 'El médico le receto unas pastillas.'", opts: ["A) recetó", "B) recetó", "C) receto", "D) recetó"], correct: 0, difficulty: 1, hint: "Verbo en pasado lleva tilde en la última vocal.", exp: "Se escribe 'recetó'." },
-                { q: "¿Qué es un sustantivo?", opts: ["A) Acción", "B) Nombre de persona, lugar o cosa", "C) Describe una cualidad", "D) Une oraciones"], correct: 1, difficulty: 1, hint: "Son palabras que nombran.", exp: "Los sustantivos nombran seres y objetos." },
-                { q: "¿Cuál es el plural de 'lápiz'?", opts: ["A) lápizes", "B) lapices", "C) lápices", "D) lapizes"], correct: 2, difficulty: 1, hint: "Palabras terminadas en 'z' cambian a 'ces'.", exp: "El plural es lápices." },
-                
-                // === NIVEL 2: MEDIO ===
-                { q: "Lee: 'El viento susurraba entre los árboles.' ¿Qué figura retórica se usa?", opts: ["A) Metáfora", "B) Personificación", "C) Hipérbole", "D) Ironía"], correct: 1, difficulty: 2, hint: "Atribuye cualidad humana a un objeto.", exp: "Es personificación." },
-                { q: "¿Cuál es la idea principal en: 'La tecnología transformó la educación, pero creó nuevas desigualdades'?", opts: ["A) La tecnología es mala", "B) Tiene ventajas y desventajas", "C) La educación es obsoleta", "D) Todos usan tecnología"], correct: 1, difficulty: 2, hint: "Resume ambas partes.", exp: "Contrasta beneficio y problema." },
-                { q: "¿Qué es una metáfora?", opts: ["A) Comparación sin 'como'", "B) Exageración", "C) Pregunta retórica", "D) Repetición de sonidos"], correct: 0, difficulty: 2, hint: "Ejemplo: 'Tus ojos son estrellas'.", exp: "Identifica un término con otro por semejanza." },
-                { q: "¿Cuál es el tiempo verbal en: 'Habré terminado'?", opts: ["A) Presente", "B) Pasado", "C) Futuro perfecto", "D) Condicional"], correct: 2, difficulty: 2, hint: "Indica una acción futura completada.", exp: "Es futuro compuesto." },
-                { q: "¿Qué tipo de palabra es 'rápidamente'?", opts: ["A) Sustantivo", "B) Adjetivo", "C) Adverbio", "D) Verbo"], correct: 2, difficulty: 2, hint: "Modifica a un verbo.", exp: "Es un adverbio de modo." },
-                { q: "Selecciona la oración correcta:", opts: ["A) Ayer vi a María", "B) Ayer vì a María", "C) Ayer vi a Maria", "D) Ayer vió a María"], correct: 0, difficulty: 2, hint: "Verbo ver en pasado sin tilde.", exp: "'Vi' es correcto." },
-                { q: "¿Qué es un texto argumentativo?", opts: ["A) Cuenta una historia", "B) Describe un objeto", "C) Defiende una postura", "D) Da instrucciones"], correct: 2, difficulty: 2, hint: "Busca convencer al lector.", exp: "Presenta una tesis y argumentos." },
-                
-                // === NIVEL 3: DIFÍCIL ===
-                { q: "Identifica la voz pasiva: 'El libro fue escrito por el autor.'", opts: ["A) Activa", "B) Pasiva", "C) Reflexiva", "D) Recíproca"], correct: 1, difficulty: 3, hint: "El sujeto recibe la acción.", exp: "El sujeto (libro) recibe la acción de ser escrito." },
-                { q: "¿Cuál es la función de los dos puntos (:) en: 'Tres cosas: paciencia, orden y constancia.'?", opts: ["A) Enumerar", "B) Citar", "C) Explicar", "D) Separar"], correct: 0, difficulty: 3, hint: "Introducen una lista.", exp: "Se usan para enumerar." },
-                { q: "¿Qué error tiene: 'La crisis económica afectó a la mayoría de los ciudadanos, sin embargo, la recuperación fue rápida.'?", opts: ["A) Coma antes de 'sin embargo'", "B) Falta punto", "C) 'sin embargo' no va con coma", "D) Está correcto"], correct: 2, difficulty: 3, hint: "Los conectores de este tipo llevan puntuación específica.", exp: "Debe ir entre comas o punto y coma." },
-                { q: "¿Qué es un oxímoron?", opts: ["A) Repetición de sonidos", "B) Dos términos opuestos juntos", "C) Exageración extrema", "D) Comparación directa"], correct: 1, difficulty: 3, hint: "Ejemplo: 'oscuridad brillante'.", exp: "Une conceptos contradictorios." }
-            ]
-        },
+       lenguaje: {
+    name: "Artes del Lenguaje",
+    icon: "📖",
+    time: 9000,
+    questions: [
+        // ============================================================
+        //  NIVEL 1: FÁCIL (dificultad 1) - 20 preguntas
+        // ============================================================
+        { q: "Identifica el error: 'Habían muchas personas esperando.'", opts: ["A) Habían", "B) muchas", "C) personas", "D) esperando"], correct: 0, difficulty: 1, hint: "Verbo haber en impersonal va en singular.", exp: "Lo correcto es 'Había muchas personas'." },
+        { q: "¿Cuál es el antónimo de 'efímero'?", opts: ["A) Breve", "B) Pasajero", "C) Duradero", "D) Fugaz"], correct: 2, difficulty: 1, hint: "Efímero = que dura poco.", exp: "Duradero es lo opuesto." },
+        { q: "¿Cuál es el sinónimo de 'feliz'?", opts: ["A) Triste", "B) Alegre", "C) Enojado", "D) Cansado"], correct: 1, difficulty: 1, hint: "Busca una palabra de significado similar.", exp: "Alegre es sinónimo de feliz." },
+        { q: "¿Qué tipo de texto es una receta de cocina?", opts: ["A) Narrativo", "B) Descriptivo", "C) Instructivo", "D) Argumentativo"], correct: 2, difficulty: 1, hint: "Da pasos para lograr un objetivo.", exp: "Es un texto instructivo." },
+        { q: "El conector 'sin embargo' expresa:", opts: ["A) Causa", "B) Consecuencia", "C) Oposición", "D) Adición"], correct: 2, difficulty: 1, hint: "Introduce una contradicción.", exp: "Es adversativo." },
+        { q: "Corrige: 'El médico le receto unas pastillas.'", opts: ["A) recetó", "B) recetó", "C) receto", "D) recetó"], correct: 0, difficulty: 1, hint: "Verbo en pasado lleva tilde en la última vocal.", exp: "Se escribe 'recetó'." },
+        { q: "¿Qué es un sustantivo?", opts: ["A) Acción", "B) Nombre de persona, lugar o cosa", "C) Describe una cualidad", "D) Une oraciones"], correct: 1, difficulty: 1, hint: "Son palabras que nombran.", exp: "Los sustantivos nombran seres y objetos." },
+        { q: "¿Cuál es el plural de 'lápiz'?", opts: ["A) lápizes", "B) lapices", "C) lápices", "D) lapizes"], correct: 2, difficulty: 1, hint: "Palabras terminadas en 'z' cambian a 'ces'.", exp: "El plural es lápices." },
+        { q: "¿Qué es un adjetivo?", opts: ["A) Acción", "B) Nombre", "C) Describe cualidad", "D) Une palabras"], correct: 2, difficulty: 1, hint: "Modifica a un sustantivo.", exp: "Los adjetivos describen características." },
+        { q: "¿Cuál es el sinónimo de 'rápido'?", opts: ["A) Lento", "B) Veloz", "C) Pesado", "D) Liviano"], correct: 1, difficulty: 1, hint: "Busca una palabra similar.", exp: "Veloz es sinónimo de rápido." },
+        { q: "¿Qué tipo de palabra es 'pero'?", opts: ["A) Sustantivo", "B) Adjetivo", "C) Conjunción", "D) Verbo"], correct: 2, difficulty: 1, hint: "Une oraciones o palabras.", exp: "'Pero' es una conjunción adversativa." },
+        { q: "Corrige: 'Ayer vino muchas personas.'", opts: ["A) vino", "B) vinieron", "C) vienen", "D) vendrán"], correct: 1, difficulty: 1, hint: "El sujeto es plural.", exp: "'Muchas personas' es plural, el verbo debe concordar: 'vinieron'." },
+        { q: "¿Qué es un verbo?", opts: ["A) Nombre", "B) Acción o estado", "C) Cualidad", "D) Lugar"], correct: 1, difficulty: 1, hint: "Indica lo que hace el sujeto.", exp: "Los verbos expresan acciones o estados." },
+        { q: "Selecciona la palabra bien escrita:", opts: ["A) Vueno", "B) Bueno", "C) Buno", "D) Vueno"], correct: 1, difficulty: 1, hint: "La 'b' y 'v' tienen reglas.", exp: "La forma correcta es 'bueno'." },
+        { q: "¿Cuál es el antónimo de 'alegre'?", opts: ["A) Feliz", "B) Contento", "C) Triste", "D) Risueño"], correct: 2, difficulty: 1, hint: "Busca lo opuesto.", exp: "Triste es antónimo de alegre." },
+        { q: "¿Qué tipo de texto es una noticia?", opts: ["A) Narrativo", "B) Descriptivo", "C) Informativo", "D) Argumentativo"], correct: 2, difficulty: 1, hint: "Informa sobre hechos.", exp: "La noticia es un texto informativo." },
+        { q: "Corrige: 'La casa es muy grande y espaciosa.' ¿Qué tipo de oración es?", opts: ["A) Simple", "B) Compuesta", "C) Subordinada", "D) Coordinada"], correct: 1, difficulty: 1, hint: "Tiene dos verbos.", exp: "Tiene dos verbos: 'es' y 'espaciosa' (implícito)." },
+        { q: "¿Qué son los signos de puntuación?", opts: ["A) Letras", "B) Números", "C) Símbolos para organizar texto", "D) Verbos"], correct: 2, difficulty: 1, hint: "Ayudan a dar sentido.", exp: "Organizan y dan estructura al texto." },
+        { q: "¿Cuál es el plural de 'pez'?", opts: ["A) peces", "B) pezes", "C) pez", "D) peces"], correct: 0, difficulty: 1, hint: "Terminada en 'z' cambia a 'ces'.", exp: "El plural es 'peces'." },
+        { q: "¿Qué es un pronombre?", opts: ["A) Nombre", "B) Palabra que sustituye a un nombre", "C) Cualidad", "D) Acción"], correct: 1, difficulty: 1, hint: "Ejemplo: 'él', 'ella', 'nosotros'.", exp: "Sustituyen a los sustantivos." },
+
+        // ============================================================
+        //  NIVEL 2: MEDIO (dificultad 2) - 20 preguntas
+        // ============================================================
+        { q: "Lee: 'El viento susurraba entre los árboles.' ¿Qué figura retórica se usa?", opts: ["A) Metáfora", "B) Personificación", "C) Hipérbole", "D) Ironía"], correct: 1, difficulty: 2, hint: "Atribuye cualidad humana a un objeto.", exp: "Es personificación." },
+        { q: "¿Cuál es la idea principal en: 'La tecnología transformó la educación, pero creó nuevas desigualdades'?", opts: ["A) La tecnología es mala", "B) Tiene ventajas y desventajas", "C) La educación es obsoleta", "D) Todos usan tecnología"], correct: 1, difficulty: 2, hint: "Resume ambas partes.", exp: "Contrasta beneficio y problema." },
+        { q: "¿Qué es una metáfora?", opts: ["A) Comparación sin 'como'", "B) Exageración", "C) Pregunta retórica", "D) Repetición de sonidos"], correct: 0, difficulty: 2, hint: "Ejemplo: 'Tus ojos son estrellas'.", exp: "Identifica un término con otro por semejanza." },
+        { q: "¿Cuál es el tiempo verbal en: 'Habré terminado'?", opts: ["A) Presente", "B) Pasado", "C) Futuro perfecto", "D) Condicional"], correct: 2, difficulty: 2, hint: "Indica una acción futura completada.", exp: "Es futuro compuesto." },
+        { q: "¿Qué tipo de palabra es 'rápidamente'?", opts: ["A) Sustantivo", "B) Adjetivo", "C) Adverbio", "D) Verbo"], correct: 2, difficulty: 2, hint: "Modifica a un verbo.", exp: "Es un adverbio de modo." },
+        { q: "Selecciona la oración correcta:", opts: ["A) Ayer vi a María", "B) Ayer vì a María", "C) Ayer vi a Maria", "D) Ayer vió a María"], correct: 0, difficulty: 2, hint: "Verbo ver en pasado sin tilde.", exp: "'Vi' es correcto." },
+        { q: "¿Qué es un texto argumentativo?", opts: ["A) Cuenta una historia", "B) Describe un objeto", "C) Defiende una postura", "D) Da instrucciones"], correct: 2, difficulty: 2, hint: "Busca convencer al lector.", exp: "Presenta una tesis y argumentos." },
+        { q: "¿Cuál es el error en: 'A mi me gusta el helado'?", opts: ["A) A mi", "B) me", "C) gusta", "D) helado"], correct: 0, difficulty: 2, hint: "Redundancia pronominal.", exp: "Sobra 'A mi' porque 'me' ya indica la persona." },
+        { q: "¿Qué es un hiato?", opts: ["A) Dos vocales abiertas juntas", "B) Dos vocales cerradas juntas", "C) Una vocal abierta y una cerrada", "D) Acento en la sílaba"], correct: 0, difficulty: 2, hint: "Ejemplo: 'ca-ído'.", exp: "Dos vocales abiertas (a,e,o) juntas forman hiato." },
+        { q: "¿Cuál es el propósito de la coma en: 'Juan, Pedro y Luis fueron.'?", opts: ["A) Separar elementos en una lista", "B) Indicar pausa", "C) Separar vocativo", "D) Todas las anteriores"], correct: 0, difficulty: 2, hint: "Enumera nombres.", exp: "Separa elementos de una enumeración." },
+        { q: "¿Qué es un diptongo?", opts: ["A) Dos vocales juntas en la misma sílaba", "B) Dos vocales separadas", "C) Una vocal con tilde", "D) Dos consonantes"], correct: 0, difficulty: 2, hint: "Ejemplo: 'cau-sa'.", exp: "Unión de dos vocales en una sílaba." },
+        { q: "Identifica el sujeto en: 'El perro corre por el parque.'", opts: ["A) El perro", "B) corre", "C) por el parque", "D) el parque"], correct: 0, difficulty: 2, hint: "¿Quién realiza la acción?", exp: "El sujeto es 'El perro'." },
+        { q: "¿Qué tipo de oración es: '¡Qué bonito día!'?", opts: ["A) Enunciativa", "B) Exclamativa", "C) Interrogativa", "D) Imperativa"], correct: 1, difficulty: 2, hint: "Expresa emoción.", exp: "Es exclamativa por los signos de exclamación." },
+        { q: "Corrige: 'La problema es grave.'", opts: ["A) El problema", "B) La problemática", "C) Los problemas", "D) Problema"], correct: 0, difficulty: 2, hint: "'Problema' es masculino.", exp: "Se dice 'El problema'." },
+        { q: "¿Qué es una oración compuesta?", opts: ["A) Una oración con un verbo", "B) Una oración con dos o más verbos", "C) Una oración corta", "D) Una oración sin verbo"], correct: 1, difficulty: 2, hint: "Tiene más de un verbo.", exp: "Tiene dos o más verbos conjugados." },
+        { q: "Selecciona el sinónimo de 'inteligente':", opts: ["A) Tonto", "B) Listo", "C) Lento", "D) Perezoso"], correct: 1, difficulty: 2, hint: "Busca una palabra similar.", exp: "'Listo' es sinónimo de inteligente." },
+        { q: "¿Qué es un texto descriptivo?", opts: ["A) Cuenta una historia", "B) Detalla características", "C) Defiende una idea", "D) Da instrucciones"], correct: 1, difficulty: 2, hint: "Pinta con palabras.", exp: "Describe personas, objetos o lugares." },
+        { q: "¿Cuál es la función del punto y coma (;)?", opts: ["A) Terminar una oración", "B) Separar elementos en una lista con comas internas", "C) Preguntar algo", "D) Expresar emoción"], correct: 1, difficulty: 2, hint: "Pausa intermedia entre la coma y el punto.", exp: "Separa elementos complejos en enumeraciones." },
+        { q: "Corrige: 'El agua están fría.'", opts: ["A) El agua está fría", "B) El agua están frías", "C) La agua está fría", "D) La agua están fría"], correct: 0, difficulty: 2, hint: "Concordancia de género y número.", exp: "'Agua' es femenino pero usa 'el' por la 'a' tónica." },
+
+        // ============================================================
+        //  NIVEL 3: DIFÍCIL (dificultad 3) - 15 preguntas
+        // ============================================================
+        { q: "Identifica la voz pasiva: 'El libro fue escrito por el autor.'", opts: ["A) Activa", "B) Pasiva", "C) Reflexiva", "D) Recíproca"], correct: 1, difficulty: 3, hint: "El sujeto recibe la acción.", exp: "El sujeto (libro) recibe la acción de ser escrito." },
+        { q: "¿Cuál es la función de los dos puntos (:) en: 'Tres cosas: paciencia, orden y constancia.'?", opts: ["A) Enumerar", "B) Citar", "C) Explicar", "D) Separar"], correct: 0, difficulty: 3, hint: "Introducen una lista.", exp: "Se usan para enumerar." },
+        { q: "¿Qué error tiene: 'La crisis económica afectó a la mayoría de los ciudadanos, sin embargo, la recuperación fue rápida.'?", opts: ["A) Coma antes de 'sin embargo'", "B) Falta punto", "C) 'sin embargo' no va con coma", "D) Está correcto"], correct: 2, difficulty: 3, hint: "Los conectores de este tipo llevan puntuación específica.", exp: "Debe ir entre comas o punto y coma." },
+        { q: "¿Qué es un oxímoron?", opts: ["A) Repetición de sonidos", "B) Dos términos opuestos juntos", "C) Exageración extrema", "D) Comparación directa"], correct: 1, difficulty: 3, hint: "Ejemplo: 'oscuridad brillante'.", exp: "Une conceptos contradictorios." },
+        { q: "¿Qué es una paráfrasis?", opts: ["A) Copiar un texto", "B) Expresar con otras palabras el mismo contenido", "C) Resumir un texto", "D) Analizar un texto"], correct: 1, difficulty: 3, hint: "Repite la idea con palabras propias.", exp: "Es reescribir con otras palabras manteniendo el significado." },
+        { q: "¿Cuál es la diferencia entre 'por qué' y 'porque'?", opts: ["A) El primero pregunta, el segundo explica", "B) El primero explica, el segundo pregunta", "C) Son iguales", "D) El primero lleva tilde, el segundo no"], correct: 0, difficulty: 3, hint: "Uno es interrogativo, otro es causal.", exp: "'Por qué' pregunta, 'porque' explica la causa." },
+        { q: "Identifica el error en: 'El equipo de fútbol ganaron el campeonato.'", opts: ["A) El equipo", "B) ganaron", "C) el campeonato", "D) No hay error"], correct: 1, difficulty: 3, hint: "Sujeto colectivo en singular.", exp: "El verbo debe concordar: 'ganó'." },
+        { q: "¿Qué es un eufemismo?", opts: ["A) Palabra grosera", "B) Expresión suave para algo desagradable", "C) Exageración", "D) Comparación directa"], correct: 1, difficulty: 3, hint: "Ejemplo: 'pasar a mejor vida' en vez de 'morir'.", exp: "Suaviza conceptos duros o tabú." },
+        { q: "¿Cuál es la función de la tilde diacrítica?", opts: ["A) Diferenciar palabras iguales con distinto significado", "B) Acentuar siempre la última sílaba", "C) Indicar silencio", "D) Separar sílabas"], correct: 0, difficulty: 3, hint: "Ejemplo: 'té' (bebida) y 'te' (pronombre).", exp: "Diferencia entre palabras con mismo sonido pero distinto significado." },
+        { q: "En la oración: 'Espero que hayas estudiado para el examen.' ¿Qué tiempo verbal es 'hayas estudiado'?", opts: ["A) Presente", "B) Pasado perfecto subjuntivo", "C) Futuro", "D) Pretérito perfecto simple"], correct: 1, difficulty: 3, hint: "Expresa una acción pasada en relación al presente.", exp: "Es pretérito perfecto compuesto de subjuntivo." },
+        { q: "¿Qué recurso literario se usa en: 'Mi corazón es un tambor que late sin cesar'?", opts: ["A) Personificación", "B) Metáfora", "C) Símil", "D) Hipérbole"], correct: 1, difficulty: 3, hint: "Comparación directa sin 'como'.", exp: "Identifica el corazón con un tambor." },
+        { q: "¿Cuál es la estructura correcta del sujeto en: 'Les dije a ellos que vinieran'?", opts: ["A) Les", "B) a ellos", "C) que vinieran", "D) dije"], correct: 1, difficulty: 3, hint: "Complemento indirecto duplicado.", exp: "'a ellos' refuerza el 'les', no es necesario." },
+        { q: "Selecciona el uso correcto de 'haber' impersonal:", opts: ["A) Hubieron muchos problemas", "B) Hubo muchos problemas", "C) Habían muchos problemas", "D) Han habido muchos problemas"], correct: 1, difficulty: 3, hint: "Siempre en singular.", exp: "'Hubo' es la forma correcta impersonal." },
+        { q: "¿Qué tipo de texto es un ensayo?", opts: ["A) Narrativo", "B) Descriptivo", "C) Argumentativo con opinión personal", "D) Instructivo"], correct: 2, difficulty: 3, hint: "Combina análisis y opinión.", exp: "El ensayo presenta una reflexión personal y argumentada." },
+        { q: "Identifica la figura literaria: 'Tus cabellos son hilos de oro.'", opts: ["A) Símil", "B) Metáfora", "C) Personificación", "D) Hipérbole"], correct: 1, difficulty: 3, hint: "Comparación directa.", exp: "Es metáfora porque identifica sin 'como'." },
+
+        // ============================================================
+        //  NIVEL EXTRA: COMPRENSIÓN LECTORA (dificultad 2-3) - 5 preguntas
+        // ============================================================
+        { q: "Lee: 'El cambio climático es el mayor desafío de nuestra era. Afecta todos los ecosistemas y pone en riesgo la supervivencia de muchas especies.' ¿Cuál es la idea principal?", opts: ["A) El cambio climático es un desafío global", "B) Afecta solo a los animales", "C) No tiene solución", "D) Es un problema menor"], correct: 0, difficulty: 2, hint: "Busca la oración que resume todo.", exp: "El texto presenta el cambio climático como un gran desafío." },
+        { q: "Lee: 'A pesar de los avances tecnológicos, millones de personas aún carecen de acceso a internet.' ¿Qué expresa esta oración?", opts: ["A) Un contraste", "B) Una causa", "C) Una consecuencia", "D) Una enumeración"], correct: 0, difficulty: 2, hint: "'A pesar de' indica oposición.", exp: "Expresa contraste entre avances y falta de acceso." },
+        { q: "Lee: 'El autor sostiene que la educación es la clave para superar la pobreza.' ¿Qué tipo de texto es?", opts: ["A) Narrativo", "B) Descriptivo", "C) Argumentativo", "D) Instructivo"], correct: 2, difficulty: 2, hint: "Presenta una postura o tesis.", exp: "Es argumentativo porque defiende una idea." },
+        { q: "Lee: 'La historia de la humanidad es la historia de sus migraciones.' ¿Qué figura retórica se usa?", opts: ["A) Metáfora", "B) Personificación", "C) Hipérbole", "D) Ironía"], correct: 0, difficulty: 3, hint: "Comparación implícita.", exp: "Identifica la historia de la humanidad con la de las migraciones." },
+        { q: "Lee: 'No todo lo que brilla es oro.' ¿Qué quiere decir esta frase?", opts: ["A) Todo lo brillante es valioso", "B) Las apariencias engañan", "C) El oro siempre brilla", "D) Solo el oro es valioso"], correct: 1, difficulty: 2, hint: "Es una expresión popular.", exp: "Significa que no debemos juzgar por las apariencias." }
+    ]
+}
         ciencias: {
             name: "Ciencias",
             icon: "🔬",
