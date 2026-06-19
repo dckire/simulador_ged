@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador Oficial de Práctica GED</title>
+    <title>Simulador Completo GED: Matemáticas</title>
     <style>
         :root {
             --primary: #0284c7;
@@ -34,51 +34,25 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 850px;
             width: 100%;
             background: var(--card-bg);
             padding: 30px;
             border-radius: 16px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            margin-top: 20px;
+            margin-top: 10px;
         }
 
         h1 {
             color: var(--primary-dark);
             text-align: center;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
 
         .subtitle {
             text-align: center;
             color: var(--text-light);
-            margin-bottom: 30px;
-        }
-
-        .tabs {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 10px;
-            margin-bottom: 30px;
-        }
-
-        .tab-btn {
-            background: #e2e8f0;
-            border: none;
-            padding: 12px 10px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            color: var(--text-light);
-            transition: all 0.3s ease;
-            text-align: center;
-            font-size: 0.9rem;
-        }
-
-        .tab-btn.active {
-            background: var(--primary);
-            color: white;
-            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+            margin-bottom: 25px;
         }
 
         .status-bar {
@@ -90,6 +64,7 @@
             border-radius: 10px;
             margin-bottom: 25px;
             font-weight: 600;
+            border: 1px solid #e2e8f0;
         }
 
         .timer {
@@ -108,7 +83,7 @@
             font-size: 1.15rem;
             font-weight: 600;
             margin-bottom: 20px;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         .options-list {
@@ -127,6 +102,7 @@
             font-size: 1rem;
             transition: all 0.2s ease;
             font-weight: 500;
+            line-height: 1.4;
         }
 
         .option-btn:hover:not([disabled]) {
@@ -138,6 +114,7 @@
             background: #dcfce7;
             border-color: var(--success);
             color: #14532d;
+            font-weight: 600;
         }
 
         .option-btn.wrong {
@@ -188,17 +165,17 @@
         }
 
         .score-circle {
-            width: 150px;
-            height: 150px;
+            width: 160px;
+            height: 160px;
             border-radius: 50%;
             background: #f0f9ff;
-            border: 5px solid var(--primary);
+            border: 6px solid var(--primary);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            margin: 20px auto;
-            font-size: 2rem;
+            margin: 25px auto;
+            font-size: 2.2rem;
             font-weight: bold;
             color: var(--primary-dark);
         }
@@ -207,30 +184,22 @@
 <body>
 
     <div class="container">
-        <h1>Simulador Práctica GED</h1>
-        <p class="subtitle">Selecciona una materia para iniciar el examen con tiempo real</p>
-
-        <div class="tabs">
-            <button class="tab-btn active" onclick="switchSubject('matematicas')">Matemáticas</button>
-            <button class="tab-btn" onclick="switchSubject('lenguaje')">Artes del Lenguaje</button>
-            <button class="tab-btn" onclick="switchSubject('ciencias')">Ciencias</button>
-            <button class="tab-btn" onclick="switchSubject('sociales')">Estudios Sociales</button>
-        </div>
+        <h1>Simulador Intensivo GED</h1>
+        <p class="subtitle">Módulo: Razonamiento Matemático (En Español)</p>
 
         <div class="status-bar">
-            <span id="question-counter">Pregunta 1 de 3</span>
-            <span class="timer">⏱️ <span id="time-display">10:00</span></span>
+            <span id="question-counter">Pregunta 1 de 30</span>
+            <span class="timer">⏱️ Tiempo restante: <span id="time-display">90:00</span></span>
         </div>
 
         <div id="quiz-zone">
             <div class="question-box">
-                <p class="question-text" id="question-text">Cargando pregunta...</p>
-                <div class="options-list" id="options-container">
-                    </div>
+                <p class="question-text" id="question-text">Cargando reactivos oficiales...</p>
+                <div class="options-list" id="options-container"></div>
             </div>
 
             <div class="explanation" id="explanation-box">
-                <strong>Explicación:</strong> <span id="explanation-text"></span>
+                <strong>Análisis de respuesta:</strong> <span id="explanation-text"></span>
             </div>
 
             <div class="nav-actions">
@@ -241,105 +210,233 @@
     </div>
 
     <script>
-        // Banco de preguntas estructurado por materia (Estilo oficial del GED)
         const examData = {
-            matematicas: {
-                time: 600, // 10 minutos
-                questions: [
-                    {
-                        q: "Un tanque de almacenamiento contiene 240 galones de agua. Si se vacía a una tasa constante de 6 galones por minuto, ¿cuál de las siguientes ecuaciones representa la cantidad de agua (W) que queda en el tanque después de 'm' minutos?",
-                        options: ["W = 240 + 6m", "W = 6m - 240", "W = 240 - 6m", "W = 240 / 6m"],
-                        correct: 2,
-                        hint: "El tanque empieza lleno (240 positivo) y va perdiendo agua (-), perdiendo 6 galones por cada minuto multiplicador.",
-                        exp: "La cantidad inicial es 240 galones. Al vaciarse, restamos el flujo por minuto: 6 multiplicado por los minutos (6m). Por lo tanto, W = 240 - 6m."
-                    },
-                    {
-                        q: "Resuelve la siguiente inecuación lineal para x: 3x - 4 > 11",
-                        options: ["x > 5", "x > 2.33", "x < 5", "x > 7"],
-                        correct: 0,
-                        hint: "Pasa el -4 al otro lado sumando (+4) y luego divide el resultado entre 3.",
-                        exp: "Sumamos 4 a ambos lados: 3x > 15. Dividimos entre 3: x > 15/3, lo que resulta en x > 5."
-                    },
-                    {
-                        q: "Un triángulo rectángulo tiene una base de 8 cm y una altura de 15 cm. ¿Cuál es la longitud de su hipotenusa? (Usa el Teorema de Pitágoras: a² + b² = c²)",
-                        options: ["23 cm", "17 cm", "289 cm", "12 cm"],
-                        correct: 1,
-                        hint: "Eleva 8 y 15 al cuadrado, súmalos y luego sácale la raíz cuadrada al resultado final.",
-                        exp: "8² + 15² = 64 + 225 = 289. La raíz cuadrada de 289 es 17 cm."
-                    }
-                ]
-            },
-            lenguaje: {
-                time: 600,
-                questions: [
-                    {
-                        q: "Lee el siguiente fragmento: 'El uso generalizado de vehículos eléctricos no solo mitiga la emisión de gases de invernadero, sino que impulsa la innovación tecnológica en almacenamiento de energía.' ¿Cuál es el argumento principal del autor?",
-                        options: ["Los autos eléctricos son demasiado caros para el público.", "Los vehículos eléctricos ofrecen beneficios ecológicos y tecnológicos.", "La innovación en baterías está completamente estancada.", "Los gases de invernadero no se pueden detener."],
-                        correct: 1,
-                        hint: "Busca la opción que resuma los dos puntos positivos mencionados en la oración corta.",
-                        exp: "El texto vincula explícitamente la mitigación de gases (ecología) con el desarrollo de almacenamiento energético (tecnología)."
-                    },
-                    {
-                        q: "Elige la opción que corrija correctamente el error gramatical de la frase: 'Ayer, los soldados marchó rápidamente hacia la base.'",
-                        options: ["Ayer, los soldados marcharon rápidamente hacia la base.", "Ayer, el soldado marcharon rápidamente hacia la base.", "Ayer, los soldados marchar rápidamente hacia la base.", "No requiere cambios."],
-                        correct: 0,
-                        hint: "El sujeto 'los soldados' es plural, por lo que el verbo debe coincidir en plural.",
-                        exp: "Para mantener la concordancia de número entre el sujeto plural ('los soldados') y el verbo en pasado, se debe utilizar 'marcharon'."
-                    }
-                ]
-            },
-            ciencias: {
-                time: 600,
-                questions: [
-                    {
-                        q: "En un experimento genético con plantas, el alelo para flores rojas (R) es dominante sobre el alelo para flores blancas (r). Si se cruzan dos plantas heterocigotas (Rr x Rr), ¿qué porcentaje de la descendencia se espera que tenga flores blancas (rr)?",
-                        options: ["0%", "25%", "50%", "75%"],
-                        correct: 1,
-                        hint: "Haz un cuadro de Punnett de 2x2. Solo las plantas con combinación 'rr' serán blancas.",
-                        exp: "El cruce produce: RR (25%), Rr (50%) y rr (25%). Al ser 'rr' el único recesivo que produce flores blancas, la probabilidad es del 25%."
-                    },
-                    {
-                        q: "Un científico observa que al calentar un gas en un contenedor cerrado herméticamente y rígido, la presión aumenta. ¿Cuál es la variable independiente en este experimento?",
-                        options: ["La presión del gas", "La temperatura (calor aplicado)", "El volumen del contenedor", "El tipo de gas utilizado"],
-                        correct: 1,
-                        hint: "La variable independiente es aquella que el científico manipula o cambia directamente para ver qué pasa.",
-                        exp: "El experimentador modifica directamente la temperatura aplicando calor; el aumento de presión es la consecuencia (variable dependiente)."
-                    }
-                ]
-            },
-            sociales: {
-                time: 600,
-                questions: [
-                    {
-                        q: "¿Qué sistema de gobierno se caracteriza por una división clara de poderes entre el gobierno nacional central y los gobiernos estatales o provinciales?",
-                        options: ["Monarquía Absoluta", "Federalismo", "Dictadura Centralizada", "Anarquía"],
-                        correct: 1,
-                        hint: "Es el sistema utilizado en países como Estados Unidos o México, donde los estados tienen sus propias leyes además de las leyes nacionales.",
-                        exp: "El federalismo distribuye el poder gubernamental de manera compartida y soberana entre una estructura centralizada y entidades regionales autónomas."
-                    },
-                    {
-                        q: "La rama del gobierno encargada principalmente de interpretar las leyes y asegurar que coincidan con la Constitución es:",
-                        options: ["La Rama Ejecutiva", "La Rama Legislativa", "La Rama Judicial (Las Cortes)", "La Rama Militar"],
-                        correct: 2,
-                        hint: "Está compuesta por los jueces y la Corte Suprema de Justicia.",
-                        exp: "La rama judicial tiene como mandato constitucional exclusivo interpretar las leyes en disputas legales y evaluar su constitucionalidad."
-                    }
-                ]
-            }
+            time: 5400, // 90 minutos exactos para 30 preguntas
+            questions: [
+                {
+                    q: "1. Un tanque de almacenamiento contiene 240 galones de agua. Si se vacía a una tasa constante de 6 galones por minuto, ¿cuál de las siguientes ecuaciones representa la cantidad de agua (W) que queda en el tanque después de 'm' minutos?",
+                    options: ["W = 240 + 6m", "W = 6m - 240", "W = 240 - 6m", "W = 240 / 6m"],
+                    correct: 2,
+                    hint: "El tanque empieza lleno (240) y va perdiendo agua, restando 6 por cada minuto transcurrido.",
+                    exp: "La cantidad inicial es de 240 galones. Al vaciarse disminuye la cantidad, por lo que restamos la tasa constante por minuto recorrida: 6 multiplicado por 'm'. Así, W = 240 - 6m."
+                },
+                {
+                    q: "2. Resuelve la siguiente inecuación lineal para x: 3x - 4 > 11",
+                    options: ["x > 5", "x > 2.33", "x < 5", "x > 7"],
+                    correct: 0,
+                    hint: "Pasa el -4 al otro lado sumando (+4) y luego divide el 15 resultante entre 3.",
+                    exp: "Sumamos 4 a ambos lados de la expresión obteniendo 3x > 15. Al dividir entre 3, nos resulta x > 5."
+                },
+                {
+                    q: "3. Un triángulo rectángulo tiene una base de 8 cm y una altura de 15 cm. ¿Cuál es la longitud de su hipotenusa?",
+                    options: ["23 cm", "17 cm", "289 cm", "12 cm"],
+                    correct: 1,
+                    hint: "Usa el Teorema de Pitágoras: a² + b² = c². Eleva 8 y 15 al cuadrado, súmalos y saca raíz cuadrada.",
+                    exp: "8² + 15² = 64 + 225 = 289. La raíz cuadrada de 289 es 17, que corresponde a la hipotenusa."
+                },
+                {
+                    q: "4. Una tienda de ropa ofrece un descuento del 35% en una chaqueta que originalmente cuesta $80. ¿Cuál es el precio final de la chaqueta después del descuento?",
+                    options: ["$28", "$52", "$45", "$62"],
+                    correct: 1,
+                    hint: "Calcula el valor del descuento multiplicando 80 por 0.35, y luego réstale ese valor a los $80 originales.",
+                    exp: "El descuento es de 80 × 0.35 = $28. El precio de venta final es el costo original menos el descuento: 80 - 28 = $52."
+                },
+                {
+                    q: "5. ¿Cuál es el valor de la expresión algebraica 2x² - 5x + 3 cuando x = -3?",
+                    options: ["36", "6", "0", "30"],
+                    correct: 0,
+                    hint: "Cuidado con los signos. Al elevar -3 al cuadrado obtienes +9. Multiplicar -5 por -3 da +15.",
+                    exp: "Sustituyendo: 2(-3)² - 5(-3) + 3 = 2(9) + 15 + 3 = 18 + 15 + 3 = 36."
+                },
+                {
+                    q: "6. Un contenedor cilíndrico de almacenamiento tiene un radio de 4 pies y una altura de 10 pies. ¿Cuál es el volumen aproximado del contenedor? (Usa π ≈ 3.14)",
+                    options: ["125.6 pies cúbicos", "502.4 pies cúbicos", "160 pies cúbicos", "251.2 pies cúbicos"],
+                    correct: 1,
+                    hint: "La fórmula del volumen es V = π × r² × h. Recuerda elevar primero el radio (4) al cuadrado.",
+                    exp: "Calculamos: V = 3.14 × 4² × 10 = 3.14 × 16 × 10 = 502.4 pies cúbicos."
+                },
+                {
+                    q: "7. Simplifica por completo la siguiente expresión combinada: 4(3x - 2) - 2(x + 5)",
+                    options: ["10x - 18", "10x + 2", "14x - 18", "10x - 3"],
+                    correct: 0,
+                    hint: "Distribuye multiplicando los números de afuera por los de adentro. Ten cuidado con el signo de -2 multiplicando a +5.",
+                    exp: "Distribución: (12x - 8) - (2x + 10) = 12x - 8 - 2x - 10. Agrupamos términos semejantes: 12x - 2x = 10x; -8 - 10 = -18. Queda 10x - 18."
+                },
+                {
+                    q: "8. ¿Cuál es la pendiente de la línea recta continua que pasa exactamente por los puntos coordenadas (3, -2) y (7, 6)?",
+                    options: ["1", "4", "2", "-2"],
+                    correct: 2,
+                    hint: "Fórmula de la pendiente: m = (y₂ - y₁) / (x₂ - x₁). Recuerda que restar un número negativo se convierte en suma.",
+                    exp: "Aplicando la fórmula: m = (6 - (-2)) / (7 - 3) = (6 + 2) / 4 = 8 / 4 = 2."
+                },
+                {
+                    q: "9. Una bolsa opaca contiene 6 canicas rojas, 8 canicas negras y 10 canicas azules. Si se extrae una canica completamente al azar, ¿cuál es la probabilidad exacta de que sea negra?",
+                    options: ["1/3", "1/4", "5/12", "8/16"],
+                    correct: 0,
+                    hint: "Suma todas las canicas para el total del denominador, coloca las negras arriba y simplifica la fracción.",
+                    exp: "Total de canicas = 6 + 8 + 10 = 24. Probabilidad de negra = 8/24. Al dividir arriba y abajo entre 8 simplificamos a 1/3."
+                },
+                {
+                    q: "10. Determina los valores que resuelven la siguiente ecuación cuadrática factorizable: x² - 6x + 8 = 0",
+                    options: ["x = -2, x = -4", "x = 2, x = 4", "x = 1, x = 8", "x = 3, x = 3"],
+                    correct: 1,
+                    hint: "Busca dos números que multiplicados den +8 y sumados den -6, luego cámbiales el signo al despejar.",
+                    exp: "La ecuación se factoriza como (x - 2)(x - 4) = 0. Al igualar cada binomio a cero y despejar las raíces obtenemos x = 2 y x = 4."
+                },
+                {
+                    q: "11. ¿Para qué valor específico de la variable 'x' se vuelve totalmente indefinida la expresión racional: 5 / (2x - 10)?",
+                    options: ["x = 0", "x = -5", "x = 5", "x = 10"],
+                    correct: 2,
+                    hint: "Una fracción es indefinida si la parte de abajo se vuelve cero. Resuelve la ecuación pequeña: 2x - 10 = 0.",
+                    exp: "Para encontrar la restricción igualamos el denominador a cero: 2x - 10 = 0 → 2x = 10 → x = 5. Si x es 5, se divide entre cero, lo cual es imposible."
+                },
+                {
+                    q: "12. Un trabajador gana un salario de $18 por hora por las primeras 40 horas laboradas en la semana, y tiempo y medio ($27) por cada hora extra. Si en una semana trabajó 46 horas, ¿cuál fue su salario bruto total?",
+                    options: ["$828", "$882", "$720", "$1,242"],
+                    correct: 1,
+                    hint: "Calcula las 40 horas base primero, luego averigua cuántas horas extra hizo y multiplícalas por la tarifa de $27.",
+                    exp: "Salario base: 40 horas × $18 = $720. Horas extra: 46 - 40 = 6 horas. Pago extra: 6 horas × $27 = $162. Total: 720 + 162 = $882."
+                },
+                {
+                    q: "13. El promedio (media) de cuatro números enteros es exactamente 15. Si tres de esos números son 12, 14 y 22, ¿cuál es el valor numérico del cuarto número?",
+                    options: ["12", "16", "15", "10"],
+                    correct: 0,
+                    hint: "Si el promedio de 4 números es 15, la suma de todos ellos juntos debe dar 60 (15 × 4).",
+                    exp: "Suma requerida total = 4 × 15 = 60. Suma de los tres conocidos = 12 + 14 + 22 = 48. Cuarto número = 60 - 48 = 12."
+                },
+                {
+                    q: "14. Una alfombra rectangular tiene un área de 120 pies cuadrados. Si sabemos que el largo mide 14 pies más que el ancho, ¿cuál es la medida en pies de su ancho?",
+                    options: ["6 pies", "10 pies", "8 pies", "12 pies"],
+                    correct: 0,
+                    hint: "Área es largo × ancho. Puedes probar las opciones multiplicando el número por sí mismo más 14 hasta que te dé 120.",
+                    exp: "Si el ancho es 6, el largo es 6 + 14 = 20. Multiplicamos para comprobar el área: 6 × 20 = 120 pies cuadrados. Cumple perfectamente."
+                },
+                {
+                    q: "15. ¿Cuál es el valor del término faltante 'y' en el siguiente sistema lineal de ecuaciones combinadas por eliminación?\n• x + y = 12\n• 2x - y = 9",
+                    options: ["x = 7", "y = 5", "y = 3", "y = 7"],
+                    correct: 1,
+                    hint: "Suma las dos ecuaciones directamente hacia abajo para cancelar la variable 'y', encuentra la 'x' y luego deduce la 'y'.",
+                    exp: "Sumando las ecuaciones: (x + 2x) + (y - y) = 12 + 9 → 3x = 21 → x = 7. Sustituyendo x=7 en la primera ecuación: 7 + y = 12 → y = 5."
+                },
+                {
+                    q: "16. Un terreno plano en forma de trapecio tiene bases de 12 metros y 18 metros, con una altura de 8 metros. ¿Cuál es el área total del terreno?",
+                    options: ["120 metros cuadrados", "240 metros cuadrados", "144 metros cuadrados", "432 metros cuadrados"],
+                    correct: 0,
+                    hint: "La fórmula del área del trapecio es: A = [(Base mayor + Base menor) × altura] / 2.",
+                    exp: "Sumamos las bases: 12 + 18 = 30. Multiplicamos por la altura: 30 × 8 = 240. Dividimos entre dos: 240 / 2 = 120 metros cuadrados."
+                },
+                {
+                    q: "17. Si expresamos la relación matemática y varía directamente con x, y sabemos que y = 24 cuando x = 6, ¿cuál será el valor de y cuando x valga 10?",
+                    options: ["40", "14", "60", "240"],
+                    correct: 0,
+                    hint: "Variación directa significa que y = kx. Encuentra primero la constante de proporcionalidad 'k' dividiendo 24 entre 6.",
+                    exp: "Constante k = 24 / 6 = 4. Por lo tanto, la función es y = 4x. Cuando x = 10, calculamos: y = 4 × 10 = 40."
+                },
+                {
+                    q: "18. Encuentra el conjunto solución para la siguiente ecuación con valor absoluto: |2x - 3| = 7",
+                    options: ["x = 5 únicamente", "x = 5 y x = -2", "x = 5 y x = -5", "x = 2 y x = -5"],
+                    correct: 1,
+                    hint: "Plantea dos ecuaciones separadas sin barras: una igual a 7 positivo y otra igual a 7 negativo (-7).",
+                    exp: "Caso 1: 2x - 3 = 7 → 2x = 10 → x = 5. Caso 2: 2x - 3 = -7 → 2x = -4 → x = -2. Las soluciones son 5 y -2."
+                },
+                {
+                    q: "19. Una fábrica produce 150 piezas mecánicas cada 3 horas. Al mantener este mismo ritmo constante de producción, ¿cuántas piezas completará en una jornada laboral extendida de 12 horas?",
+                    options: ["450 piezas", "600 piezas", "750 piezas", "300 piezas"],
+                    correct: 1,
+                    hint: "Averigua cuántas piezas hace por hora dividiendo 150 entre 3, o mira cuántas veces cabe el bloque de 3 horas en 12.",
+                    exp: "El tiempo se multiplica por 4 (12 horas / 3 horas = 4). Por lo tanto, la producción se cuadruplica: 150 piezas × 4 = 600 piezas."
+                },
+                {
+                    q: "20. ¿Cuál es el volumen de una pirámide de base cuadrada si el lado de la base mide 6 cm y la altura vertical de la pirámide es de 10 cm?",
+                    options: ["360 cm cúbicos", "180 cm cúbicos", "120 cm cúbicos", "60 cm cúbicos"],
+                    correct: 2,
+                    hint: "La fórmula es V = (Área de la base × Altura) / 3. Primero saca el área del cuadrado (6 × 6).",
+                    exp: "Área de la base cuadrada = 6 × 6 = 36 cm². Multiplicamos por la altura: 36 × 10 = 360. Dividimos entre tres: 360 / 3 = 120 cm cúbicos."
+                },
+                {
+                    q: "21. Una persona invierte un capital inicial de $2,000 en una cuenta que le rinde el 6% de interés simple anual. ¿Cuál será el monto total acumulado en la cuenta tras 5 años?",
+                    options: ["$600", "$2,600", "$2,120", "$3,200"],
+                    correct: 1,
+                    hint: "Usa la fórmula I = P × r × t para saber el interés generado, y al final súmaselo al dinero que depositó al principio.",
+                    exp: "Interés generado = 2000 × 0.06 × 5 = $600. El monto total de la cuenta es el capital más el interés acumulado: 2000 + 600 = $2,600."
+                },
+                {
+                    q: "22. En una gráfica de coordenadas cartesianas, ¿cuál es la distancia lineal entre los puntos con coordenadas (2, 3) y (5, 7)?",
+                    options: ["7 unidades", "5 unidades", "25 unidades", "12 unidades"],
+                    correct: 1,
+                    hint: "Usa la fórmula de distancia (derivada de Pitágoras). Resta las x (5-2=3) y las y (7-3=4), eleva ambos al cuadrado, súmalos y saca raíz.",
+                    exp: "Diferencia en x es 3 (3² = 9). Diferencia en y es 4 (4² = 16). Suma = 9 + 16 = 25. La raíz cuadrada de 25 nos da una distancia de 5 unidades."
+                },
+                {
+                    q: "23. Simplifica por completo la siguiente expresión utilizando leyes de exponentes: (3x³y²) × (4x²y⁴)",
+                    options: ["12x⁶y⁸", "7x⁵y⁶", "12x⁵y⁶", "12x⁵y⁸"],
+                    correct: 2,
+                    hint: "Multiplica los coeficientes numéricos normales (3×4), y suma los exponentes de las letras iguales.",
+                    exp: "Multiplicamos 3 × 4 = 12. Sumamos exponentes de x: 3 + 2 = 5. Sumamos exponentes de y: 2 + 4 = 6. Resultado: 12x⁵y⁶."
+                },
+                {
+                    q: "24. El precio de una computadora portátil este año es de $640, lo cual representa exactamente un 20% menos de lo que costaba el año pasado. ¿Cuál era el precio original el año anterior?",
+                    options: ["$800", "$768", "$512", "$850"],
+                    correct: 0,
+                    hint: "Si tiene un 20% de descuento, quiere decir que $640 equivale al 80% del valor real. Divide 640 entre 0.80.",
+                    exp: "Planteamos la regla de tres o ecuación decimal: 0.80 × Precio Anterior = 640 → Precio Anterior = 640 / 0.80 = $800."
+                },
+                {
+                    q: "25. Una caja contiene los siguientes pesos en libras: 10, 12, 12, 14, 18, 20, 26. ¿Cuál es el rango (range) estadístico de este grupo de datos?",
+                    options: ["12", "16", "14", "26"],
+                    correct: 1,
+                    hint: "El rango es la medida de dispersión más sencilla: se calcula restando el valor menor al valor mayor de la lista.",
+                    exp: "El valor máximo es 26 y el valor mínimo es 10. Calculamos el rango restándolos: 26 - 10 = 16."
+                },
+                {
+                    q: "26. ¿Cuál es la ecuación de la recta que presenta una pendiente (m) igual a -3 y corta verticalmente al eje y en el punto coordinado (0, 5)?",
+                    options: ["y = 5x - 3", "y = -3x - 5", "y = -3x + 5", "y = 3x + 5"],
+                    correct: 2,
+                    hint: "Usa la forma estándar de la ecuación ordinaria de la recta: y = mx + b, donde m es la pendiente y b es la intersección.",
+                    exp: "Sustituyendo directamente m = -3 y b = 5 en el modelo pendiente-intersección ordinario, se obtiene la ecuación funcional y = -3x + 5."
+                },
+                {
+                    q: "27. Encuentra el valor real de la variable incógnita para la siguiente proporción fraccionaria: 4 / 7 = x / 35",
+                    options: ["x = 20", "x = 14", "x = 28", "x = 16"],
+                    correct: 0,
+                    hint: "Usa multiplicación cruzada: multiplica 4 por 35 y luego divide ese resultado numérico entre 7.",
+                    exp: "Multiplicación cruzada: 7x = 4 × 35 → 7x = 140 → x = 140 / 7 = 20. También se puede ver que 7 se multiplicó por 5 para dar 35, así que 4 × 5 = 20."
+                },
+                {
+                    q: "28. Un mapa de construcción civil posee una escala gráfica donde 0.5 pulgadas representa una distancia de 20 millas reales. Si dos ciudades se encuentran a 6 pulgadas de distancia en el mapa, ¿cuál es la distancia real?",
+                    options: ["120 millas", "240 millas", "60 millas", "180 millas"],
+                    correct: 1,
+                    hint: "Calcula cuántos bloques de 0.5 pulgadas caben en 6 pulgadas enteras (caben exactamente 12 bloques) y multiplícalo por las 20 millas.",
+                    exp: "Dividimos 6 / 0.5 = 12 segmentos de escala. Cada segmento equivale a 20 millas reales, por lo tanto multiplicamos: 12 × 20 = 240 millas reales."
+                },
+                {
+                    q: "29. ¿Cuál es el resultado de la siguiente operación con expresiones de raíces cuadradas simplificadas: 3√2 + 5√2 - 2√2?",
+                    options: ["6√2", "6√6", "10√2", "8√2"],
+                    correct: 0,
+                    hint: "Dado que las raíces son exactamente iguales (términos semejantes), opera los números de afuera de forma normal.",
+                    exp: "Sumamos y restamos los coeficientes externos manteniendo la misma raíz común: (3 + 5 - 2)√2 = 6√2."
+                },
+                {
+                    q: "30. Un círculo perfecto está dibujado dentro de una lona cuadrada y posee un diámetro de 14 cm. ¿Cuál es el área aproximada del círculo? (Usa π ≈ 3.14)",
+                    options: ["615.44 cm²", "153.86 cm²", "43.96 cm²", "196 cm²"],
+                    correct: 1,
+                    hint: "¡Cuidado! Te dan el diámetro (14). La fórmula usa el radio, que es la mitad (7). Usa la fórmula A = π × r².",
+                    exp: "El radio es 14 / 2 = 7 cm. Aplicamos la ecuación estándar del área circular: A = 3.14 × 7² = 3.14 × 49 = 153.86 centímetros cuadrados."
+                }
+            ]
         };
 
-        let currentSubject = 'matematicas';
         let currentQuestionIdx = 0;
         let score = 0;
         let timerInterval = null;
-        let timeLeft = 0;
+        let timeLeft = examData.time;
         let answered = false;
 
         function initExam() {
             currentQuestionIdx = 0;
             score = 0;
             answered = false;
-            timeLeft = examData[currentSubject].time;
+            timeLeft = examData.time;
             
             document.getElementById('next-btn').disabled = true;
             document.getElementById('explanation-box').style.display = "none";
@@ -347,20 +444,6 @@
             clearInterval(timerInterval);
             startTimer();
             renderQuestion();
-        }
-
-        function switchSubject(subjectKey) {
-            currentSubject = subjectKey;
-            
-            // Actualizar diseño de botones de pestañas
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-                if(btn.textContent.toLowerCase().includes(subjectKey.substring(0,5))) {
-                    btn.classList.add('active');
-                }
-            });
-
-            initExam();
         }
 
         function startTimer() {
@@ -383,10 +466,9 @@
         }
 
         function renderQuestion() {
-            const currentQuestions = examData[currentSubject].questions;
-            const qData = currentQuestions[currentQuestionIdx];
+            const qData = examData.questions[currentQuestionIdx];
             
-            document.getElementById('question-counter').textContent = `Pregunta ${currentQuestionIdx + 1} de ${currentQuestions.length}`;
+            document.getElementById('question-counter').textContent = `Pregunta ${currentQuestionIdx + 1} de ${examData.questions.length}`;
             document.getElementById('question-text').textContent = qData.q;
             
             const optionsContainer = document.getElementById('options-container');
@@ -408,7 +490,7 @@
             if(answered) return;
             answered = true;
             
-            const qData = examData[currentSubject].questions[currentQuestionIdx];
+            const qData = examData.questions[currentQuestionIdx];
             const buttons = document.querySelectorAll('.option-btn');
             
             buttons.forEach((btn) => btn.disabled = true);
@@ -421,20 +503,24 @@
                 buttons[qData.correct].classList.add('correct');
             }
 
-            // Mostrar retroalimentación pedagógica instantánea
             document.getElementById('explanation-text').textContent = qData.exp;
             document.getElementById('explanation-box').style.display = "block";
+            
+            if(currentQuestionIdx === examData.questions.length - 1) {
+                document.getElementById('next-btn').textContent = "Finalizar Examen";
+            } else {
+                document.getElementById('next-btn').textContent = "Siguiente Pregunta";
+            }
             document.getElementById('next-btn').disabled = false;
         }
 
         function showHint() {
-            const qData = examData[currentSubject].questions[currentQuestionIdx];
+            const qData = examData.questions[currentQuestionIdx];
             alert(`💡 PISTA:\n${qData.hint}`);
         }
 
         function nextQuestion() {
-            const currentQuestions = examData[currentSubject].questions;
-            if(currentQuestionIdx < currentQuestions.length - 1) {
+            if(currentQuestionIdx < examData.questions.length - 1) {
                 currentQuestionIdx++;
                 renderQuestion();
             } else {
@@ -444,28 +530,26 @@
         }
 
         function finishExam(timeout) {
-            const currentQuestions = examData[currentSubject].questions;
-            const total = currentQuestions.length;
+            const total = examData.questions.length;
             const percentage = Math.round((score / total) * 100);
             
-            let feedbackMsg = percentage >= 70 ? "¡Excelente trabajo! Pasarías el GED con este ritmo." : "Sigue repasando los conceptos base. ¡Tú puedes!";
-            if(timeout) feedbackMsg = "⏰ ¡Se acabó el tiempo asignado para este módulo!";
+            let feedbackMsg = percentage >= 70 ? "¡Excelente nivel! Estás listo para pasar la prueba real del GED." : "Buen intento, pero necesitas reforzar más temas para asegurar tu aprobado.";
+            if(timeout) feedbackMsg = "⏰ ¡Se agotó el tiempo límite de 90 minutos!";
 
             document.getElementById('quiz-zone').innerHTML = `
                 <div class="results-screen">
-                    <h2>Módulo Completado</h2>
-                    <p style="margin: 10px 0; color:var(--text-light);">${feedbackMsg}</p>
+                    <h2>Resultados Finales Evaluados</h2>
+                    <p style="margin: 10px 0; color:var(--text-light); font-size:1.1rem;">${feedbackMsg}</p>
                     <div class="score-circle">
                         <span>${percentage}%</span>
-                        <span style="font-size:0.8rem; font-weight:normal; color:var(--text-light)">Correctas</span>
+                        <span style="font-size:0.8rem; font-weight:normal; color:var(--text-light)">Aciertos</span>
                     </div>
-                    <p>Acertaste <strong>${score}</strong> de un total de <strong>${total}</strong> preguntas.</p>
-                    <button class="action-btn" style="margin-top:25px;" onclick="location.reload()">Tomar otro examen</button>
+                    <p style="font-size:1.1rem;">Calificación: Respuestas correctas <strong>${score}</strong> de un total de <strong>${total}</strong>.</p>
+                    <button class="action-btn" style="margin-top:30px; padding: 15px 35px;" onclick="location.reload()">Reiniciar Simulador</button>
                 </div>
             `;
         }
 
-        // Arrancar el simulador al abrir la página
         window.onload = initExam;
     </script>
 </body>
